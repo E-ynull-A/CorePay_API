@@ -1,0 +1,12 @@
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\bin\Debug\net8.0\CorePay.Domain.deps.json
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\bin\Debug\net8.0\CorePay.Domain.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\bin\Debug\net8.0\CorePay.Domain.pdb
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\CorePay.Domain.csproj.AssemblyReference.cache
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\CorePay.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\CorePay.Domain.AssemblyInfoInputs.cache
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\CorePay.Domain.AssemblyInfo.cs
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\CorePay.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\CorePay.Domain.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\refint\CorePay.Domain.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\CorePay.Domain.pdb
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\ref\CorePay.Domain.dll

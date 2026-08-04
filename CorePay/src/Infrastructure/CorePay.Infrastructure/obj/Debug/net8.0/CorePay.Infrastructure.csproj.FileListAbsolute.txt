@@ -1,0 +1,17 @@
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\bin\Debug\net8.0\CorePay.Infrastructure.deps.json
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\bin\Debug\net8.0\CorePay.Infrastructure.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\bin\Debug\net8.0\CorePay.Infrastructure.pdb
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\bin\Debug\net8.0\CorePay.Application.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\bin\Debug\net8.0\CorePay.Domain.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\bin\Debug\net8.0\CorePay.Application.pdb
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\bin\Debug\net8.0\CorePay.Domain.pdb
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay.Infrastructure.AssemblyInfo.cs
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay..C72FB7B7.Up2Date
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay.Infrastructure.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\refint\CorePay.Infrastructure.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay.Infrastructure.pdb
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\ref\CorePay.Infrastructure.dll
