@@ -1,5 +1,6 @@
 
 using CorePay.Persistance;
+using CorePay.Application;
 
 namespace CorePay.API
 {
@@ -17,6 +18,7 @@ namespace CorePay.API
             builder.Services.AddSwaggerGen();
 
             builder.Services.RegistrateServices(builder.Configuration);
+            builder.Services.RegistrateServices();
 
             var app = builder.Build();
 

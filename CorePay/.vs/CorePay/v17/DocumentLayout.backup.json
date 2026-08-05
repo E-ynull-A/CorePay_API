@@ -3,6 +3,34 @@
   "WorkspaceRootPath": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DD028E0D-8E02-4C4E-865E-16F296B747E7}|src\\Core\\CorePay.Application\\CorePay.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\src\\core\\corepay.application\\applicationregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD028E0D-8E02-4C4E-865E-16F296B747E7}|src\\Core\\CorePay.Application\\CorePay.Application.csproj|solutionrelative:src\\core\\corepay.application\\applicationregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD028E0D-8E02-4C4E-865E-16F296B747E7}|src\\Core\\CorePay.Application\\CorePay.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\src\\core\\corepay.application\\features\\queries\\token\\access\\postaccesstokenqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD028E0D-8E02-4C4E-865E-16F296B747E7}|src\\Core\\CorePay.Application\\CorePay.Application.csproj|solutionrelative:src\\core\\corepay.application\\features\\queries\\token\\access\\postaccesstokenqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{277586DA-5FC4-4E6B-B587-633C1C9D65D0}|Presentation\\CorePay.API\\CorePay.API.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\presentation\\corepay.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{277586DA-5FC4-4E6B-B587-633C1C9D65D0}|Presentation\\CorePay.API\\CorePay.API.csproj|solutionrelative:presentation\\corepay.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD028E0D-8E02-4C4E-865E-16F296B747E7}|src\\Core\\CorePay.Application\\CorePay.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\src\\core\\corepay.application\\features\\queries\\token\\access\\postaccesstokenqueryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD028E0D-8E02-4C4E-865E-16F296B747E7}|src\\Core\\CorePay.Application\\CorePay.Application.csproj|solutionrelative:src\\core\\corepay.application\\features\\queries\\token\\access\\postaccesstokenqueryresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD028E0D-8E02-4C4E-865E-16F296B747E7}|src\\Core\\CorePay.Application\\CorePay.Application.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\src\\core\\corepay.application\\features\\queries\\token\\access\\postaccesstokenquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD028E0D-8E02-4C4E-865E-16F296B747E7}|src\\Core\\CorePay.Application\\CorePay.Application.csproj|solutionrelative:src\\core\\corepay.application\\features\\queries\\token\\access\\postaccesstokenquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C088816C-E6ED-431C-BB4A-A4447B420725}|src\\Core\\CorePay.Domain\\CorePay.Domain.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\src\\core\\corepay.domain\\utilities\\enums\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C088816C-E6ED-431C-BB4A-A4447B420725}|src\\Core\\CorePay.Domain\\CorePay.Domain.csproj|solutionrelative:src\\core\\corepay.domain\\utilities\\enums\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{277586DA-5FC4-4E6B-B587-633C1C9D65D0}|Presentation\\CorePay.API\\CorePay.API.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\presentation\\corepay.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{277586DA-5FC4-4E6B-B587-633C1C9D65D0}|Presentation\\CorePay.API\\CorePay.API.csproj|solutionrelative:presentation\\corepay.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F1A19BCC-D846-40A9-9C71-D87F5561A7C2}|src\\Infrastructure\\CorePay.Persistance\\CorePay.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\src\\infrastructure\\corepay.persistance\\persistanceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F1A19BCC-D846-40A9-9C71-D87F5561A7C2}|src\\Infrastructure\\CorePay.Persistance\\CorePay.Persistance.csproj|solutionrelative:src\\infrastructure\\corepay.persistance\\persistanceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -79,16 +107,8 @@
       "RelativeMoniker": "D:0:0:{C088816C-E6ED-431C-BB4A-A4447B420725}|src\\Core\\CorePay.Domain\\CorePay.Domain.csproj|solutionrelative:src\\core\\corepay.domain\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{277586DA-5FC4-4E6B-B587-633C1C9D65D0}|Presentation\\CorePay.API\\CorePay.API.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\presentation\\corepay.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{277586DA-5FC4-4E6B-B587-633C1C9D65D0}|Presentation\\CorePay.API\\CorePay.API.csproj|solutionrelative:presentation\\corepay.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F1A19BCC-D846-40A9-9C71-D87F5561A7C2}|src\\Infrastructure\\CorePay.Persistance\\CorePay.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\src\\infrastructure\\corepay.persistance\\corepay.persistance.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{F1A19BCC-D846-40A9-9C71-D87F5561A7C2}|src\\Infrastructure\\CorePay.Persistance\\CorePay.Persistance.csproj|solutionrelative:src\\infrastructure\\corepay.persistance\\corepay.persistance.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{277586DA-5FC4-4E6B-B587-633C1C9D65D0}|Presentation\\CorePay.API\\CorePay.API.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\presentation\\corepay.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{277586DA-5FC4-4E6B-B587-633C1C9D65D0}|Presentation\\CorePay.API\\CorePay.API.csproj|solutionrelative:presentation\\corepay.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F1A19BCC-D846-40A9-9C71-D87F5561A7C2}|src\\Infrastructure\\CorePay.Persistance\\CorePay.Persistance.csproj|c:\\users\\eynotto\\desktop\\code work\\corepay_api\\corepay\\src\\infrastructure\\corepay.persistance\\data access layer\\configurations\\transactionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -126,37 +146,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TransactionRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\TransactionRepository.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\TransactionRepository.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\TransactionRepository.cs",
-              "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\TransactionRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
+              "Title": "PostAccessTokenQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQueryHandler.cs",
+              "RelativeDocumentMoniker": "src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQueryHandler.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQueryHandler.cs",
+              "RelativeToolTip": "src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQueryHandler.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAkwBcAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-05T12:21:33.201Z",
+              "WhenOpened": "2026-08-05T20:28:37.358Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CardRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\CardRepository.cs",
-              "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\CardRepository.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\CardRepository.cs",
-              "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\CardRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAyAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Utilities\\Enums\\Role.cs",
+              "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\Role.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Utilities\\Enums\\Role.cs",
+              "RelativeToolTip": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-05T12:19:36.841Z",
+              "WhenOpened": "2026-08-05T20:27:09.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PostAccessTokenQuery.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQuery.cs",
+              "RelativeDocumentMoniker": "src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQuery.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQuery.cs",
+              "RelativeToolTip": "src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T20:19:58.292Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationRegistration.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\ApplicationRegistration.cs",
+              "RelativeDocumentMoniker": "src\\Core\\CorePay.Application\\ApplicationRegistration.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\ApplicationRegistration.cs",
+              "RelativeToolTip": "src\\Core\\CorePay.Application\\ApplicationRegistration.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwB8AAAB3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T20:13:17.705Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "PostAccessTokenQueryResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQueryResponse.cs",
+              "RelativeDocumentMoniker": "src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQueryResponse.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQueryResponse.cs",
+              "RelativeToolTip": "src\\Core\\CorePay.Application\\Features\\Queries\\Token\\Access\\PostAccessTokenQueryResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T20:11:40.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "AccountRepository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\AccountRepository.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\AccountRepository.cs",
@@ -169,33 +228,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\Presentation\\CorePay.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Presentation\\CorePay.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\Presentation\\CorePay.API\\appsettings.json",
+              "RelativeToolTip": "Presentation\\CorePay.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-04T13:23:28.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CardRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\CardRepository.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\CardRepository.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\CardRepository.cs",
+              "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\CardRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T12:19:36.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Repository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\Common\\Repository.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\Common\\Repository.cs",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\Common\\Repository.cs",
               "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\Common\\Repository.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAFkAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwFkAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-05T11:26:58.373Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "IRepository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Interfaces\\Repositories\\Common\\IRepository.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Application\\Interfaces\\Repositories\\Common\\IRepository.cs",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Interfaces\\Repositories\\Common\\IRepository.cs",
               "RelativeToolTip": "src\\Core\\CorePay.Application\\Interfaces\\Repositories\\Common\\IRepository.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAADwvxEAAABOAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAwwBEAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-05T11:20:38.537Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "ITransactionRepository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Interfaces\\Repositories\\ITransactionRepository.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Application\\Interfaces\\Repositories\\ITransactionRepository.cs",
@@ -208,7 +293,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\Presentation\\CorePay.API\\Program.cs",
+              "RelativeDocumentMoniker": "Presentation\\CorePay.API\\Program.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\Presentation\\CorePay.API\\Program.cs",
+              "RelativeToolTip": "Presentation\\CorePay.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-04T13:29:49.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TransactionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\TransactionRepository.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\TransactionRepository.cs",
+              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\TransactionRepository.cs",
+              "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\Implementations\\Repositories\\TransactionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T12:21:33.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "ICardRepository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Interfaces\\Repositories\\ICardRepository.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Application\\Interfaces\\Repositories\\ICardRepository.cs",
@@ -221,7 +332,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "PersistanceRegistration.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\PersistanceRegistration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\PersistanceRegistration.cs",
@@ -234,7 +345,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 17,
               "Title": "IAccountRepository.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\Interfaces\\Repositories\\IAccountRepository.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Application\\Interfaces\\Repositories\\IAccountRepository.cs",
@@ -247,7 +358,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 19,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\AppDbContext.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\AppDbContext.cs",
@@ -260,7 +371,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 20,
               "Title": "AppDbContextInitalizer.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\AppDbContextInitalizer.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\AppDbContextInitalizer.cs",
@@ -273,33 +384,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
               "Title": "Transaction.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Entities\\Transaction.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Entities\\Transaction.cs",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Entities\\Transaction.cs",
               "RelativeToolTip": "src\\Core\\CorePay.Domain\\Entities\\Transaction.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAEBVwBEAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-03T11:41:47.551Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 15,
               "Title": "Card.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Entities\\Card.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Entities\\Card.cs",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Entities\\Card.cs",
               "RelativeToolTip": "src\\Core\\CorePay.Domain\\Entities\\Card.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAAA8AAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAIBJwA8AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-03T11:30:33.763Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 21,
               "Title": "AppDbContextHelper.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\AppDbContextHelper.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\AppDbContextHelper.cs",
@@ -312,32 +423,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 18,
               "Title": "BaseEntity.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Entities\\Common\\BaseEntity.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Entities\\Common\\BaseEntity.cs",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Entities\\Common\\BaseEntity.cs",
               "RelativeToolTip": "src\\Core\\CorePay.Domain\\Entities\\Common\\BaseEntity.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA1wBcAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-01T20:02:40.151Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 24,
               "Title": "Account.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Entities\\Account.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Entities\\Account.cs",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Entities\\Account.cs",
               "RelativeToolTip": "src\\Core\\CorePay.Domain\\Entities\\Account.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAIBJwAoAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T11:09:32.975Z"
+              "WhenOpened": "2026-08-03T11:09:32.975Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 33,
               "Title": "20260804135332_Initalize.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Migrations\\20260804135332_Initalize.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Migrations\\20260804135332_Initalize.cs",
@@ -345,11 +457,12 @@
               "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\Migrations\\20260804135332_Initalize.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T13:53:33.005Z"
+              "WhenOpened": "2026-08-04T13:53:33.005Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 22,
               "Title": "AccountConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\AccountConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\AccountConfiguration.cs",
@@ -357,11 +470,12 @@
               "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\AccountConfiguration.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAIwBEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T12:53:12.851Z"
+              "WhenOpened": "2026-08-03T12:53:12.851Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 23,
               "Title": "CardConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\CardConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\CardConfiguration.cs",
@@ -369,11 +483,12 @@
               "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\CardConfiguration.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAkwBkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T13:30:02.924Z"
+              "WhenOpened": "2026-08-03T13:30:02.924Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 25,
               "Title": "AppUser.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Entities\\AppUser.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Entities\\AppUser.cs",
@@ -381,23 +496,12 @@
               "RelativeToolTip": "src\\Core\\CorePay.Domain\\Entities\\AppUser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T11:00:02.365Z"
+              "WhenOpened": "2026-08-03T11:00:02.365Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\Presentation\\CorePay.API\\appsettings.json",
-              "RelativeDocumentMoniker": "Presentation\\CorePay.API\\appsettings.json",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\Presentation\\CorePay.API\\appsettings.json",
-              "RelativeToolTip": "Presentation\\CorePay.API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-08-04T13:23:28.659Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 26,
               "Title": "CorePay.Persistance.csproj",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\CorePay.Persistance.csproj",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\CorePay.Persistance.csproj",
@@ -405,35 +509,25 @@
               "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\CorePay.Persistance.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-08-04T13:21:07.098Z"
+              "WhenOpened": "2026-08-04T13:21:07.098Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\Presentation\\CorePay.API\\Program.cs",
-              "RelativeDocumentMoniker": "Presentation\\CorePay.API\\Program.cs",
-              "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\Presentation\\CorePay.API\\Program.cs",
-              "RelativeToolTip": "Presentation\\CorePay.API\\Program.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBIAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T13:29:49.336Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 27,
               "Title": "TransactionConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\TransactionConfiguration.cs",
               "RelativeDocumentMoniker": "src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\TransactionConfiguration.cs",
               "ToolTip": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\TransactionConfiguration.cs",
               "RelativeToolTip": "src\\Infrastructure\\CorePay.Persistance\\Data Access Layer\\Configurations\\TransactionConfiguration.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAIBJwBkAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBZwBkAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T13:49:05.094Z"
+              "WhenOpened": "2026-08-03T13:49:05.094Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 30,
               "Title": "CardStatus.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Utilities\\Enums\\CardStatus.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\CardStatus.cs",
@@ -441,11 +535,12 @@
               "RelativeToolTip": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\CardStatus.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T11:35:45.457Z"
+              "WhenOpened": "2026-08-03T11:35:45.457Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 32,
               "Title": "AccountStatus.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Utilities\\Enums\\AccountStatus.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\AccountStatus.cs",
@@ -453,11 +548,12 @@
               "RelativeToolTip": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\AccountStatus.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T11:20:18.123Z"
+              "WhenOpened": "2026-08-03T11:20:18.123Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 31,
               "Title": "Currency.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Utilities\\Enums\\Currency.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\Currency.cs",
@@ -465,11 +561,12 @@
               "RelativeToolTip": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\Currency.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T11:10:58.843Z"
+              "WhenOpened": "2026-08-03T11:10:58.843Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 29,
               "Title": "TransactionType.cs",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Domain\\Utilities\\Enums\\TransactionType.cs",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\TransactionType.cs",
@@ -477,11 +574,12 @@
               "RelativeToolTip": "src\\Core\\CorePay.Domain\\Utilities\\Enums\\TransactionType.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T11:44:02.255Z"
+              "WhenOpened": "2026-08-03T11:44:02.255Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "CorePay.Application.csproj",
               "DocumentMoniker": "C:\\Users\\Eynotto\\Desktop\\Code Work\\CorePay_API\\CorePay\\src\\Core\\CorePay.Application\\CorePay.Application.csproj",
               "RelativeDocumentMoniker": "src\\Core\\CorePay.Application\\CorePay.Application.csproj",
@@ -489,7 +587,8 @@
               "RelativeToolTip": "src\\Core\\CorePay.Application\\CorePay.Application.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-08-03T12:47:27.151Z"
+              "WhenOpened": "2026-08-03T12:47:27.151Z",
+              "EditorCaption": ""
             }
           ]
         }
