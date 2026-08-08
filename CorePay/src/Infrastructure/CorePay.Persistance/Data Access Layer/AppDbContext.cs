@@ -25,10 +25,6 @@ namespace CorePay.Persistance.Data_Access_Layer
             base.OnModelCreating(builder);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             ChangeTracker.SaveChangeInterseptor();            
@@ -39,6 +35,6 @@ namespace CorePay.Persistance.Data_Access_Layer
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

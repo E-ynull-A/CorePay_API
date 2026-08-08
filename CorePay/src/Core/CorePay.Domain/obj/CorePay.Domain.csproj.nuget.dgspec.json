@@ -52,7 +52,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.29, )"
+              "version": "[8.0.23, )"
             }
           },
           "imports": [

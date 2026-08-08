@@ -17,6 +17,7 @@ namespace CorePay.Persistance.Data_Access_Layer
             builder._applyQueryFilter<Account>();
             builder._applyQueryFilter<Card>();
             builder._applyQueryFilter<Transaction>();
+            builder._applyQueryFilter<RefreshToken>();
         }
         private static void _applyQueryFilter<T>(this ModelBuilder builder) where T : BaseEntity
         {

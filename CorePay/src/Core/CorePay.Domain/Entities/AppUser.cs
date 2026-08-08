@@ -26,6 +26,7 @@ namespace CorePay.Domain.Entities
         //Relations
 
         public ICollection<Account> Accounts { get; } = new List<Account>();
+        public ICollection<RefreshToken> RefreshTokens { get; } = new List<RefreshToken>();
 
     }
 }

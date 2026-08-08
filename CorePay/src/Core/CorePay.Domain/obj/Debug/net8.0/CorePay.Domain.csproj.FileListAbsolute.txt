@@ -10,3 +10,4 @@ C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\o
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\refint\CorePay.Domain.dll
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\CorePay.Domain.pdb
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\ref\CorePay.Domain.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Core\CorePay.Domain\obj\Debug\net8.0\CorePay.Domain.sourcelink.json

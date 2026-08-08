@@ -216,6 +216,50 @@ namespace CorePay.Persistance.Migrations
                     b.ToTable("Cards");
                 });
 
+            modelBuilder.Entity("CorePay.Domain.Entities.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("ValidFrom")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("Token")
+                        .IsUnique();
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("CorePay.Domain.Entities.Transaction", b =>
                 {
                     b.Property<Guid>("Id")
@@ -407,6 +451,17 @@ namespace CorePay.Persistance.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("CorePay.Domain.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("CorePay.Domain.Entities.AppUser", "AppUser")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("CorePay.Domain.Entities.Transaction", b =>
                 {
                     b.HasOne("CorePay.Domain.Entities.Account", "Account")
@@ -479,6 +534,8 @@ namespace CorePay.Persistance.Migrations
             modelBuilder.Entity("CorePay.Domain.Entities.AppUser", b =>
                 {
                     b.Navigation("Accounts");
+
+                    b.Navigation("RefreshTokens");
                 });
 #pragma warning restore 612, 618
         }

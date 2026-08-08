@@ -17,3 +17,4 @@ C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePa
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Persistance\obj\Debug\net8.0\ref\CorePay.Persistance.dll
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Persistance\bin\Debug\net8.0\CorePay.Persistance.runtimeconfig.json
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Persistance\obj\Debug\net8.0\CorePay.Persistance.genruntimeconfig.cache
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Persistance\obj\Debug\net8.0\CorePay.Persistance.sourcelink.json

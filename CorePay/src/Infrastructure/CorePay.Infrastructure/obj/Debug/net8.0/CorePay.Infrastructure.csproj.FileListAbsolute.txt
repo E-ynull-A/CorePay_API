@@ -15,3 +15,4 @@ C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePa
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\refint\CorePay.Infrastructure.dll
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay.Infrastructure.pdb
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\ref\CorePay.Infrastructure.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\src\Infrastructure\CorePay.Infrastructure\obj\Debug\net8.0\CorePay.Infrastructure.sourcelink.json

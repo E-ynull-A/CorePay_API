@@ -1,6 +1,14 @@
 
-using CorePay.Persistance;
 using CorePay.Application;
+using CorePay.Application.Interfaces.Repositories;
+using CorePay.Domain.Entities;
+using CorePay.Infrastructure;
+using CorePay.Persistance;
+using CorePay.Persistance.Data_Access_Layer;
+using CorePay.Persistance.Implementations.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace CorePay.API
 {
@@ -17,8 +25,35 @@ namespace CorePay.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.RegistrateServices(builder.Configuration);
-            builder.Services.RegistrateServices();
+            builder.Services.RegistrateApplication();
+            builder.Services.RegistrateInfrastructure(builder.Configuration);
+
+
+            builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer
+                        (builder.Configuration.GetConnectionString("default")));
+
+
+
+            builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(opt =>
+            {
+                opt.User.RequireUniqueEmail = true;
+
+                opt.SignIn.RequireConfirmedEmail = true;
+
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
+                opt.Lockout.MaxFailedAccessAttempts = 4;
+
+                opt.Password.RequiredUniqueChars = 3;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredLength = 7;
+            })
+            .AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<AppDbContext>();
+
+            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+            builder.Services.AddScoped<ICardRepository, CardRepository>();
+            builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+        
 
             var app = builder.Build();
 
