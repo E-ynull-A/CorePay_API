@@ -1,4 +1,7 @@
-﻿using CorePay.Domain.Entities;
+﻿using CorePay.Application.Behaviors;
+using CorePay.Domain.Entities;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +22,12 @@ namespace CorePay.Application
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly
                                     (Assembly.GetExecutingAssembly()));
+
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddScoped(typeof(IPipelineBehavior<,>),
+                               typeof(ValidationBehavior<,>));
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             return services;
         }

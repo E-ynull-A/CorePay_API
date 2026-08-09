@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorePay.Application.Features.Commands.Auth
+namespace CorePay.Application.Features.Commands.Auth.Login
 {
     public class LoginCommandHandler : IRequestHandler<LoginCommand,Result<LoginCommandResponce>>
     {
@@ -39,21 +39,21 @@ namespace CorePay.Application.Features.Commands.Auth
             AppUser? user = await _signInManager.UserManager.Users.FirstOrDefaultAsync(u => u.Email == request.UsernameOrEmail ||
                                                                      u.UserName == request.UsernameOrEmail);
             if(user is null)
-                throw new Exception("User not Found");               
+                return new Result<LoginCommandResponce>(AuthError.NotFound);               
 
             SignInResult result = await _signInManager
                 .CheckPasswordSignInAsync(user,request.Password,user.LockoutEnabled);
 
             if (result.IsLockedOut)
-                return new Result<LoginCommandResponce>(AuthError.Lockout);
+                return new Result<LoginCommandResponce>(AuthError.AccountLockedOut);
 
             if (!result.Succeeded)
-                throw new Exception("Username, Email or Password is inncorrect!");
+                return new Result<LoginCommandResponce>(AuthError.InvalidCredentials);
 
             double expireTime = double.TryParse(_configuration["RefreshToken:ExpireTime"], out double time) ? time : 0;
 
             if (expireTime == 0)
-                throw new Exception("Bad Configuration exception!!");
+                throw new InvalidOperationException("JWT:ExpireTime configuration is invalid.");
 
             RefreshToken refreshToken = new RefreshToken(
                                 _tokenService.GenerateRefreshToken(),

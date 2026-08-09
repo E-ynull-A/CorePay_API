@@ -16,7 +16,7 @@ namespace CorePay.Domain.Utilities.Errors
 
         public static Error Dublicate { get;} = new Error("Account.Dublicate",
                                                    "Account was already exist!",
-                                                    ErrorType.Dublicate);
+                                                    ErrorType.Conflict);
 
 
     }

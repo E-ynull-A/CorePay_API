@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorePay.Application.Features.Commands.Auth
+namespace CorePay.Application.Features.Commands.Auth.Login
 {
     public record LoginCommand(       
         string UsernameOrEmail,

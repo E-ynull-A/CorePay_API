@@ -1,4 +1,5 @@
 
+using CorePay.API.Middlewares;
 using CorePay.Application;
 using CorePay.Application.Interfaces.Repositories;
 using CorePay.Domain.Entities;
@@ -8,6 +9,7 @@ using CorePay.Persistance.Data_Access_Layer;
 using CorePay.Persistance.Implementations.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 
 namespace CorePay.API
@@ -20,7 +22,13 @@ namespace CorePay.API
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(opt =>
+                {
+                    opt.JsonSerializerOptions.Converters
+                        .Add(new JsonStringEnumConverter());
+                });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -32,7 +40,7 @@ namespace CorePay.API
             builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer
                         (builder.Configuration.GetConnectionString("default")));
 
-
+       
 
             builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(opt =>
             {
@@ -53,9 +61,13 @@ namespace CorePay.API
             builder.Services.AddScoped<IAccountRepository, AccountRepository>();
             builder.Services.AddScoped<ICardRepository, CardRepository>();
             builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
-        
+
+            
+          
 
             var app = builder.Build();
+
+            app.UseMiddleware<GlobalExceptionMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

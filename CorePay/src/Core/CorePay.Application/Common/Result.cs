@@ -10,19 +10,19 @@ namespace CorePay.Application.Common
 {
     public class Result
     {
-        public bool IsSuccess { get; set; }
-        public Error Error { get; set; }
+        public bool IsSuccess { get;}
+        public Error Error { get; }
         public Result(bool isSuccess,Error error)
         {
             IsSuccess = isSuccess;
             Error = error;
         }
 
-        public Result Success() =>
-            new Result(true,null);
+        public static Result Success() =>
+            new (true,null);
 
-        public Result Failure(Error error) =>
-            new Result(false, error);
+        public static Result Failure(Error error) =>
+            new (false, error);
     }
 
     public class Result<T>:Result
@@ -37,10 +37,10 @@ namespace CorePay.Application.Common
         public Result(Error error):base(false,error)
         {}
 
-        public Result<T> Success(T value)=>
+        public static Result<T> Success(T value)=>
             new Result<T>(value);
 
-        public Result<T> Failure(Error error) =>
+        public static Result<T> Failure(Error error) =>
             new Result<T>(error);
     }
     

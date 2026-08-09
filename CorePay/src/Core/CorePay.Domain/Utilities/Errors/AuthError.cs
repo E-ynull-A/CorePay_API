@@ -10,16 +10,20 @@ namespace CorePay.Domain.Utilities.Errors
 {
     public sealed class AuthError
     {
-        public static Error NotFound { get; } = new Error("User.NotFound",
+        public static Error NotFound { get; } = new("User.NotFound",
                                                   "User Not Found!",
                                                   ErrorType.NotFound);
 
-        public static Error Dublicate { get; } = new Error("User.Dublicate",
+        public static Error Dublicate { get; } = new("User.Dublicate",
                                                    "User was already exist!",
-                                                    ErrorType.Dublicate);
+                                                    ErrorType.Conflict);
 
-        public static Error Lockout { get; } = new Error("User.Lockout",
-                                                   "User's Lockout is enable!",
-                                                    ErrorType.NotAllowed);
+        public static readonly Error AccountLockedOut = new("Auth.AccountLockedOut",
+                                                            "Your account is temporarily locked.",
+                                                            ErrorType.Forbidden);
+
+        public static readonly Error InvalidCredentials = new("Auth.InvalidCredentials",
+                                                              "Username or password is incorrect.",
+                                                              ErrorType.Unauthorized);
     }
 }
