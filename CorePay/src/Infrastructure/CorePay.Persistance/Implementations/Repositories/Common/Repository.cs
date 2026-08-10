@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CorePay.Persistance.Implementations.Repositories.Common
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity, new()
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly AppDbContext _context;
         private readonly DbSet<T> _dbSet;
@@ -23,12 +23,12 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
             _dbSet = context.Set<T>();
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> func = null,
-                                    string[] includes = null,
+        public IQueryable<T> GetAll(Expression<Func<T, bool>>? func = null,
+                                    string[]? includes = null,
                                     int page = 0,
                                     int take = 0,
                                     bool isFiltered = true,
-                                    Expression<Func<T, bool>> orderBy = null)
+                                    Expression<Func<T, bool>>? orderBy = null)
         {
             IQueryable<T> query = _dbSet.AsQueryable();
 
@@ -63,7 +63,7 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
 
 
         public async Task<T?> GetByIdAsync(Guid id,
-                                    string[] includes = null,
+                                    string[]? includes = null,
                                     bool isFiltered = true)
         {
             IQueryable<T> query = _dbSet.AsQueryable();

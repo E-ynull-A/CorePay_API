@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Interfaces.Repositories.Common
 {
-    public interface IRepository<T> where T : BaseEntity, new()
+    public interface IRepository<T> where T : BaseEntity
     {
-        IQueryable<T> GetAll(Expression<Func<T, bool>> func = null,
-                                    string[] includes = null,
+        IQueryable<T> GetAll(Expression<Func<T, bool>>? func = null,
+                                    string[]? includes = null,
                                     int page = 0,
                                     int take = 0,
                                     bool isFiltered = true,
-                                    Expression<Func<T, bool>> orderBy = null);
+                                    Expression<Func<T, bool>>? orderBy = null);
         Task<T?> GetByIdAsync(Guid id,
-                              string[] includes = null,
+                              string[]? includes = null,
                               bool isFiltered = true);
         void Update(T updatedItem);
         void Add(T item);

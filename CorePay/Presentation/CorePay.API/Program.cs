@@ -10,13 +10,15 @@ using CorePay.Persistance.Implementations.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using CorePay.Persistance;
+using System.Threading.Tasks;
 
 
 namespace CorePay.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -35,12 +37,14 @@ namespace CorePay.API
 
             builder.Services.RegistrateApplication();
             builder.Services.RegistrateInfrastructure(builder.Configuration);
+            builder.Services.RegistratePersistance();
+
 
 
             builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer
                         (builder.Configuration.GetConnectionString("default")));
 
-       
+
 
             builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(opt =>
             {
@@ -55,15 +59,12 @@ namespace CorePay.API
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequiredLength = 7;
             })
-            .AddDefaultTokenProviders()
-            .AddEntityFrameworkStores<AppDbContext>();
+                                    .AddDefaultTokenProviders()
+                                    .AddEntityFrameworkStores<AppDbContext>();
 
-            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
-            builder.Services.AddScoped<ICardRepository, CardRepository>();
-            builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+           
 
-            
-          
+
 
             var app = builder.Build();
 
@@ -76,8 +77,14 @@ namespace CorePay.API
                 app.UseSwaggerUI();
             }
 
+            using (var scope = app.Services.CreateScope())
+            {
+                await app.UseDbContextInitalizer();
+            }
+
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

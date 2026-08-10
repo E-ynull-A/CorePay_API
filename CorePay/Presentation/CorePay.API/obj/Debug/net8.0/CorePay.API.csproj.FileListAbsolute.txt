@@ -165,3 +165,13 @@ C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\System.Formats.Asn1.dll
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\obj\Debug\net8.0\CorePay.API.sourcelink.json
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\Microsoft.Extensions.WebEncoders.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll

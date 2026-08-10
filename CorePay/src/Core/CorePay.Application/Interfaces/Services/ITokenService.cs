@@ -1,5 +1,4 @@
-﻿using CorePay.Application.DTOs.Token;
-using CorePay.Domain.Entities;
+﻿using CorePay.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

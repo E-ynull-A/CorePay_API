@@ -1,5 +1,4 @@
 ﻿
-using CorePay.Application.Common;
 using CorePay.Domain.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
@@ -62,7 +61,8 @@ namespace CorePay.API.Middlewares
 
                         await context.Response.WriteAsJsonAsync(new
                         {
-                            Title = "Iternal Server Error"
+                            Title = "Iternal Server Error",
+                            Message = ex.Message
                         });
 
                         break;

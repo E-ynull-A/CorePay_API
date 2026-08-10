@@ -2,6 +2,7 @@
 using CorePay.Application.Common;
 using CorePay.Domain.Entities;
 using CorePay.Domain.Exceptions;
+using CorePay.Domain.Utilities.Enums;
 using CorePay.Domain.Utilities.Errors;
 using CorePay.Domain.Utilities.Errors.Common;
 using MediatR;
@@ -18,15 +19,12 @@ namespace CorePay.Application.Features.Commands.Auth.Register
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result>
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
         private readonly IMapper _mapper;
 
         public RegisterCommandHandler(UserManager<AppUser> userManager,
-                                      SignInManager<AppUser> signInManager,
                                       IMapper mapper)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _mapper = mapper;
         }
         public async Task<Result> Handle(RegisterCommand request, CancellationToken cancellationToken)
@@ -35,9 +33,18 @@ namespace CorePay.Application.Features.Commands.Auth.Register
                                         || u.UserName == request.Username))
                 return Result.Failure(AuthError.Dublicate);
 
-            IdentityResult result = await _userManager
-                             .CreateAsync(_mapper.Map<AppUser>(request),
-                                          request.Password);
+
+            AppUser user = new AppUser(request.Name,
+                                       request.Surname,
+                                       request.Username,
+                                       request.Birthdate,
+                                       request.Email,
+                                       request.PhoneNumber,
+                                       request.FIN);
+
+            await _userManager.AddToRoleAsync(user, Role.User.ToString());
+
+            IdentityResult result = await _userManager.CreateAsync(user,request.Password);
 
             if (!result.Succeeded)
                 throw new IdentityException(result.Errors);

@@ -38,6 +38,26 @@ namespace CorePay.Persistance.Data_Access_Layer
 
                 }
             }
+
+            var userEntries = tracker.Entries<AppUser>();
+
+            foreach (var entity in userEntries)
+            {
+                switch (entity.State)
+                {
+                    case EntityState.Modified:
+                        entity.Property(nameof(AppUser.UpdatedAt)).CurrentValue = DateTimeOffset.UtcNow;
+                        entity.Property(nameof(AppUser.UpdatedBy)).CurrentValue = "Default";
+                        break;
+
+                    case EntityState.Added:
+                        entity.Property(nameof(AppUser.CreatedAt)).CurrentValue = DateTimeOffset.UtcNow;
+                        entity.Property(nameof(AppUser.CreatedBy)).CurrentValue = "Default";
+                        break;
+                }
+            }
+
+
             //entity.OriginalValues.GetValue<bool>(nameof(BaseEntity.IsDeleted)) ==
             //entity.CurrentValues.GetValue<bool>(nameof(BaseEntity.IsDeleted)))
         }

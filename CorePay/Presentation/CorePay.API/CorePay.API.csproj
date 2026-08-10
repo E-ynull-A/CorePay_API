@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Infrastructure\CorePay.Infrastructure\CorePay.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Infrastructure\CorePay.Persistance\CorePay.Persistance.csproj" />
   </ItemGroup>

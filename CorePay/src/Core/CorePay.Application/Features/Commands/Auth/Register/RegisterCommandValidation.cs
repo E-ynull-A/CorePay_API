@@ -37,28 +37,27 @@ namespace CorePay.Application.Features.Commands.Auth.Register
                   .Must(l => l.Any(l => char.IsUpper(l))
                           && l.Any(l => char.IsLower(l))
                           && l.Any(l => char.IsDigit(l)))
-                  .WithMessage("Invalid Password syntax."); 
+                  .WithMessage("Invalid Password syntax.");
 
-            RuleFor(r => r.Email)
+
+            RuleFor(q => q.Email)
                   .NotEmpty()
+                  .MinimumLength(4)
                   .MaximumLength(256)
-                  .Matches(
-                        @"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@
-                              [a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?
-                              (?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$")
-                  .WithMessage("Invalid email address.");
+                  .Matches(@"^\w+([-+.']\\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$")
+                    .WithMessage("Invalid email address.");
 
-            RuleFor(r=>r.FIN)
+            RuleFor(r => r.FIN)
                 .NotEmpty()
                 .Length(7)
                 .Matches("^[A-Z0-9]{7}$")
                 .WithMessage("FIN must contain exactly 7 uppercase letters or digits.");
 
-            RuleFor(r => r.BirthDate)
+            RuleFor(r => r.Birthdate)
                 .NotEmpty()
-                .Must(bd => bd.AddYears(18) >= DateOnly.FromDateTime(DateTime.Now));
+                .Must(bd => bd.AddYears(18) <= DateOnly.FromDateTime(DateTime.Now));
 
-            RuleFor(r=>r.PhoneNumber)
+            RuleFor(r => r.PhoneNumber)
                 .NotEmpty()
                 .Matches(@"^\+994(10|50|51|55|60|70|77|99)\d{7}$")
                 .WithMessage("Invalid Azerbaijani phone number");

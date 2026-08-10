@@ -8,12 +8,12 @@ namespace CorePay.API.Extentions
     public static class ResultExtention
     {
         public static IActionResult ToActionResult(this Result result,
-                                                    int statusCode)
+                                                    int successStatusCode)
         {
             if (!result.IsSuccess)
                 return result.Error._getFailureResult();
 
-            return statusCode._getSuccessResult();
+            return successStatusCode._getSuccessResult();
 
         }
 
