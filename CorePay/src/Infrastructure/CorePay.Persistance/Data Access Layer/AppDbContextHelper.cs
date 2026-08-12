@@ -32,10 +32,14 @@ namespace CorePay.Persistance.Data_Access_Layer
             {
                 switch (entity.State)
                 {
-                    case EntityState.Modified:                
-                            entity.Entity.UpdatedAt = DateTime.UtcNow;                        
+                    case EntityState.Modified:
+                        entity.Property(u => u.UpdatedAt).CurrentValue = DateTimeOffset.UtcNow;
+                        entity.Property(u => u.UpdatedBy).CurrentValue = Guid.Parse("af29e40f-ff70-4d9a-1615-08def795fab3");
                         break;
-
+                    case EntityState.Added:
+                        entity.Property(u => u.CreatedAt).CurrentValue = DateTimeOffset.UtcNow;
+                        entity.Property(u => u.CreatedBy).CurrentValue = Guid.Parse("af29e40f-ff70-4d9a-1615-08def795fab3");
+                        break;
                 }
             }
 
@@ -47,12 +51,12 @@ namespace CorePay.Persistance.Data_Access_Layer
                 {
                     case EntityState.Modified:
                         entity.Property(nameof(AppUser.UpdatedAt)).CurrentValue = DateTimeOffset.UtcNow;
-                        entity.Property(nameof(AppUser.UpdatedBy)).CurrentValue = "Default";
+                        entity.Property(nameof(AppUser.UpdatedBy)).CurrentValue = Guid.Parse("af29e40f-ff70-4d9a-1615-08def795fab3");
                         break;
 
                     case EntityState.Added:
                         entity.Property(nameof(AppUser.CreatedAt)).CurrentValue = DateTimeOffset.UtcNow;
-                        entity.Property(nameof(AppUser.CreatedBy)).CurrentValue = "Default";
+                        entity.Property(nameof(AppUser.CreatedBy)).CurrentValue = Guid.Parse("af29e40f-ff70-4d9a-1615-08def795fab3");
                         break;
                 }
             }

@@ -1,16 +1,9 @@
 ﻿using CorePay.Application.Interfaces.Repositories.Common;
 using CorePay.Domain.Entities;
-using CorePay.Domain.Exceptions;
 using CorePay.Domain.Utilities.Enums;
-using CorePay.Persistance.Migrations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CorePay.Persistance.Data_Access_Layer
 {

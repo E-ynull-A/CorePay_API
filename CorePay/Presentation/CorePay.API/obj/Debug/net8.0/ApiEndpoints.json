@@ -22,6 +22,22 @@
   },
   {
     "ContainingType": "CorePay.API.Controllers.AuthController",
+    "Method": "Refresh",
+    "RelativePath": "Refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RefreshToken",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.AuthController",
     "Method": "Register",
     "RelativePath": "Register",
     "HttpMethod": "POST",

@@ -12,12 +12,12 @@ namespace CorePay.Domain.Entities.Common
 
         public bool IsDeleted { get; protected set; }
 
-        public DateTimeOffset CreatedAt { get; protected set; } = DateTimeOffset.UtcNow;
-        public Guid? CreatedBy { get; set; }
+        public DateTimeOffset CreatedAt { get; protected set; }
+        public Guid CreatedBy { get; protected set; }
 
 
-        public DateTimeOffset UpdatedAt { get; set; }
-        public Guid? UpdatedBy { get; set; }
+        public DateTimeOffset UpdatedAt { get; protected set; }
+        public Guid? UpdatedBy { get; protected set; }
 
 
         public void SoftDelete(Guid? deletedBy)=>

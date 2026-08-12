@@ -61,7 +61,15 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
             return query;
         }
 
-
+        public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> func, string[]? includes = null)
+        {         
+            if(includes is not null)
+               return await _addIncludes(_dbSet, includes).FirstOrDefaultAsync(func);
+            
+            return await _dbSet.FirstOrDefaultAsync(func);
+        } 
+           
+       
         public async Task<T?> GetByIdAsync(Guid id,
                                     string[]? includes = null,
                                     bool isFiltered = true)
@@ -83,10 +91,14 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
         public void Add(T item)=>
             _dbSet.Add(item);
 
-        public void SoftDelete(Guid id)=>      
-            SoftDelete(id);
-
         public Task SaveChangesAsync() =>
-            _context.SaveChangesAsync();                       
+            _context.SaveChangesAsync();
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> func) =>
+           await _dbSet.AnyAsync(func);
+
+        public async Task<int> CountAsync(Expression<Func<T, bool>> func) =>
+            await _dbSet.CountAsync(func);
+            
     }
 }

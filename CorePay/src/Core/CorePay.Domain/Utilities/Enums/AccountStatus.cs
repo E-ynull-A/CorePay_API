@@ -9,7 +9,8 @@ namespace CorePay.Domain.Utilities.Enums
     public enum AccountStatus
     {
         Active = 1,
-        Blocked = 2,
-        Closed = 3
+        UserBlocked = 2,
+        BankBloked = 3,
+        Closed = 4
     }
 }

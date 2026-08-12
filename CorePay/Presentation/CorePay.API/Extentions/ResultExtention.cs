@@ -47,5 +47,13 @@ namespace CorePay.API.Extentions
                 _ => new StatusCodeResult(StatusCodes.Status200OK)
             };
         }
+
+        public static IActionResult ToActionResult<T>(this Result<T> result)
+        {
+            if (!result.IsSuccess)
+                return result.Error._getFailureResult();
+
+            return new OkObjectResult(result.Value);
+        }
     }
 }

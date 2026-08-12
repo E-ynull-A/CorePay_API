@@ -17,10 +17,10 @@ namespace CorePay.Domain.Entities
 
 
         public DateTimeOffset CreatedAt { get; protected set; } = DateTimeOffset.UtcNow;
-        public string CreatedBy { get; protected set; }
+        public Guid CreatedBy { get; protected set; }
 
         public DateTimeOffset? UpdatedAt { get; protected set; }
-        public string? UpdatedBy { get; protected set; }
+        public Guid? UpdatedBy { get; protected set; }
 
 
         //Relations

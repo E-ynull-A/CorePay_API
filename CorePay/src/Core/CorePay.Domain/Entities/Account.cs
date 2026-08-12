@@ -1,10 +1,5 @@
 ﻿using CorePay.Domain.Entities.Common;
 using CorePay.Domain.Utilities.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CorePay.Domain.Entities
 {
@@ -13,7 +8,7 @@ namespace CorePay.Domain.Entities
         public decimal Balance { get; protected set; }
         public string IBAN { get; protected set; }
         public Currency Currency { get; protected set; }
-        public AccountStatus Status { get; protected set; }
+        public AccountStatus Status { get; protected set; } = AccountStatus.Active;
 
 
         //Relations
@@ -23,5 +18,18 @@ namespace CorePay.Domain.Entities
 
         public ICollection<Card> Cards { get; } = new List<Card>();
         public ICollection<Transaction> Transactions { get; } = new List<Transaction>();
+
+        public Account(string iBAN, Currency currency, Guid appUserId)
+        {
+            IBAN = iBAN;
+            Currency = currency;
+            AppUserId = appUserId;
+            Balance = 0;
+        }
+
+        public void Activate()=>
+            Status = AccountStatus.Active;
+        public void BlokedByUser()=>
+            Status = AccountStatus.UserBlocked;
     }
 }

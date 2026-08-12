@@ -1,5 +1,6 @@
 ﻿using CorePay.Application.Interfaces.Services;
 using CorePay.Domain.Entities;
+using CorePay.Infrastructure.Services;
 using CorePay.Persistance.Implementations.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -38,6 +39,8 @@ namespace CorePay.Infrastructure
             
 
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ISystemValueGeneratorService, SystemValueGeneratorService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             return services;
         }

@@ -15,5 +15,6 @@ namespace CorePay.Domain.Utilities.Enums
         Unauthorized = 4,
         Forbidden = 5,
         Failure = 6,
+        BusinessRule = 7
     }
 }

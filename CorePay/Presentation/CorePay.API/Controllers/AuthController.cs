@@ -1,6 +1,7 @@
 ﻿using CorePay.API.Extentions;
 using CorePay.Application.Common;
 using CorePay.Application.Features.Commands.Auth.Login;
+using CorePay.Application.Features.Commands.Auth.Refresh;
 using CorePay.Application.Features.Commands.Auth.Register;
 using MediatR;
 using Microsoft.AspNetCore.HttpLogging;
@@ -31,7 +32,16 @@ namespace CorePay.API.Controllers
         public async Task<IActionResult> Login([FromForm]LoginCommand command)
         {
             Result<LoginCommandResponce> result = await _mediator.Send(command);
-            return result.ToActionResult(201);
+
+            return result.ToActionResult();
+        }
+
+        [HttpPost("/Refresh")]
+        public async Task<IActionResult> Refresh([FromForm]RefreshCommand command)
+        {
+           Result<RefreshCommandResponse> response = await _mediator.Send(command);
+
+            return response.ToActionResult();
         }
     }
 }

@@ -19,9 +19,12 @@ namespace CorePay.Application.Interfaces.Repositories.Common
         Task<T?> GetByIdAsync(Guid id,
                               string[]? includes = null,
                               bool isFiltered = true);
+
+        Task<int> CountAsync(Expression<Func<T,bool>> func);
+        Task<bool> AnyAsync(Expression<Func<T,bool>> func);
+        Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> func, string[]? includes = null);
         void Update(T updatedItem);
         void Add(T item);
-        void SoftDelete(Guid id);
         Task SaveChangesAsync();
     }
 }

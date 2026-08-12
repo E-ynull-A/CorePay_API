@@ -17,6 +17,16 @@ namespace CorePay.Domain.Utilities.Errors
         public static Error Dublicate { get;} = new Error("Account.Dublicate",
                                                    "Account was already exist!",
                                                     ErrorType.Conflict);
+        public static Error ReachedAccountLimit { get;} = new Error("Account.ReachedLimit",
+                                                      "You reach the account limit!",
+                                                      ErrorType.BusinessRule);
+        public static Error AccountBloked { get; } = new Error("Account.Bloked",
+                                                        "The Account was bloked by Bank",
+                                                        ErrorType.BusinessRule);
+
+        public static Error AccountClosed { get; } = new Error("Account.Closed",
+                                                "The Account was Closed",
+                                                ErrorType.BusinessRule);
 
 
     }
