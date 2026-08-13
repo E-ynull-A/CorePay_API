@@ -44,6 +44,7 @@ namespace CorePay.Infrastructure
 
 
 
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ISystemValueGeneratorService, SystemValueGeneratorService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();

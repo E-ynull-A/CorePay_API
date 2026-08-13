@@ -271,6 +271,9 @@ namespace CorePay.Persistance.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<Guid?>("CardId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -292,6 +295,8 @@ namespace CorePay.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
+
+                    b.HasIndex("CardId");
 
                     b.ToTable("Transactions");
                 });
@@ -468,7 +473,13 @@ namespace CorePay.Persistance.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("CorePay.Domain.Entities.Card", "Card")
+                        .WithMany("Transactions")
+                        .HasForeignKey("CardId");
+
                     b.Navigation("Account");
+
+                    b.Navigation("Card");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -534,6 +545,11 @@ namespace CorePay.Persistance.Migrations
                     b.Navigation("Accounts");
 
                     b.Navigation("RefreshTokens");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.Card", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

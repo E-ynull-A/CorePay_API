@@ -9,6 +9,6 @@ namespace CorePay.Application.Features.Queries.Accounts.GetAll
 {
     public record GetAllAccountQuery(
         int Take,
-        int Page):IRequest<Result<ICollection<GetAllAccountQueryResponse>>>;
+        int Page):IRequest<Result<ICollection<GetAllAccountResponse>>>;
     
 }

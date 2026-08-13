@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CorePay.Application.Features.Queries.Accounts.GetAll
 {
-    public class GetAllAccountQueryHandler : IRequestHandler<GetAllAccountQuery, Result<ICollection<GetAllAccountQueryResponse>>>
+    public class GetAllAccountQueryHandler : IRequestHandler<GetAllAccountQuery, Result<ICollection<GetAllAccountResponse>>>
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
@@ -22,14 +22,14 @@ namespace CorePay.Application.Features.Queries.Accounts.GetAll
             _mapper = mapper;
             _currentUser = currentUser;
         }
-        public async Task<Result<ICollection<GetAllAccountQueryResponse>>> Handle(GetAllAccountQuery request, CancellationToken cancellationToken)
+        public async Task<Result<ICollection<GetAllAccountResponse>>> Handle(GetAllAccountQuery request, CancellationToken cancellationToken)
         {
             Guid userId = _currentUser.GetUserId();
 
             ICollection<Account> accounts = await _accountRepository.GetAll(func: a => a.AppUserId == userId,
                                                                             page: request.Page, take: request.Take).ToListAsync();
 
-            return Result<ICollection<GetAllAccountQueryResponse>>.Success(_mapper.Map<ICollection<GetAllAccountQueryResponse>>(accounts));
+            return Result<ICollection<GetAllAccountResponse>>.Success(_mapper.Map<ICollection<GetAllAccountResponse>>(accounts));
         }
     }
 }

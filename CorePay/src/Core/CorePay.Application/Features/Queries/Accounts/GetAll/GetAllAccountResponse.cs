@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Queries.Accounts.GetAll
 {
-    public record GetAllAccountQueryResponse(
+    public record GetAllAccountResponse(
         
         Guid Id,
         Currency Currency,

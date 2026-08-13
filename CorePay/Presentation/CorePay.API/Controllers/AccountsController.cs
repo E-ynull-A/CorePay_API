@@ -3,6 +3,7 @@ using CorePay.Application.Common;
 using CorePay.Application.Features.Commands.Accounts.Post;
 using CorePay.Application.Features.Commands.Accounts.StatusToggle.User;
 using CorePay.Application.Features.Queries.Accounts.GetAll;
+using CorePay.Application.Features.Queries.Accounts.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,7 +25,7 @@ namespace CorePay.API.Controllers
         [HttpGet("/Account/GetAll")]
         public async Task<IActionResult> Get([FromQuery]GetAllAccountQuery query)
         {
-            Result<ICollection<GetAllAccountQueryResponse>> response = await _mediator.Send(query);
+            Result<ICollection<GetAllAccountResponse>> response = await _mediator.Send(query);
 
             return response.ToActionResult();
         }
@@ -45,6 +46,16 @@ namespace CorePay.API.Controllers
             Result result = await _mediator.Send(command);
 
             return result.ToActionResult(204);
+        }
+
+        [Authorize]
+        [HttpGet("/Account/Get/{Id}")]
+
+        public async Task<IActionResult> Get([FromRoute]GetByIdAccountQuery query)
+        {
+            Result<GetByIdAccountResponse> result = await _mediator.Send(query);
+
+            return result.ToActionResult();
         }
 
 

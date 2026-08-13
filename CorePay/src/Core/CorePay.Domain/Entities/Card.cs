@@ -2,6 +2,7 @@
 using CorePay.Domain.Utilities.Enums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,5 +19,8 @@ namespace CorePay.Domain.Entities
         //Relations
         public Account Account { get; protected set; }
         public Guid AccountId { get; protected set; }
+
+
+        public ICollection<Transaction> Transactions { get; protected set; } = new Collection<Transaction>();
     }
 }

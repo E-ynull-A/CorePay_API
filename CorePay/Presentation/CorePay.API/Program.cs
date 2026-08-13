@@ -1,18 +1,14 @@
 
 using CorePay.API.Middlewares;
 using CorePay.Application;
-using CorePay.Application.Interfaces.Repositories;
 using CorePay.Domain.Entities;
 using CorePay.Infrastructure;
 using CorePay.Persistance;
-using CorePay.Persistance;
 using CorePay.Persistance.Data_Access_Layer;
-using CorePay.Persistance.Implementations.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 
 namespace CorePay.API
