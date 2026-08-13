@@ -15,7 +15,7 @@ namespace CorePay.Application.Interfaces.Repositories.Common
                                     int page = 0,
                                     int take = 0,
                                     bool isFiltered = true,
-                                    Expression<Func<T, bool>>? orderBy = null);
+                                    bool orderByAscending = true);
         Task<T?> GetByIdAsync(Guid id,
                               string[]? includes = null,
                               bool isFiltered = true);

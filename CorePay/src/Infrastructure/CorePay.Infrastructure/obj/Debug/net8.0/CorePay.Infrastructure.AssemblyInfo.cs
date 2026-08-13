@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CorePay.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63df3e0e8c5aee18f068d4bff0cc370891a2213a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3662444f3f959fddf55c2bf0056acf4dec5b3df")]
 [assembly: System.Reflection.AssemblyProductAttribute("CorePay.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CorePay.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

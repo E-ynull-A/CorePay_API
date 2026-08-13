@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="DTOs\Token\" />
     <Folder Include="Features\Commands\Accounts\StatusToggle\System\" />
-    <Folder Include="Features\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

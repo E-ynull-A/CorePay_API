@@ -2,6 +2,7 @@
 using CorePay.Domain.Entities;
 using CorePay.Infrastructure.Services;
 using CorePay.Persistance.Implementations.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,29 +15,34 @@ namespace CorePay.Infrastructure
     {
         private const int MINUTE = 5;
         public static IServiceCollection RegistrateInfrastructure(this IServiceCollection services
-                                                    ,IConfiguration configuration)
+                                                    , IConfiguration configuration)
         {
             services.AddAuthentication(opt =>
             {
-                opt.DefaultAuthenticateScheme = default;
-                opt.DefaultChallengeScheme = default;
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-           .AddJwtBearer(opt => opt.TokenValidationParameters = new()
+           .AddJwtBearer(opt =>
            {
-               ValidateAudience = true,
-               ValidateIssuer = true,
-               ValidateIssuerSigningKey = true,
-               ValidateLifetime = true,
+               opt.TokenValidationParameters = new TokenValidationParameters()
+               {
+                   ValidateAudience = true,
+                   ValidateIssuer = true,
+                   ValidateIssuerSigningKey = true,
+                   ValidateLifetime = true,
 
-               ValidAudience = configuration["JWT:Audience"],
-               ValidIssuer = configuration["JWT:Issuer"],
-               IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["JWT:SecurityKey"])),
-               LifetimeValidator = (_, exp, token, _) => exp is not null && token is not null ? exp > DateTime.UtcNow : false,
+                   ValidAudience = configuration["JWT:Audience"],
+                   ValidIssuer = configuration["JWT:Issuer"],
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["JWT:SecretKey"])),
+                   LifetimeValidator = (_, exp, token, _) => exp is not null && token is not null ? exp > DateTime.UtcNow : false,
 
-               ClockSkew = TimeSpan.Zero
+                   ClockSkew = TimeSpan.Zero
+
+
+               };
            });
 
-            
+
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ISystemValueGeneratorService, SystemValueGeneratorService>();

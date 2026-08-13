@@ -19,13 +19,10 @@ namespace CorePay.Application.Features.Commands.Auth.Register
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result>
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly IMapper _mapper;
 
-        public RegisterCommandHandler(UserManager<AppUser> userManager,
-                                      IMapper mapper)
+        public RegisterCommandHandler(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
-            _mapper = mapper;
         }
         public async Task<Result> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
@@ -42,12 +39,17 @@ namespace CorePay.Application.Features.Commands.Auth.Register
                                        request.PhoneNumber,
                                        request.FIN);
 
-            await _userManager.AddToRoleAsync(user, Role.User.ToString());
+            
 
             IdentityResult result = await _userManager.CreateAsync(user,request.Password);
 
             if (!result.Succeeded)
                 throw new IdentityException(result.Errors);
+
+            IdentityResult roleResult = await _userManager.AddToRoleAsync(user, Role.User.ToString());
+
+            if (!roleResult.Succeeded)
+                throw new IdentityException(roleResult.Errors);
 
             return Result.Success();
         }

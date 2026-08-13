@@ -28,5 +28,16 @@ namespace CorePay.Infrastructure.Services
 
             return Id;
         }
+
+
+        public string GetUserRole()
+        {
+            string? userRoles = _httpContext.HttpContext.User.FindFirstValue(ClaimTypes.Role);
+
+            if (string.IsNullOrWhiteSpace(userRoles))
+                throw new UnauthorizedAccessException("Current user was not found");
+
+            return userRoles;
+        }
     }
 }

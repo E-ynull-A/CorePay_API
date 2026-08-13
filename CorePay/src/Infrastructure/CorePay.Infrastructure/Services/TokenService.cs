@@ -48,7 +48,8 @@ namespace CorePay.Persistance.Implementations.Services
                                                           audience: _configuration["JWT:Audience"],
                                                           claims: claims,
                                                           notBefore: DateTime.UtcNow,
-                                                          expires: DateTime.UtcNow.AddMinutes(expireTime));
+                                                          expires: DateTime.UtcNow.AddMinutes(expireTime),
+                                                          signingCredentials:credentials);
 
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 

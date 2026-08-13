@@ -28,7 +28,7 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
                                     int page = 0,
                                     int take = 0,
                                     bool isFiltered = true,
-                                    Expression<Func<T, bool>>? orderBy = null)
+                                    bool orderByAscending = true)
         {
             IQueryable<T> query = _dbSet.AsQueryable();
 
@@ -41,10 +41,12 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
             if (!isFiltered)
                 query = query.IgnoreQueryFilters();
 
-            if (orderBy is not null)
-                query = query.OrderBy(orderBy);
+            if (!orderByAscending)
+                query = query.OrderDescending();
+            else 
+                query = query.OrderBy(func);
 
-            if(includes is not null)
+            if (includes is not null)
                 query = _addIncludes(query, includes);
 
             return query;

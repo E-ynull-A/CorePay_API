@@ -2,7 +2,9 @@
 using CorePay.Application.Common;
 using CorePay.Application.Features.Commands.Accounts.Post;
 using CorePay.Application.Features.Commands.Accounts.StatusToggle.User;
+using CorePay.Application.Features.Queries.Accounts.GetAll;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -18,7 +20,17 @@ namespace CorePay.API.Controllers
         public AccountsController(IMediator mediator) =>
             _mediator = mediator;
 
-        [HttpPost("Account/Post")]
+        [Authorize]
+        [HttpGet("/Account/GetAll")]
+        public async Task<IActionResult> Get([FromQuery]GetAllAccountQuery query)
+        {
+            Result<ICollection<GetAllAccountQueryResponse>> response = await _mediator.Send(query);
+
+            return response.ToActionResult();
+        }
+
+        [Authorize]
+        [HttpPost("/Account/Post")]
         public async Task<IActionResult> Post([FromForm] PostAccountCommand command)
         {
             Result result = await _mediator.Send(command);
@@ -26,7 +38,8 @@ namespace CorePay.API.Controllers
             return result.ToActionResult(201);
         }
 
-        [HttpPut("Account/User/ToggleStatus/{Id}")]
+        [Authorize]
+        [HttpPut("/Account/User/ToggleStatus/{AccountId}")]
         public async Task<IActionResult> Put([FromRoute] ToggleStatusByUserCommand command)
         {
             Result result = await _mediator.Send(command);

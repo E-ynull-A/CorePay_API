@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CorePay.Application.Features.Commands.Auth.Register;
+using CorePay.Application.Features.Queries.Accounts.GetAll;
 using CorePay.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.MappingProfile
 {
-    public class AuthProfile:Profile
+    public class AccountMapper:Profile
     {
-        public AuthProfile()
+        public AccountMapper()
         {
-            CreateMap<RegisterCommand, AppUser>();
+            CreateMap<Account, GetAllAccountQueryResponse>();
         }
     }
 }

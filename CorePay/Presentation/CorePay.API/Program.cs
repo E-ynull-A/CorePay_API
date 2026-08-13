@@ -64,7 +64,7 @@ namespace CorePay.API
             });
 
             builder.Services.RegistrateApplication();
-            builder.Services.RegistrateInfrastructure(builder.Configuration);
+           
             builder.Services.RegistratePersistance();
 
 
@@ -78,7 +78,7 @@ namespace CorePay.API
             {
                 opt.User.RequireUniqueEmail = true;
 
-                opt.SignIn.RequireConfirmedEmail = true;
+                opt.SignIn.RequireConfirmedEmail = false;
 
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
                 opt.Lockout.MaxFailedAccessAttempts = 4;
@@ -90,7 +90,9 @@ namespace CorePay.API
                                     .AddDefaultTokenProviders()
                                     .AddEntityFrameworkStores<AppDbContext>();
 
-           
+            builder.Services.RegistrateInfrastructure(builder.Configuration);
+
+
 
 
 
