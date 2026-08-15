@@ -19,7 +19,7 @@ namespace CorePay.Infrastructure.Services
             _configuration = configuration;
         }
 
-        public async Task SendEmail(string toEmail
+        public async Task SendEmailAsync(string toEmail
                                    ,string subject
                                    ,string body)
         {

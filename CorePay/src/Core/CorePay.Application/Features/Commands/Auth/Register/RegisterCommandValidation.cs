@@ -43,9 +43,9 @@ namespace CorePay.Application.Features.Commands.Auth.Register
             RuleFor(q => q.Email)
                   .NotEmpty()
                   .MinimumLength(4)
-                  .MaximumLength(256)
-                  .Matches(@"^\w+([-+.']\\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$")
-                    .WithMessage("Invalid email address.");
+                  .MaximumLength(256);
+                  //.Matches(@"^\w+([-+.']\\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$")
+                  //  .WithMessage("Invalid email address.");
 
             RuleFor(r => r.FIN)
                 .NotEmpty()

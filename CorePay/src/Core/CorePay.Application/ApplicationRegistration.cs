@@ -28,6 +28,8 @@ namespace CorePay.Application
                                typeof(ValidationBehavior<,>));
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+   
+
 
             return services;
         }

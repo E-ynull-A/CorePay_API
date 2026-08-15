@@ -3,6 +3,7 @@ using CorePay.Application.Common;
 using CorePay.Application.Features.Commands.Auth.Login;
 using CorePay.Application.Features.Commands.Auth.Refresh;
 using CorePay.Application.Features.Commands.Auth.Register;
+using CorePay.Application.Features.Commands.EmailConfirm;
 using MediatR;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,20 @@ namespace CorePay.API.Controllers
            Result<RefreshCommandResponse> response = await _mediator.Send(command);
 
             return response.ToActionResult();
+        }
+
+        [HttpPatch("/EmailConfirm")]
+        public async Task<IActionResult> Confirm([FromForm]EmailConfirmCommand command)
+        {
+            Result response = await _mediator.Send(command);
+            return response.ToActionResult(200);
+        }
+
+        [HttpPost("/Email/ResendConfirmCode")]
+        public async Task<IActionResult> Resend([FromForm]ConfirmEmailResendCommand command)
+        {
+            Result response = await _mediator.Send(command);
+            return response.ToActionResult(200);
         }
     }
 }

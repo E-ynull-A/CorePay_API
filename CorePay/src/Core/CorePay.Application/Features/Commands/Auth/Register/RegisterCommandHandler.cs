@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CorePay.Application.Common;
+using CorePay.Application.Interfaces.Services;
 using CorePay.Domain.Entities;
 using CorePay.Domain.Exceptions;
 using CorePay.Domain.Utilities.Enums;
@@ -19,10 +20,13 @@ namespace CorePay.Application.Features.Commands.Auth.Register
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result>
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IEmailConfirmService _confirmService;
 
-        public RegisterCommandHandler(UserManager<AppUser> userManager)
+        public RegisterCommandHandler(UserManager<AppUser> userManager,
+                                      IEmailConfirmService confirmService)
         {
             _userManager = userManager;
+            _confirmService = confirmService;
         }
         public async Task<Result> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
@@ -50,6 +54,12 @@ namespace CorePay.Application.Features.Commands.Auth.Register
 
             if (!roleResult.Succeeded)
                 throw new IdentityException(roleResult.Errors);
+
+            Result emailResult = await _confirmService
+                                            .SendConfirmEmailAsync(request.Email);
+
+            if (!emailResult.IsSuccess)
+                return emailResult;
 
             return Result.Success();
         }

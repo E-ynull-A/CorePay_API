@@ -33,6 +33,14 @@ namespace CorePay.API.Extentions
                 {
                     StatusCode = StatusCodes.Status500InternalServerError
                 },
+                ErrorType.BusinessRule => new ObjectResult(error)
+                {
+                    StatusCode = StatusCodes.Status422UnprocessableEntity
+                },
+                ErrorType.TooManyRequests => new ObjectResult(error)
+                {
+                    StatusCode = StatusCodes.Status429TooManyRequests
+                },
                 _ => new BadRequestObjectResult(error)
 
             };

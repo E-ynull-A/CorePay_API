@@ -2,6 +2,22 @@
   {
     "ContainingType": "CorePay.API.Controllers.AccountsController",
     "Method": "Get",
+    "RelativePath": "Account/Get/{Id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.AccountsController",
+    "Method": "Get",
     "RelativePath": "Account/GetAll",
     "HttpMethod": "GET",
     "IsController": true,
@@ -48,6 +64,43 @@
         "Name": "AccountId",
         "Type": "System.Guid",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.AuthController",
+    "Method": "Resend",
+    "RelativePath": "Email/ResendConfirmCode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.AuthController",
+    "Method": "Confirm",
+    "RelativePath": "EmailConfirm",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Code",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

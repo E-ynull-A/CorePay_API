@@ -1,0 +1,73 @@
+﻿using CorePay.Application.Common;
+using CorePay.Application.Interfaces.Services;
+using CorePay.Domain.Entities;
+using CorePay.Domain.Utilities.Enums;
+using CorePay.Domain.Utilities.Errors;
+using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
+using StackExchange.Redis;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Net;
+using System.Numerics;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace CorePay.Infrastructure.Services
+{
+    public class EmailConfirmService : IEmailConfirmService
+    {
+        private readonly IEmailService _emailService;
+        private readonly IRedisCasheService _redisCashe;
+
+        public EmailConfirmService(IEmailService emailService, IRedisCasheService redisCashe)
+        {
+            _emailService = emailService;
+            _redisCashe = redisCashe;
+        }
+
+        public async Task<Result> SendConfirmEmailAsync(string toEmail)
+        {
+            int randInt = RandomNumberGenerator.GetInt32(100000, 999999);
+
+            if (await _redisCashe.CountAsync(toEmail, TimeSpan.FromMinutes(3)) > 3)
+                return Result.Failure(AuthError.TooManyRequests);
+
+            string body = $"""
+                
+                          Hello,
+                
+                          Welcome to CorePay!
+
+                          To complete your registration and verify your email address, please enter the following verification code:
+
+                          {randInt}
+
+                          This verification code is valid for 3 minutes.Please do not share this code with anyone.
+
+                          If you did not create a CorePay account, you can safely ignore this email.
+
+                          Best regards,
+                          CorePay Team
+                
+                          """;
+
+
+            await _emailService.SendEmailAsync(toEmail, "Confirm Email", body);
+            return Result.Success();
+        }
+
+        public async Task<bool> IsTooManyAttempsAsync(string email)
+        {
+            if (await _redisCashe.CountAsync(email, TimeSpan.FromMinutes(10)) == 4)
+                return true;
+
+            return false;
+        }
+    }
+}

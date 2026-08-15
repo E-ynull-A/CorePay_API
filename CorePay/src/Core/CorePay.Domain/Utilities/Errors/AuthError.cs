@@ -25,5 +25,11 @@ namespace CorePay.Domain.Utilities.Errors
         public static readonly Error InvalidCredentials = new("Auth.InvalidCredentials",
                                                               "Username or password is incorrect.",
                                                               ErrorType.Unauthorized);
+
+        public static readonly Error TooManyRequests = new("Auth.ManyRequests",
+                                                              "Too many requests! " +
+                                                              "Please try a few minutes later.",
+                                                              ErrorType.TooManyRequests);
+
     }
 }

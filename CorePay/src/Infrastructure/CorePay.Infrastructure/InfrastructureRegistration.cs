@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using System.Text;
 
 namespace CorePay.Infrastructure
@@ -43,11 +44,14 @@ namespace CorePay.Infrastructure
            });
 
 
+            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect("localhost:6379"));
 
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ISystemValueGeneratorService, SystemValueGeneratorService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IRedisCasheService, RedisCasheService>();
+            services.AddScoped<IEmailConfirmService, EmailConfirmService>();
 
             return services;
         }

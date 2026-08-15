@@ -8,7 +8,7 @@ namespace CorePay.Application.Interfaces.Services
 {
     public interface IEmailService
     {
-        Task SendEmail(string toEmail
+        Task SendEmailAsync(string toEmail
                       ,string subject
                       ,string body);
     }
