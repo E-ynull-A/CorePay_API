@@ -22,7 +22,9 @@ namespace CorePay.Application.Interfaces.Repositories.Common
 
         Task<int> CountAsync(Expression<Func<T,bool>> func);
         Task<bool> AnyAsync(Expression<Func<T,bool>> func);
-        Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> func, string[]? includes = null);
+        Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> func,
+                                          string[]? includes = null,
+                                          bool isFiltered = true);
         void Update(T updatedItem);
         void Add(T item);
         Task SaveChangesAsync();

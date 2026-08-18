@@ -63,12 +63,19 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
             return query;
         }
 
-        public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> func, string[]? includes = null)
-        {         
-            if(includes is not null)
-               return await _addIncludes(_dbSet, includes).FirstOrDefaultAsync(func);
-            
-            return await _dbSet.FirstOrDefaultAsync(func);
+        public async Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> func,
+                                                  string[]? includes = null,
+                                                  bool isFiltered = true)
+        {
+            IQueryable<T> dbSet = _dbSet;
+
+            if (includes is not null)
+                dbSet = _addIncludes(_dbSet, includes);
+
+            if (!isFiltered)
+                dbSet.IgnoreQueryFilters();
+   
+            return await dbSet.FirstOrDefaultAsync(func);
         } 
            
        

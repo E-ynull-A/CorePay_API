@@ -1,0 +1,19 @@
+﻿using AutoMapper;
+using CorePay.Application.Features.Queries.Accounts.GetAll;
+using CorePay.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CorePay.Application.MappingProfile
+{
+    public class CardMapper:Profile
+    {
+        public CardMapper()
+        {
+            CreateMap<Card, GetAllAccountResponse>();
+        }
+    }
+}

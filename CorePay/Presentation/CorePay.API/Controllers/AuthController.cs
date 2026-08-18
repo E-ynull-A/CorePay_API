@@ -1,9 +1,9 @@
 ﻿using CorePay.API.Extentions;
 using CorePay.Application.Common;
+using CorePay.Application.Features.Commands.Auth.EmailConfirm;
 using CorePay.Application.Features.Commands.Auth.Login;
 using CorePay.Application.Features.Commands.Auth.Refresh;
 using CorePay.Application.Features.Commands.Auth.Register;
-using CorePay.Application.Features.Commands.EmailConfirm;
 using MediatR;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;

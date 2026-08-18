@@ -35,8 +35,12 @@ namespace CorePay.Infrastructure.Services
         {
             int randInt = RandomNumberGenerator.GetInt32(100000, 999999);
 
-            if (await _redisCashe.CountAsync(toEmail, TimeSpan.FromMinutes(3)) > 3)
+            if (await _redisCashe.CountAsync($"otp:verify-email:rate-limit:{toEmail.ToLowerInvariant()}",
+                                                TimeSpan.FromMinutes(10)) > 3)
                 return Result.Failure(AuthError.TooManyRequests);
+
+            await _redisCashe.SetAsync<int>($"otp:verify-email:{toEmail.ToLowerInvariant()}",
+                                    randInt,TimeSpan.FromMinutes(5));
 
             string body = $"""
                 
@@ -46,7 +50,7 @@ namespace CorePay.Infrastructure.Services
 
                           To complete your registration and verify your email address, please enter the following verification code:
 
-                          {randInt}
+                           {randInt}
 
                           This verification code is valid for 3 minutes.Please do not share this code with anyone.
 
@@ -64,7 +68,8 @@ namespace CorePay.Infrastructure.Services
 
         public async Task<bool> IsTooManyAttempsAsync(string email)
         {
-            if (await _redisCashe.CountAsync(email, TimeSpan.FromMinutes(10)) == 4)
+            if (await _redisCashe.CountAsync($"otp:verify-email:attempts:{email.ToLowerInvariant()}"
+                                                    ,TimeSpan.FromMinutes(10)) == 4)
                 return true;
 
             return false;

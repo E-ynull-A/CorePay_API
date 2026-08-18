@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorePay.Application.Features.Commands.EmailConfirm
+namespace CorePay.Application.Features.Commands.Cards.Lost
 {
-    public record ConfirmEmailResendCommand(string Email):IRequest<Result>;
- 
+    public record LockCardCommand(Guid Id):IRequest<Result>;
+   
 }

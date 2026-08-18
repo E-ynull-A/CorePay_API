@@ -14,12 +14,15 @@ namespace CorePay.Infrastructure.Services
     {
         private readonly IConfiguration _config;
         private readonly IAccountRepository _accountRepository;
+        private readonly ICardRepository _cardRepository;
 
         public SystemValueGeneratorService(IConfiguration config,
-                                            IAccountRepository accountRepository)
+                                            IAccountRepository accountRepository,
+                                            ICardRepository cardRepository)
         {
             _config = config;
             _accountRepository = accountRepository;
+            _cardRepository = cardRepository;
         }
         public async Task<string> GenerateIbanAsync()
         {
@@ -35,11 +38,11 @@ namespace CorePay.Infrastructure.Services
             }
             while (await _accountRepository.AnyAsync(a => a.IBAN.EndsWith(accountCode)));
 
-            string ibanForCheckDigit = string.Concat(bankCode,accountCode,countryCode,"00");
+            string ibanForCheckDigit = string.Concat(bankCode, accountCode, countryCode, "00");
 
             return string.Concat(_config["Bank:Country"],
                                 _getCheckDigit(ibanForCheckDigit),
-                                _config["Bank:Code"],accountCode);
+                                _config["Bank:Code"], accountCode);
         }
 
         private int _getCheckDigit(string letters)
@@ -62,5 +65,62 @@ namespace CorePay.Infrastructure.Services
                 .Concat(letters.Select(l => (l - 'A' + 10)
                     .ToString()));
         }
+
+
+        public async Task<string> GenerateCardNumber()
+        {
+
+
+            string code = string.Concat(_config["Bank:VIM"]
+                                             ,Enumerable.Range(0, 7)
+                                                .Select(_ => RandomNumberGenerator
+                                                             .GetInt32(0, 10)));
+            
+            
+            int numb = 0;
+            int sum = 0;
+            int checkDigit = 0;
+
+            while (await _cardRepository.AnyAsync(c => c.CardNumber.StartsWith(code)))
+            {
+               
+
+                for (int i = 0; i < code.Length; i++)
+                {
+                    numb = code[i] - '0';
+
+                    if (i % 2 == 0)
+                        sum += (numb * 2 > 9)
+                                    ? (numb % 10 + (numb - numb % 10) / 10)
+                                    : code[i] - '0';
+
+                    else
+                        sum += numb;
+                }
+
+                checkDigit = (10 - (sum % 10)) % 10;
+            }
+                       
+            return string.Concat(code,checkDigit);
+        }
+        public string GenerateCvnCode() =>
+            RandomNumberGenerator.GetInt32(100, 999).ToString("D3");
+        
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

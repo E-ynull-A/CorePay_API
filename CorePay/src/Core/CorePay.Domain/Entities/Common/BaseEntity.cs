@@ -20,7 +20,7 @@ namespace CorePay.Domain.Entities.Common
         public Guid? UpdatedBy { get; protected set; }
 
 
-        public void SoftDelete(Guid? deletedBy)=>
+        public void SoftDelete()=>
             IsDeleted = true;
 
     }

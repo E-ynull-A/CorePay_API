@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CorePay.Application.Common;
 using CorePay.Application.Interfaces.Repositories;
+using CorePay.Application.Interfaces.Services;
 using CorePay.Domain.Entities;
 using CorePay.Domain.Utilities.Errors;
 using MediatR;
@@ -16,16 +17,21 @@ namespace CorePay.Application.Features.Queries.Accounts.GetById
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUser;
 
         public GetByIdAccountQueryHandler(IAccountRepository accountRepository,
-                                          IMapper mapper)
+                                          IMapper mapper,
+                                          ICurrentUserService currentUser)
         {
             _accountRepository = accountRepository;
             _mapper = mapper;
+            _currentUser = currentUser;
         }
         public async Task<Result<GetByIdAccountResponse>> Handle(GetByIdAccountQuery request, CancellationToken cancellationToken)
         {
-            Account? account = await _accountRepository.GetByIdAsync(request.Id);
+            Guid userId = _currentUser.GetUserId();
+
+            Account? account = await _accountRepository.FirstOrDefaultAsync(a=>a.Id == request.Id && a.AppUserId == userId);
 
             if (account == null)
                 return Result<GetByIdAccountResponse>.Failure(AccountError.NotFound);

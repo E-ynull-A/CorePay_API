@@ -31,5 +31,7 @@ namespace CorePay.Domain.Entities
             Status = AccountStatus.Active;
         public void BlokedByUser()=>
             Status = AccountStatus.UserBlocked;
+        public void Close()=>
+            Status = AccountStatus.Closed;
     }
 }

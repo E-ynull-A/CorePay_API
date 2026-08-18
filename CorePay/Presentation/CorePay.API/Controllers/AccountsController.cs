@@ -1,5 +1,6 @@
 ﻿using CorePay.API.Extentions;
 using CorePay.Application.Common;
+using CorePay.Application.Features.Commands.Accounts.Close;
 using CorePay.Application.Features.Commands.Accounts.Post;
 using CorePay.Application.Features.Commands.Accounts.StatusToggle.User;
 using CorePay.Application.Features.Queries.Accounts.GetAll;
@@ -56,6 +57,15 @@ namespace CorePay.API.Controllers
             Result<GetByIdAccountResponse> result = await _mediator.Send(query);
 
             return result.ToActionResult();
+        }
+
+        [Authorize]
+        [HttpPut("/Account/Close/{Id}")]
+        public async Task<IActionResult> Close([FromRoute] CloseAccountCommand query)
+        {
+            Result result = await _mediator.Send(query);
+
+            return result.ToActionResult(204);
         }
 
 

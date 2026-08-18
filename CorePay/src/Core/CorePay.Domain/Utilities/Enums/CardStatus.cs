@@ -11,6 +11,6 @@ namespace CorePay.Domain.Utilities.Enums
         Active = 1,
         Blocked = 2,
         Expired = 3,
-        Lost = 4
+        Locked = 4
     }
 }

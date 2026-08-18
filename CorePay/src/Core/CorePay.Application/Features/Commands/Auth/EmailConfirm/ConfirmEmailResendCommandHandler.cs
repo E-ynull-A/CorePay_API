@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorePay.Application.Features.Commands.EmailConfirm
+namespace CorePay.Application.Features.Commands.Auth.EmailConfirm
 {
     public class ConfirmEmailResendCommandHandler : IRequestHandler<ConfirmEmailResendCommand, Result>
     {

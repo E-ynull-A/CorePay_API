@@ -7,13 +7,8 @@ using CorePay.Domain.Utilities.Errors.Common;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CorePay.Application.Features.Commands.EmailConfirm
+namespace CorePay.Application.Features.Commands.Auth.EmailConfirm
 {
     public class EmailConfirmCommandHandler : IRequestHandler<EmailConfirmCommand, Result>
     {
@@ -34,13 +29,14 @@ namespace CorePay.Application.Features.Commands.EmailConfirm
             if (await _emailConfirm.IsTooManyAttempsAsync(request.Email))
                 return Result.Failure(AuthError.TooManyRequests);
 
-            if (await _redisCashe.GetAsync<string>(request.Email) == request.Code)
+            if (await _redisCashe.GetAsync<string>($"otp:verify-email:{request.Email.ToLowerInvariant()}") == request.Code)
             {
                 AppUser? user = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
                 if (user == null)
                     return Result.Failure(AuthError.NotFound);
 
                 user.EmailConfirmed = true;
+                await _userManager.UpdateAsync(user);
 
                 await _redisCashe.DeleteAsync(request.Email);
                 return Result.Success();
