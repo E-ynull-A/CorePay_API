@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "CorePay.API.Controllers.AccountsController",
+    "Method": "Close",
+    "RelativePath": "Account/Close/{Id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.AccountsController",
     "Method": "Get",
     "RelativePath": "Account/Get/{Id}",
     "HttpMethod": "GET",
@@ -24,13 +40,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Take",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Page",
-        "Type": "System.Int32",
+        "Name": "query",
+        "Type": "CorePay.Application.Features.Queries.Accounts.GetAll.GetAllAccountQuery",
         "IsRequired": false
       }
     ],
@@ -62,6 +73,91 @@
     "Parameters": [
       {
         "Name": "AccountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.CardsController",
+    "Method": "Get",
+    "RelativePath": "Card/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "AccountId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.CardsController",
+    "Method": "Get",
+    "RelativePath": "Card/GetById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "AccountId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.CardsController",
+    "Method": "Lost",
+    "RelativePath": "Card/Lock/{Id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.CardsController",
+    "Method": "Post",
+    "RelativePath": "Card/Post/{AccountId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "AccountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.CardsController",
+    "Method": "Remove",
+    "RelativePath": "Card/SoftDelete/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
         "Type": "System.Guid",
         "IsRequired": true
       }

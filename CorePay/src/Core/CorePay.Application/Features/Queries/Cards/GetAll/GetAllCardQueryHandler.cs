@@ -32,8 +32,7 @@ namespace CorePay.Application.Features.Queries.Cards.GetAll
             Guid userId = _currentUser.GetUserId();
 
             ICollection<Card> cards = await _cardRepository.GetAll(func: c => c.Account.AppUserId == userId
-                                                                  ,page: request.Page
-                                                                  ,take: request.Take).ToListAsync();
+                                                                           && c.AccountId == request.AccountId).ToListAsync();
 
             return Result<ICollection<GetAllCardResponse>>.Success
                 (_mapper.Map<ICollection<GetAllCardResponse>>(cards));

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Queries.Cards.GetAll
 {
-    public record GetAllCardQuery(int Take,
-                                  int Page):IRequest<Result<ICollection<GetAllCardResponse>>>;
+    public record GetAllCardQuery(Guid AccountId):IRequest<Result<ICollection<GetAllCardResponse>>>;
     
 }

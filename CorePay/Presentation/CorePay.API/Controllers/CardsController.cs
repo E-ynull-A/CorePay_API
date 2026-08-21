@@ -3,13 +3,11 @@ using CorePay.Application.Common;
 using CorePay.Application.Features.Commands.Cards.Lost;
 using CorePay.Application.Features.Commands.Cards.Post;
 using CorePay.Application.Features.Commands.Cards.Remove;
-using CorePay.Application.Features.Queries.Accounts.GetAll;
+using CorePay.Application.Features.Queries.Cards.GetAll;
 using CorePay.Application.Features.Queries.Cards.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace CorePay.API.Controllers
 {
@@ -35,7 +33,7 @@ namespace CorePay.API.Controllers
         }
 
         [Authorize]
-        [HttpPatch("/Card/Lost/{Id}")]
+        [HttpPatch("/Card/Lock/{Id}")]
         public async Task<IActionResult> Lost([FromRoute] LockCardCommand command)
         {
             Result result = await _mediator.Send(command);
@@ -57,18 +55,18 @@ namespace CorePay.API.Controllers
         [Authorize]
         [HttpGet("/Card/GetAll")]
 
-        public async Task<IActionResult> Get([FromQuery] GetAllAccountQuery query)
+        public async Task<IActionResult> Get([FromQuery] GetAllCardQuery query)
         {
-            Result<ICollection<GetAllAccountResponse>> response =
+            Result<ICollection<GetAllCardResponse>> response =
                                                     await _mediator.Send(query);
 
             return response.ToActionResult();
         }
 
         [Authorize]
-        [HttpGet("/Card/GetById/{Id}")]
+        [HttpGet("/Card/GetById")]
 
-        public async Task<IActionResult> Get([FromRoute]GetByIdCardQuery query)
+        public async Task<IActionResult> Get([FromQuery]GetByIdCardQuery query)
         {
             Result<GetByIdCardResponse> response = 
                                     await _mediator.Send(query);

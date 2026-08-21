@@ -65,7 +65,7 @@ namespace CorePay.Application.Features.Commands.Auth.Refresh
             _tokenRepository.Add(newRefreshTkn);
 
             refreshToken.Revoke();
-            refreshToken.SoftDelete(Guid.Parse("af29e40f-ff70-4d9a-1615-08def795fab3"));
+            refreshToken.SoftDelete();
             _tokenRepository.Update(refreshToken);
             
 

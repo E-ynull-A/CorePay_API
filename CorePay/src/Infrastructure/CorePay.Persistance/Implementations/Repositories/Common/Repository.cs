@@ -27,8 +27,7 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
                                     string[]? includes = null,
                                     int page = 0,
                                     int take = 0,
-                                    bool isFiltered = true,
-                                    bool orderByAscending = true)
+                                    bool isFiltered = true)
         {
             IQueryable<T> query = _dbSet.AsQueryable();
 
@@ -39,12 +38,7 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
                 query = query.Skip((page - 1) * take).Take(take);
 
             if (!isFiltered)
-                query = query.IgnoreQueryFilters();
-
-            if (!orderByAscending)
-                query = query.OrderDescending();
-            else 
-                query = query.OrderBy(func);
+                query = query.IgnoreQueryFilters();           
 
             if (includes is not null)
                 query = _addIncludes(query, includes);
@@ -53,11 +47,11 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
         }
 
 
-        private IQueryable<T> _addIncludes(IQueryable<T> query,string[] includes)
+        private IQueryable<T> _addIncludes(IQueryable<T> query, string[] includes)
         {
             foreach (var include in includes)
             {
-               query = query.Include(include);
+                query = query.Include(include);
             }
 
             return query;
@@ -74,11 +68,11 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
 
             if (!isFiltered)
                 dbSet.IgnoreQueryFilters();
-   
+
             return await dbSet.FirstOrDefaultAsync(func);
-        } 
-           
-       
+        }
+
+
         public async Task<T?> GetByIdAsync(Guid id,
                                     string[]? includes = null,
                                     bool isFiltered = true)
@@ -88,16 +82,16 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
             if (includes is not null)
                 query = _addIncludes(query, includes);
 
-            if(!isFiltered)
+            if (!isFiltered)
                 query = query.IgnoreQueryFilters();
 
-            return await query.FirstOrDefaultAsync(q => q.Id == id);           
+            return await query.FirstOrDefaultAsync(q => q.Id == id);
         }
 
-        public void Update(T updatedItem)=>        
+        public void Update(T updatedItem) =>
             _dbSet.Update(updatedItem);
-        
-        public void Add(T item)=>
+
+        public void Add(T item) =>
             _dbSet.Add(item);
 
         public Task SaveChangesAsync() =>
@@ -108,6 +102,6 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
 
         public async Task<int> CountAsync(Expression<Func<T, bool>> func) =>
             await _dbSet.CountAsync(func);
-            
+
     }
 }

@@ -7,8 +7,6 @@ using System.Linq.Expressions;
 
 namespace CorePay.Application.Features.Queries.Accounts.GetAll
 {
-    public record GetAllAccountQuery(
-        int Take,
-        int Page):IRequest<Result<ICollection<GetAllAccountResponse>>>;
+    public record GetAllAccountQuery():IRequest<Result<ICollection<GetAllAccountResponse>>>;
     
 }

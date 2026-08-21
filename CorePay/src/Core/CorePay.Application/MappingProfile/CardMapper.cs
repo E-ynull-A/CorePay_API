@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using CorePay.Application.Features.Queries.Accounts.GetAll;
+using CorePay.Application.Features.Queries.Cards.GetAll;
+using CorePay.Application.Features.Queries.Cards.GetById;
 using CorePay.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,8 @@ namespace CorePay.Application.MappingProfile
     {
         public CardMapper()
         {
-            CreateMap<Card, GetAllAccountResponse>();
+            CreateMap<Card, GetAllCardResponse>();
+            CreateMap<Card, GetByIdCardResponse>();
         }
     }
 }

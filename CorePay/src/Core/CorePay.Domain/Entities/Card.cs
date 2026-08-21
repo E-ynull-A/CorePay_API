@@ -24,11 +24,11 @@ namespace CorePay.Domain.Entities
         public ICollection<Transaction> Transactions { get; protected set; } = new Collection<Transaction>();
 
 
-        public Card(string cardNumber, DateOnly expireDate, string cvn, Guid accountId)
+        public Card(string cardNumber, DateOnly expireDate, string CVN, Guid accountId)
         {
             CardNumber = cardNumber;
             ExpireDate = expireDate;
-            CVN = cvn;
+            this.CVN = CVN;
             AccountId = accountId;
         }
 

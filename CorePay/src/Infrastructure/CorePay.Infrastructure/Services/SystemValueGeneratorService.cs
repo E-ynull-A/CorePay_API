@@ -67,23 +67,20 @@ namespace CorePay.Infrastructure.Services
         }
 
 
-        public async Task<string> GenerateCardNumber()
+        public async Task<string> GenerateCardNumberAsync()
         {
 
 
-            string code = string.Concat(_config["Bank:VIM"]
-                                             ,Enumerable.Range(0, 7)
-                                                .Select(_ => RandomNumberGenerator
-                                                             .GetInt32(0, 10)));
+            string code = string.Concat(_config["Bank:VIM"],RandomNumberGenerator.GetInt32(1000000,9999999).ToString());
             
             
             int numb = 0;
             int sum = 0;
             int checkDigit = 0;
 
-            while (await _cardRepository.AnyAsync(c => c.CardNumber.StartsWith(code)))
+            do
             {
-               
+
 
                 for (int i = 0; i < code.Length; i++)
                 {
@@ -100,8 +97,9 @@ namespace CorePay.Infrastructure.Services
 
                 checkDigit = (10 - (sum % 10)) % 10;
             }
-                       
-            return string.Concat(code,checkDigit);
+            while (await _cardRepository.AnyAsync(c => c.CardNumber.StartsWith(code)));
+
+                return string.Concat(code,checkDigit);
         }
         public string GenerateCvnCode() =>
             RandomNumberGenerator.GetInt32(100, 999).ToString("D3");

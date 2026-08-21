@@ -30,7 +30,7 @@ namespace CorePay.Application.Features.Commands.Cards.Post
                 return Result.Failure(CardError.ReachedCardLimit);
 
             Card card = new Card(
-                _generatorService.GenerateCardNumber(),
+                await _generatorService.GenerateCardNumberAsync(),
                 DateOnly.FromDateTime(DateTime.Now.AddYears(3)),
                 _generatorService.GenerateCvnCode(),
                 request.AccountId);

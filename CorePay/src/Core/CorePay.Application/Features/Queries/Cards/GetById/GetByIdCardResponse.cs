@@ -10,6 +10,7 @@ namespace CorePay.Application.Features.Queries.Cards.GetById
     public record GetByIdCardResponse(Guid Id,
                                       string CardNumber,
                                       DateOnly ExpireDate,
+                                      string CVN,
                                       CardStatus Status,
                                       Guid AccountId);
    

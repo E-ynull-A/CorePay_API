@@ -20,5 +20,14 @@ namespace CorePay.Domain.Entities
 
         public Guid? CardId { get; protected set; }
         public Card? Card { get; protected set; }
+
+
+        public Transaction(decimal amount, TransactionType type, Guid accountId, Guid? cardId = null)
+        {
+            Amount = amount;
+            Type = type;
+            AccountId = accountId;
+            CardId = cardId;
+        }
     }
 }

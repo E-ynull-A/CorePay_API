@@ -32,7 +32,8 @@ namespace CorePay.Application.Features.Queries.Cards.GetById
             Guid userId = _currentUser.GetUserId();
 
             Card? card = await _cardRepository.FirstOrDefaultAsync(c=>c.Id == request.Id 
-                                                                    && c.Account.AppUserId == userId,
+                                                                    && c.Account.AppUserId == userId
+                                                                    && c.AccountId == request.AccountId,
                                                                     includes: [nameof(Card.Account)]);
 
             if (card is null)
