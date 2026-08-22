@@ -25,6 +25,12 @@ namespace CorePay.Persistance.Data_Access_Layer.Configurations
                 .HasPrecision(18, 2)
                 .IsRequired();
 
+            builder
+                .ToTable(t=>t
+                        .HasCheckConstraint("CK_Transaction_AccountId_Or_CardId_Required",
+                                            "[AccountId] IS NOT NULL OR [CardId] IS NOT NULL"));
+                
+
         }
     }
 }

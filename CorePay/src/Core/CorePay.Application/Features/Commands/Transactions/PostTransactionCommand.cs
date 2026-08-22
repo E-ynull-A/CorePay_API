@@ -8,10 +8,11 @@ namespace CorePay.Application.Features.Commands.Transactions
         decimal Amount,
         TransactionType Type,
 
-        string? SenderIBAN,
-        string? RecieverIBAN,
+        string? senderAccount,
+        string? recieverAccount,
 
-        string? CardNumber):IRequest<Result>;
+        string? SenderCardNumber,
+        string? RecieverCardNumber):IRequest<Result>;
     
    
 }
