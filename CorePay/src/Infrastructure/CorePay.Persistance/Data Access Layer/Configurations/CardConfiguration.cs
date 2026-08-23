@@ -19,6 +19,10 @@ namespace CorePay.Persistance.Data_Access_Layer.Configurations
                 .HasForeignKey(c => c.AccountId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Property(c => c.PinHash)
+                .IsRequired()
+                .HasMaxLength(256);
+
 
             builder
                 .HasIndex(c => c.CardNumber)

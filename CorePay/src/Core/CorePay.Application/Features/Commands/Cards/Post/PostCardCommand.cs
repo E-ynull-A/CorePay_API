@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Commands.Cards.Post
 {
-    public record PostCardCommand(Guid AccountId):IRequest<Result>;
+    public record PostCardCommand(Guid AccountId,
+                                  string PIN):IRequest<Result>;
  
 }

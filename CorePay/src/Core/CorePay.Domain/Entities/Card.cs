@@ -14,6 +14,7 @@ namespace CorePay.Domain.Entities
         public string CardNumber { get; protected set; }
         public DateOnly ExpireDate { get; protected set; }
         public string CVN { get; protected set; }
+        public string PinHash { get; protected set; }
         public CardStatus Status { get; protected set; } = CardStatus.Active;
 
         //Relations
@@ -24,12 +25,13 @@ namespace CorePay.Domain.Entities
         public ICollection<Transaction> Transactions { get; protected set; } = new Collection<Transaction>();
 
 
-        public Card(string cardNumber, DateOnly expireDate, string CVN, Guid accountId)
+        public Card(string cardNumber, DateOnly expireDate, string CVN, Guid accountId, string pinHash)
         {
             CardNumber = cardNumber;
             ExpireDate = expireDate;
             this.CVN = CVN;
             AccountId = accountId;
+            PinHash = pinHash;
         }
 
         public void Lock() =>

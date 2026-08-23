@@ -23,7 +23,7 @@ namespace CorePay.Domain.Utilities.Errors
 
         public static Error Expired { get; } = new Error("Card.Expired",
                                                  "The Card was Expired!" +
-            "                                    You need to get a new one",
+                                                 "You need to get a new one",
                                                  ErrorType.BusinessRule);
     }
 }

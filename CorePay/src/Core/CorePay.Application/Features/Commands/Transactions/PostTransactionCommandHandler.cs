@@ -5,6 +5,7 @@ using CorePay.Domain.Entities;
 using CorePay.Domain.Utilities.Enums;
 using CorePay.Domain.Utilities.Errors;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,19 +19,22 @@ namespace CorePay.Application.Features.Commands.Transactions
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentUserService _currentUser;
+        private readonly IRedisCasheService _casheService;
 
         public PostTransactionCommandHandler(IUnitOfWork unitOfWork,
-                                             ICurrentUserService currentUser)
+                                             ICurrentUserService currentUser,
+                                             IRedisCasheService casheService)
         {
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;
+            _casheService = casheService;
         }
         public async Task<Result> Handle(PostTransactionCommand request, CancellationToken cancellationToken)
         {
             Guid userID = _currentUser.GetUserId();
 
-            Account? senderAccount = default;
-            Account? recieverAccount = default;
+            Account? SenderIBAN = default;
+            Account? RecieverIBAN = default;
 
             Card? senderCard = default;
             Card? recieverCard = default;
@@ -39,67 +43,90 @@ namespace CorePay.Application.Features.Commands.Transactions
                 || request.Type == TransactionType.Withdraw)
             {
 
-                if (request.senderAccount is not null)
+
+                senderCard = await _unitOfWork.CardRepository
+                                    .FirstOrDefaultAsync(c => c.Account.AppUserId == userID
+                                                           && c.CardNumber == request.SenderCardNumber,
+                                                           [nameof(Card.Account)]);
+
+                if (senderCard is null)
+                    return Result.Failure(CardError.NotFound);
+
+                PasswordHasher<object> hasher = new PasswordHasher<object>();
+
+                var result = hasher.VerifyHashedPassword(null!, senderCard.PinHash, request.PIN);
+
+                if (result == PasswordVerificationResult.Failed)
                 {
-                    senderAccount = await _unitOfWork.AccountRepository
-                                       .FirstOrDefaultAsync(a => a.AppUserId == userID
-                                                              && a.IBAN == request.senderAccount);
+                    if (await _casheService.CountAsync($"card:verify-pin:attempts:{senderCard.Id}", TimeSpan.FromMinutes(15)) == 3)
+                        return Result.Failure(TransactionError.TooManyAttempts);
 
-                    if (senderAccount is null)
-                        return Result.Failure(AccountError.NotFound);
-       
-                }
-                else
-                {
-                    senderCard = await _unitOfWork.CardRepository
-                                        .FirstOrDefaultAsync(c => c.Account.AppUserId == userID
-                                                               && c.CardNumber == request.SenderCardNumber,
-                                                               [nameof(Card.Account)]);
-
-                    if(senderCard is null)
-                        return Result.Failure(CardError.NotFound);
+                    return Result.Failure(TransactionError.WrongPIN);
                 }
 
-                if (senderAccount?.Status != AccountStatus.Active 
-                    || 
-                    senderCard?.Account.Status != AccountStatus.Active 
-                    || 
+                if (senderCard.ExpireDate < DateOnly.FromDateTime(DateTime.Now))
+                    return Result.Failure(CardError.Expired);
+
+                if (senderCard?.Account.Status != AccountStatus.Active
+                    ||
                     senderCard?.Status != CardStatus.Active)
-                 return Result.Failure(TransactionError.InvalidStatus);
+                    return Result.Failure(TransactionError.InvalidStatus);
 
+                if (senderCard?.Account.Balance < request.Amount)
+                    return Result.Failure(TransactionError.NoEnoughBalance);
+            }
 
-                if (senderAccount?.Balance < request.Amount 
-                    || senderCard?.Account.Balance < request.Amount)
-                return Result.Failure(TransactionError.NoEnoughBalance);
+            if (request.Type == TransactionType.Transfer)
+            {
+                SenderIBAN = await _unitOfWork.AccountRepository
+                                   .FirstOrDefaultAsync(a => a.AppUserId == userID
+                                                          && a.IBAN == request.SenderIBAN);
+
+                if (SenderIBAN is null)
+                    return Result.Failure(AccountError.NotFound);
+
+                if (SenderIBAN?.Status != AccountStatus.Active)
+                    return Result.Failure(TransactionError.InvalidStatus);
+
+                if (SenderIBAN?.Balance < request.Amount)
+                    return Result.Failure(TransactionError.NoEnoughBalance);
             }
 
             if (request.Type == TransactionType.Transfer
             || request.Type == TransactionType.Deposit)
             {
-                if (request.recieverAccount is not null)
+                if (request.RecieverIBAN is not null)
                 {
-                    recieverAccount = await _unitOfWork.AccountRepository
-                                       .FirstOrDefaultAsync(a => a.AppUserId == userID
-                                                              && a.IBAN == request.recieverAccount);
+                    RecieverIBAN = await _unitOfWork.AccountRepository
+                                       .FirstOrDefaultAsync(a => a.IBAN == request.RecieverIBAN);
 
-                    if (recieverAccount is null)
+                    if (RecieverIBAN is null)
                         return Result.Failure(AccountError.NotFound);
                 }
                 else
                 {
                     recieverCard = await _unitOfWork.CardRepository
-                                        .FirstOrDefaultAsync(c => c.Account.AppUserId == userID
-                                                               && c.CardNumber == request.RecieverCardNumber);
+                                        .FirstOrDefaultAsync(c => c.CardNumber == request.RecieverCardNumber);
 
                     if (recieverCard is null)
                         return Result.Failure(CardError.NotFound);
+
+                    if (recieverCard.ExpireDate < DateOnly.FromDateTime(DateTime.Now))
+                        return Result.Failure(CardError.Expired);
                 }
+
+                if (RecieverIBAN?.Status != AccountStatus.Active
+                  ||
+                  recieverCard?.Account.Status != AccountStatus.Active
+                  ||
+                  recieverCard?.Status != CardStatus.Active)
+
+                    return Result.Failure(TransactionError.InvalidStatus);
+
+
+
             }
-
-            //Card tarixin yoxla, Card-a PIN
-
-
-
+            return Result.Success();
         }
     }
 }
