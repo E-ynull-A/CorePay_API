@@ -40,19 +40,22 @@ namespace CorePay.Application.Features.Commands.Transactions
 
 
 
-
-
             RuleFor(t => t)
                 .Must(t => t.RecieverCardNumber is null
-                        && t.RecieverIBAN is null)
+                        && t.RecieverIBAN is null
+                        && t.Channel == TransactionChannel.ATM)
                 .WithMessage("There is no Reciever IBAN or Card Number during Withdraw process")
                 .When(t => t.Type == TransactionType.Withdraw);
 
+
+
             RuleFor(t => t)
-                .Must(t => (t.RecieverCardNumber is not null
+                .Must(t => ((t.RecieverCardNumber is not null
                         && t.RecieverIBAN is null)
                         || (t.RecieverCardNumber is null
                         && t.RecieverIBAN is not null))
+                        && (t.Channel == TransactionChannel.MobileApp 
+                        || t.Channel == TransactionChannel.Terminal))
                 .WithMessage("Receiver IBAN or Reciever Card Number is required for Deposit and Transfer process")
                 .When(t => t.Type == TransactionType.Deposit
                         && t.Type == TransactionType.Transfer);
@@ -61,17 +64,19 @@ namespace CorePay.Application.Features.Commands.Transactions
 
 
             RuleFor(t => t)
-                .Must(t => (t.SenderIBAN is not null
+                .Must(t => ((t.SenderIBAN is not null
                         && t.SenderCardNumber is null)
                         || (t.SenderIBAN is null
                         && t.SenderCardNumber is not null))
+                        && t.Channel == TransactionChannel.MobileApp)
                 .WithMessage("Sender IBAN or Card Number is required for Transfer process")
                 .When(t => t.Type == TransactionType.Transfer);
 
 
 
-            RuleFor(t => t.SenderCardNumber)
-                .NotNull()
+            RuleFor(t => t)
+                .Must(t=>t.SenderCardNumber is not null 
+                      && t.Channel == TransactionChannel.ATM)
                 .WithMessage("Card Number is required for Withdraw process!")
                 .When(t => t.Type == TransactionType.Withdraw);
 

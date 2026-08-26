@@ -31,16 +31,33 @@ namespace CorePay.Infrastructure.Services
             _redisCashe = redisCashe;
         }
 
-        public async Task<Result> SendConfirmEmailAsync(string toEmail)
+        public async Task<Result> SendConfirmEmailAsync(string toEmail
+                                                       ,OtpPurpose purpose
+                                                       ,int expireMinute)
         {
-            int randInt = RandomNumberGenerator.GetInt32(100000, 999999);
+            int code = RandomNumberGenerator.GetInt32(100000, 999999);
 
-            if (await _redisCashe.CountAsync($"otp:verify-email:rate-limit:{toEmail.ToLowerInvariant()}",
+            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:rate-limit:{toEmail.ToLowerInvariant()}",
                                                 TimeSpan.FromMinutes(10)) > 3)
                 return Result.Failure(AuthError.TooManyRequests);
 
-            await _redisCashe.SetAsync<int>($"otp:verify-email:{toEmail.ToLowerInvariant()}",
-                                    randInt,TimeSpan.FromMinutes(5));
+            await _redisCashe.SetAsync($"otp:{purpose.ToString().ToLower()}:{toEmail.ToLowerInvariant()}",
+                                    code,TimeSpan.FromMinutes(expireMinute));
+
+            (string subject, string actionDescription) = purpose switch
+            {
+                OtpPurpose.EmailConfirm => ("Verify Your Email",
+                                            "To complete your registration and verify your email address," +
+                                            " please enter the following verification code:"),
+                OtpPurpose.PasswordReset => ("Reset Your Password",
+                                             "We received a request to reset your password." +
+                                             " Please enter the following code to proceed:"),
+                OtpPurpose.HighAmountTransfer=>("Confirm Your Transaction",
+                                                "You are performing a high-value transaction on CorePay." +
+                                                " Please enter the following OTP to confirm:"),
+                _=>("Verification Code",
+                    "Please use the following verification code to complete your action:")
+            };
 
             string body = $"""
                 
@@ -48,11 +65,11 @@ namespace CorePay.Infrastructure.Services
                 
                           Welcome to CorePay!
 
-                          To complete your registration and verify your email address, please enter the following verification code:
+                          {actionDescription}
 
-                           {randInt}
+                          👉  {code}  👈
 
-                          This verification code is valid for 3 minutes.Please do not share this code with anyone.
+                          This verification code is valid for {expireMinute} minutes. Please do not share this code with anyone.
 
                           If you did not create a CorePay account, you can safely ignore this email.
 
@@ -62,13 +79,14 @@ namespace CorePay.Infrastructure.Services
                           """;
 
 
-            await _emailService.SendEmailAsync(toEmail, "Confirm Email", body);
+            await _emailService.SendEmailAsync(toEmail, subject, body);
             return Result.Success();
         }
 
-        public async Task<bool> IsTooManyAttempsAsync(string email)
+        public async Task<bool> IsTooManyAttempsAsync(string email,OtpPurpose purpose)
         {
-            if (await _redisCashe.CountAsync($"otp:verify-email:attempts:{email.ToLowerInvariant()}"
+
+            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:attempts:{email.ToLowerInvariant()}"
                                                     ,TimeSpan.FromMinutes(10)) == 4)
                 return true;
 

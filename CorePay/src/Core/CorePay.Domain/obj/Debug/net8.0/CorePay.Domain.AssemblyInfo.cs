@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CorePay.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f7c2aacb1cfe6d85e4cbc034f8f97093964b0ac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b76bbfecf8d32c3a9fe9ac5ce5e451393d02a893")]
 [assembly: System.Reflection.AssemblyProductAttribute("CorePay.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CorePay.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

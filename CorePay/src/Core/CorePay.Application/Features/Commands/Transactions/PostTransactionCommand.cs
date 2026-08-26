@@ -13,6 +13,8 @@ namespace CorePay.Application.Features.Commands.Transactions
 
         string? SenderCardNumber,
         string? RecieverCardNumber,
+
+        TransactionChannel Channel,
         
         string PIN):IRequest<Result>;
     

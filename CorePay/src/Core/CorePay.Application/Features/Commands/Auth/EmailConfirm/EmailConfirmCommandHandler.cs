@@ -26,10 +26,10 @@ namespace CorePay.Application.Features.Commands.Auth.EmailConfirm
         }
         public async Task<Result> Handle(EmailConfirmCommand request, CancellationToken cancellationToken)
         {
-            if (await _emailConfirm.IsTooManyAttempsAsync(request.Email))
+            if (await _emailConfirm.IsTooManyAttempsAsync(request.Email,OtpPurpose.EmailConfirm))
                 return Result.Failure(AuthError.TooManyRequests);
 
-            if (await _redisCashe.GetAsync<string>($"otp:verify-email:{request.Email.ToLowerInvariant()}") == request.Code)
+            if (await _redisCashe.GetAsync<string>($"otp:{OtpPurpose.EmailConfirm.ToString().ToLower()}:{request.Email.ToLowerInvariant()}") == request.Code)
             {
                 AppUser? user = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
                 if (user == null)

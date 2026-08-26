@@ -1,4 +1,5 @@
 ﻿using CorePay.Application.Common;
+using CorePay.Domain.Utilities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace CorePay.Application.Interfaces.Services
 {
     public interface IEmailConfirmService
     {
-        Task<bool> IsTooManyAttempsAsync(string email);
-        Task<Result> SendConfirmEmailAsync(string toEmail);
+        Task<bool> IsTooManyAttempsAsync(string email,OtpPurpose purpose);
+        Task<Result> SendConfirmEmailAsync(string toEmail
+                                          ,OtpPurpose purpose
+                                          ,int expireMinute);
     }
 }

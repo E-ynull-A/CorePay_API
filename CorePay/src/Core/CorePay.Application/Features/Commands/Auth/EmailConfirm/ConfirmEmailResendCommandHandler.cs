@@ -1,5 +1,6 @@
 ﻿using CorePay.Application.Common;
 using CorePay.Application.Interfaces.Services;
+using CorePay.Domain.Utilities.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace CorePay.Application.Features.Commands.Auth.EmailConfirm
         public async Task<Result> Handle(ConfirmEmailResendCommand request, CancellationToken cancellationToken)
         {
             Result emailResult = await _confirmService
-                                            .SendConfirmEmailAsync(request.Email);
+                                            .SendConfirmEmailAsync(request.Email,OtpPurpose.EmailConfirm,3);
 
             if (!emailResult.IsSuccess)
                 return emailResult;

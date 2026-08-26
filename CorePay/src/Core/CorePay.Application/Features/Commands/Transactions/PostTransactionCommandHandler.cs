@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,11 +44,16 @@ namespace CorePay.Application.Features.Commands.Transactions
                 || request.Type == TransactionType.Withdraw)
             {
 
+                Expression<Func<Card, bool>> func = request.Channel == TransactionChannel.MobileApp
+
+                    ? c => c.Account.AppUserId == userID
+                      && c.CardNumber == request.SenderCardNumber
+
+                    : c => c.CardNumber == request.SenderCardNumber;
+
 
                 senderCard = await _unitOfWork.CardRepository
-                                    .FirstOrDefaultAsync(c => c.Account.AppUserId == userID
-                                                           && c.CardNumber == request.SenderCardNumber,
-                                                           [nameof(Card.Account)]);
+                                    .FirstOrDefaultAsync(func,[nameof(Card.Account)]);
 
                 if (senderCard is null)
                     return Result.Failure(CardError.NotFound);
@@ -78,6 +84,7 @@ namespace CorePay.Application.Features.Commands.Transactions
 
             if (request.Type == TransactionType.Transfer)
             {
+
                 SenderIBAN = await _unitOfWork.AccountRepository
                                    .FirstOrDefaultAsync(a => a.AppUserId == userID
                                                           && a.IBAN == request.SenderIBAN);
@@ -106,7 +113,8 @@ namespace CorePay.Application.Features.Commands.Transactions
                 else
                 {
                     recieverCard = await _unitOfWork.CardRepository
-                                        .FirstOrDefaultAsync(c => c.CardNumber == request.RecieverCardNumber);
+                                        .FirstOrDefaultAsync(c => c.CardNumber == request.RecieverCardNumber
+                                                            ,[nameof(Card.Account)]);
 
                     if (recieverCard is null)
                         return Result.Failure(CardError.NotFound);
