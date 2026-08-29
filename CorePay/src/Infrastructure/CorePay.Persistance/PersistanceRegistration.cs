@@ -22,6 +22,7 @@ namespace CorePay.Persistance
             services.AddScoped<ICardRepository, CardRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            services.AddScoped<ITransferRepository, TransferRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

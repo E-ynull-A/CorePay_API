@@ -269,7 +269,7 @@ namespace CorePay.Persistance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AccountId")
+                    b.Property<Guid>("AccountId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
@@ -288,6 +288,9 @@ namespace CorePay.Persistance.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("TransferId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -303,10 +306,61 @@ namespace CorePay.Persistance.Migrations
 
                     b.HasIndex("CardId");
 
+                    b.HasIndex("TransferId");
+
                     b.ToTable("Transactions", t =>
                         {
                             t.HasCheckConstraint("CK_Transaction_AccountId_Or_CardId_Required", "[AccountId] IS NOT NULL OR [CardId] IS NOT NULL");
                         });
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.Transfer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("RecieverAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("RecieverCardId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SenderAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SenderCardId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecieverAccountId");
+
+                    b.HasIndex("RecieverCardId");
+
+                    b.HasIndex("SenderAccountId");
+
+                    b.HasIndex("SenderCardId");
+
+                    b.ToTable("Transfers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -478,15 +532,55 @@ namespace CorePay.Persistance.Migrations
                     b.HasOne("CorePay.Domain.Entities.Account", "Account")
                         .WithMany("Transactions")
                         .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("CorePay.Domain.Entities.Card", "Card")
                         .WithMany("Transactions")
                         .HasForeignKey("CardId");
 
+                    b.HasOne("CorePay.Domain.Entities.Transfer", "Transfer")
+                        .WithMany("Transactions")
+                        .HasForeignKey("TransferId");
+
                     b.Navigation("Account");
 
                     b.Navigation("Card");
+
+                    b.Navigation("Transfer");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.Transfer", b =>
+                {
+                    b.HasOne("CorePay.Domain.Entities.Account", "RecieverAccount")
+                        .WithMany()
+                        .HasForeignKey("RecieverAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CorePay.Domain.Entities.Card", "RecieverCard")
+                        .WithMany()
+                        .HasForeignKey("RecieverCardId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CorePay.Domain.Entities.Account", "SenderAccount")
+                        .WithMany()
+                        .HasForeignKey("SenderAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CorePay.Domain.Entities.Card", "SenderCard")
+                        .WithMany()
+                        .HasForeignKey("SenderCardId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("RecieverAccount");
+
+                    b.Navigation("RecieverCard");
+
+                    b.Navigation("SenderAccount");
+
+                    b.Navigation("SenderCard");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -555,6 +649,11 @@ namespace CorePay.Persistance.Migrations
                 });
 
             modelBuilder.Entity("CorePay.Domain.Entities.Card", b =>
+                {
+                    b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.Transfer", b =>
                 {
                     b.Navigation("Transactions");
                 });

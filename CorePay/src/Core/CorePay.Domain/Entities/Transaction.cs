@@ -14,31 +14,37 @@ namespace CorePay.Domain.Entities
         public TransactionType Type { get; protected set; }
 
         //Relations
-        public Account? Account { get; protected set; }
-        public Guid? AccountId { get; protected set; }
-
+        public Account Account { get; protected set; }
+        public Guid AccountId { get; protected set; }
 
         public Guid? CardId { get; protected set; }
         public Card? Card { get; protected set; }
 
 
-        public Transaction(decimal amount, TransactionType type, Guid? accountId = null, Guid? cardId = null)
+        public Transfer? Transfer { get;protected set; }
+        public Guid? TransferId { get;protected set; }
+
+
+        public Transaction(decimal amount,
+                           TransactionType type,
+                           Guid accountId,
+                           Guid? cardId = null,
+                           Guid? transferId = null)
         {
             Amount = amount;
             Type = type;
             AccountId = accountId;
             CardId = cardId;
-
-            Validate();
+            TransferId = transferId;
+            Validate();           
         }
 
         public void Validate()
         {
-            if (AccountId is null && CardId is null)
-                throw new InvalidOperationException("There must be one of two property: AccountId or CardId");
-
-            else if(AccountId is not null && CardId is not null)
-                throw new InvalidOperationException("There must be one of two property: AccountId or CardId");
+            if (TransactionType.Withdraw == Type && CardId is null)
+                throw new InvalidOperationException("These transaction is required a CardId!");
+            else if (TransactionType.Transfer == Type && Transfer is null)
+                throw new InvalidOperationException("These transaction is required a Transfer object!");
         }
 
     }

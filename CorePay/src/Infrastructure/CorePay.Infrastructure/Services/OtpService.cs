@@ -1,31 +1,17 @@
 ﻿using CorePay.Application.Common;
 using CorePay.Application.Interfaces.Services;
-using CorePay.Domain.Entities;
 using CorePay.Domain.Utilities.Enums;
 using CorePay.Domain.Utilities.Errors;
-using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
-using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Net;
-using System.Numerics;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CorePay.Infrastructure.Services
 {
-    public class EmailConfirmService : IEmailConfirmService
+    public class OtpService : IOtpService
     {
         private readonly IEmailService _emailService;
         private readonly IRedisCasheService _redisCashe;
 
-        public EmailConfirmService(IEmailService emailService, IRedisCasheService redisCashe)
+        public OtpService(IEmailService emailService, IRedisCasheService redisCashe)
         {
             _emailService = emailService;
             _redisCashe = redisCashe;

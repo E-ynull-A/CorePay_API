@@ -39,7 +39,7 @@ namespace CorePay.Infrastructure.Services
         {
             try
             {
-                var rValue = await _dbRedis.StringGetAsync(key);
+                RedisValue rValue = await _dbRedis.StringGetAsync(key);
 
                 if (!rValue.HasValue)
                     return default;
@@ -47,7 +47,7 @@ namespace CorePay.Infrastructure.Services
                 if (typeof(T) == typeof(string))
                     return (T)(object)rValue.ToString();             
 
-                T? value = JsonSerializer.Deserialize<T>(rValue);
+                T? value = JsonSerializer.Deserialize<T>(rValue.ToString());
                 return value;
             }
             catch (Exception ex)

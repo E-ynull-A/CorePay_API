@@ -34,6 +34,8 @@ namespace CorePay.Domain.Entities
             PinHash = pinHash;
         }
 
+        public bool IsExpired() =>
+            ExpireDate < DateOnly.FromDateTime(DateTime.Now);
         public void Lock() =>
             Status = CardStatus.Locked;
         public void Active()=>

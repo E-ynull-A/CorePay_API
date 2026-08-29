@@ -12,9 +12,9 @@ namespace CorePay.Application.Features.Commands.Auth.EmailConfirm
 {
     public class ConfirmEmailResendCommandHandler : IRequestHandler<ConfirmEmailResendCommand, Result>
     {
-        private readonly IEmailConfirmService _confirmService;
+        private readonly IOtpService _confirmService;
 
-        public ConfirmEmailResendCommandHandler(IEmailConfirmService confirmService)
+        public ConfirmEmailResendCommandHandler(IOtpService confirmService)
         {
             _confirmService = confirmService;
         }

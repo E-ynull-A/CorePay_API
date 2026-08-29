@@ -71,7 +71,8 @@ namespace CorePay.Infrastructure.Services
         {
 
 
-            string code = string.Concat(_config["Bank:VIM"],RandomNumberGenerator.GetInt32(1000000,9999999).ToString());
+            string code = string.Concat(_config["Bank:VIM"]
+                                        ,RandomNumberGenerator.GetInt32(1000000,9999999).ToString());
             
             
             int numb = 0;

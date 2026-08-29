@@ -51,7 +51,7 @@ namespace CorePay.Infrastructure
             services.AddScoped<ISystemValueGeneratorService, SystemValueGeneratorService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IRedisCasheService, RedisCasheService>();
-            services.AddScoped<IEmailConfirmService, EmailConfirmService>();
+            services.AddScoped<IOtpService, OtpService>();
 
             return services;
         }

@@ -18,6 +18,7 @@ namespace CorePay.Persistance.Data_Access_Layer
             builder._applyQueryFilter<Card>();
             builder._applyQueryFilter<Transaction>();
             builder._applyQueryFilter<RefreshToken>();
+            builder._applyQueryFilter<Transfer>();
         }
         private static void _applyQueryFilter<T>(this ModelBuilder builder) where T : BaseEntity
         {
@@ -30,6 +31,8 @@ namespace CorePay.Persistance.Data_Access_Layer
 
             foreach (var entity in entries)
             {
+               
+
                 switch (entity.State)
                 {
                     case EntityState.Modified:

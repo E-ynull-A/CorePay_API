@@ -14,11 +14,11 @@ namespace CorePay.Application.Features.Commands.Auth.EmailConfirm
     {
         private readonly IRedisCasheService _redisCashe;
         private readonly UserManager<AppUser> _userManager;
-        private readonly IEmailConfirmService _emailConfirm;
+        private readonly IOtpService _emailConfirm;
 
         public EmailConfirmCommandHandler(IRedisCasheService redisCashe,
                                           UserManager<AppUser> userManager,
-                                          IEmailConfirmService emailConfirm)
+                                          IOtpService emailConfirm)
         {
             _redisCashe = redisCashe;
             _userManager = userManager;

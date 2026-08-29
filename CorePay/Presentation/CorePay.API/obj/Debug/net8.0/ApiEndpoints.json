@@ -80,6 +80,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CorePay.API.Controllers.TransactionsController",
+    "Method": "Authenticate",
+    "RelativePath": "atm/authenticate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CardNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PIN",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.TransactionsController",
+    "Method": "Withdraw",
+    "RelativePath": "atm/withdraw",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "CorePay.Application.Features.Commands.Transactions.ATM.Withdraw.WithdrawCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CorePay.API.Controllers.CardsController",
     "Method": "Get",
     "RelativePath": "Card/GetAll",

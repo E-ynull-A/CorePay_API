@@ -27,6 +27,11 @@ namespace CorePay.Domain.Entities
             Balance = 0;
         }
 
+        public void IncreaseBalance(decimal amount) =>
+            Balance += amount;
+        public void DecreaseBalance(decimal amount)=>
+            Balance -= amount;
+
         public void Activate()=>
             Status = AccountStatus.Active;
         public void BlokedByUser()=>

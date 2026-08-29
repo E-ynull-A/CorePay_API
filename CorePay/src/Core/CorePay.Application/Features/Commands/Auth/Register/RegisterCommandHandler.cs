@@ -20,10 +20,10 @@ namespace CorePay.Application.Features.Commands.Auth.Register
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result>
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly IEmailConfirmService _confirmService;
+        private readonly IOtpService _confirmService;
 
         public RegisterCommandHandler(UserManager<AppUser> userManager,
-                                      IEmailConfirmService confirmService)
+                                      IOtpService confirmService)
         {
             _userManager = userManager;
             _confirmService = confirmService;
@@ -56,7 +56,7 @@ namespace CorePay.Application.Features.Commands.Auth.Register
                 throw new IdentityException(roleResult.Errors);
 
             Result emailResult = await _confirmService
-                                            .SendConfirmEmailAsync(request.Email);
+                                            .SendConfirmEmailAsync(request.Email,OtpPurpose.EmailConfirm,3);
 
             if (!emailResult.IsSuccess)
                 return emailResult;

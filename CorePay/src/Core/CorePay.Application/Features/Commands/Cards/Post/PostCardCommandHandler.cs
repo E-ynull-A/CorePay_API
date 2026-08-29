@@ -29,7 +29,8 @@ namespace CorePay.Application.Features.Commands.Cards.Post
             if (!await _accountRepository.AnyAsync(a => a.Id == request.AccountId))
                 return Result.Failure(AccountError.NotFound);
 
-            if (await _accountRepository.AnyAsync(a => a.Cards.Count == 5))
+            if (await _accountRepository.AnyAsync(a => a.Cards.Count == 5 
+                                                    && a.Id == request.AccountId))
                 return Result.Failure(CardError.ReachedCardLimit);
 
             var hasher = new PasswordHasher<object>();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Interfaces.Services
 {
-    public interface IEmailConfirmService
+    public interface IOtpService
     {
         Task<bool> IsTooManyAttempsAsync(string email,OtpPurpose purpose);
         Task<Result> SendConfirmEmailAsync(string toEmail
