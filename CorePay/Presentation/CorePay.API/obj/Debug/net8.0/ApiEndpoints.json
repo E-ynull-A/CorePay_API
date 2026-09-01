@@ -172,7 +172,7 @@
   {
     "ContainingType": "CorePay.API.Controllers.CardsController",
     "Method": "Post",
-    "RelativePath": "Card/Post/{AccountId}",
+    "RelativePath": "Card/Post",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -180,7 +180,12 @@
       {
         "Name": "AccountId",
         "Type": "System.Guid",
-        "IsRequired": true
+        "IsRequired": false
+      },
+      {
+        "Name": "PIN",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -261,6 +266,22 @@
   },
   {
     "ContainingType": "CorePay.API.Controllers.AuthController",
+    "Method": "Logout",
+    "RelativePath": "Logout",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "CorePay.Application.Features.Commands.Auth.Logout.LogoutCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.AuthController",
     "Method": "Refresh",
     "RelativePath": "Refresh",
     "HttpMethod": "POST",
@@ -287,6 +308,27 @@
         "Name": "command",
         "Type": "CorePay.Application.Features.Commands.Auth.Register.RegisterCommand",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.TransactionsController",
+    "Method": "Deposit",
+    "RelativePath": "terminal/deposit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CardNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Amount",
+        "Type": "System.Decimal",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

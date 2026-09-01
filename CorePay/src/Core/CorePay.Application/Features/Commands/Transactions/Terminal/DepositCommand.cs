@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Commands.Transactions.Deposit
 {
-    public record PostDepositTransactionCommand(string CardNumber,
-                                                decimal Amount):IRequest<Result>;
+    public record DepositCommand(string CardNumber,
+                                 decimal Amount):IRequest<Result>;
    
 }

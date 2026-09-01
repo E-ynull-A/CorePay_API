@@ -29,6 +29,16 @@ namespace CorePay.Infrastructure.Services
             return Id;
         }
 
+        public string GetUserEmail()
+        {
+            string? email = _httpContext.HttpContext
+                                .User.FindFirstValue(ClaimTypes.Email.ToString());
+
+            if(string.IsNullOrWhiteSpace(email))
+                throw new UnauthorizedAccessException("Current user was not found");
+
+            return email;
+        }
 
         public string GetUserRole()
         {

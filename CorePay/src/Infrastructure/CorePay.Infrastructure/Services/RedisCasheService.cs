@@ -68,6 +68,10 @@ namespace CorePay.Infrastructure.Services
             }
         }
 
+        public async Task<bool> AnyAsync(string key)
+        {
+           return await _dbRedis.KeyExistsAsync(key);
+        }
         public async Task<long> CountAsync(string key, TimeSpan expire)
         {
             if (!await _dbRedis.KeyExistsAsync(key))

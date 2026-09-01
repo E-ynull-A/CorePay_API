@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Commands.Transactions.Deposit
 {
-    public class PostDepositTransactionCommandValidator:AbstractValidator<PostDepositTransactionCommand>
+    public class DepositCommandValidator:AbstractValidator<DepositCommand>
     {
-        public PostDepositTransactionCommandValidator()
+        public DepositCommandValidator()
         {
             RuleFor(dt => dt.CardNumber)
                 .NotEmpty()

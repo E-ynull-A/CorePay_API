@@ -11,7 +11,7 @@ namespace CorePay.Application.Interfaces.Services
     public interface IOtpService
     {
         Task<bool> IsTooManyAttempsAsync(string email,OtpPurpose purpose);
-        Task<Result> SendConfirmEmailAsync(string toEmail
+        Task<Result> SendConfirmOtpAsync(string toEmail
                                           ,OtpPurpose purpose
                                           ,int expireMinute);
     }

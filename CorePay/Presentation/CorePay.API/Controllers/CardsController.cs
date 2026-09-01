@@ -24,8 +24,8 @@ namespace CorePay.API.Controllers
 
 
         [Authorize]
-        [HttpPost("/Card/Post/{AccountId}")]
-        public async Task<IActionResult> Post([FromRoute] PostCardCommand command)
+        [HttpPost("/Card/Post")]
+        public async Task<IActionResult> Post([FromForm] PostCardCommand command)
         {
             Result result = await _mediator.Send(command);
 

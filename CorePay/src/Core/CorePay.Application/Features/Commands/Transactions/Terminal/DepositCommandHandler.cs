@@ -13,15 +13,15 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Commands.Transactions.Deposit
 {
-    public class PostDepositTransactionCommandHandler : IRequestHandler<PostDepositTransactionCommand, Result>
+    public class DepositCommandHandler : IRequestHandler<DepositCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public PostDepositTransactionCommandHandler(IUnitOfWork unitOfWork)
+        public DepositCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<Result> Handle(PostDepositTransactionCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DepositCommand request, CancellationToken cancellationToken)
         {
             Card? card = await _unitOfWork.CardRepository
                                     .FirstOrDefaultAsync(c => c.CardNumber == request.CardNumber,

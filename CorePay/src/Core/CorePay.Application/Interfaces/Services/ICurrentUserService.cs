@@ -9,6 +9,7 @@ namespace CorePay.Application.Interfaces.Services
     public interface ICurrentUserService
     {
         Guid GetUserId();
+        string GetUserEmail();
         string GetUserRole();
     }
 }

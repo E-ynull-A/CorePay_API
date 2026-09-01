@@ -69,7 +69,7 @@ namespace CorePay.Infrastructure.Services
 
         public async Task<string> GenerateCardNumberAsync()
         {
-
+            //Bank:VIM:4563 2844
 
             string code = string.Concat(_config["Bank:VIM"]
                                         ,RandomNumberGenerator.GetInt32(1000000,9999999).ToString());
@@ -81,16 +81,14 @@ namespace CorePay.Infrastructure.Services
 
             do
             {
-
-
                 for (int i = 0; i < code.Length; i++)
                 {
                     numb = code[i] - '0';
 
                     if (i % 2 == 0)
                         sum += (numb * 2 > 9)
-                                    ? (numb % 10 + (numb - numb % 10) / 10)
-                                    : code[i] - '0';
+                                    ? (numb * 2) - 9
+                                    : numb * 2;
 
                     else
                         sum += numb;

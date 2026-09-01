@@ -1,7 +1,11 @@
 ﻿using CorePay.API.Extentions;
 using CorePay.Application.Common;
-using CorePay.Application.Features.Commands.Auth.EmailConfirm;
+using CorePay.Application.Features.Commands.Auth.EmailConfirm.Confirm;
+using CorePay.Application.Features.Commands.Auth.EmailConfirm.Send;
 using CorePay.Application.Features.Commands.Auth.Login;
+using CorePay.Application.Features.Commands.Auth.Logout;
+using CorePay.Application.Features.Commands.Auth.OtpConfirm.Confirm;
+using CorePay.Application.Features.Commands.Auth.OtpConfirm.Send;
 using CorePay.Application.Features.Commands.Auth.Refresh;
 using CorePay.Application.Features.Commands.Auth.Register;
 using MediatR;
@@ -30,33 +34,55 @@ namespace CorePay.API.Controllers
         }
 
         [HttpPost("/Login")]
-        public async Task<IActionResult> Login([FromForm]LoginCommand command)
+        public async Task<IActionResult> Login([FromForm] LoginCommand command)
         {
             Result<LoginCommandResponce> result = await _mediator.Send(command);
 
             return result.ToActionResult();
         }
 
-        [HttpPost("/Refresh")]
-        public async Task<IActionResult> Refresh([FromForm]RefreshCommand command)
+        [HttpDelete("/Logout")]
+        public async Task<IActionResult> Logout(LogoutCommand command)
         {
-           Result<RefreshCommandResponse> response = await _mediator.Send(command);
+            Result result = await _mediator.Send(command);
+
+            return result.ToActionResult(204);
+        }
+
+        [HttpPost("/Refresh")]
+        public async Task<IActionResult> Refresh([FromForm] RefreshCommand command)
+        {
+            Result<RefreshCommandResponse> response = await _mediator.Send(command);
 
             return response.ToActionResult();
         }
 
         [HttpPatch("/EmailConfirm")]
-        public async Task<IActionResult> Confirm([FromForm]EmailConfirmCommand command)
+        public async Task<IActionResult> Confirm([FromForm] EmailConfirmCommand command)
         {
             Result response = await _mediator.Send(command);
             return response.ToActionResult(200);
         }
 
         [HttpPost("/Email/ResendConfirmCode")]
-        public async Task<IActionResult> Resend([FromForm]ConfirmEmailResendCommand command)
+        public async Task<IActionResult> Resend([FromForm] ConfirmEmailResendCommand command)
         {
             Result response = await _mediator.Send(command);
             return response.ToActionResult(200);
+        }
+
+        [HttpPost("/OtpEmail/Send")]
+        public async Task<IActionResult> Send([FromBody]SendOptConfirmCommand command)
+        {
+            Result result = await _mediator.Send(command);
+            return result.ToActionResult();
+        }
+
+        [HttpPost("/OtpEmail/Confirm")]
+        public async Task<IActionResult> Confirm([FromBody]ConfirmOptCommand command)
+        {
+            Result result = await _mediator.Send(command);
+            return result.ToActionResult();
         }
     }
 }

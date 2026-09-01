@@ -17,18 +17,23 @@ namespace CorePay.Infrastructure.Services
             _redisCashe = redisCashe;
         }
 
-        public async Task<Result> SendConfirmEmailAsync(string toEmail
-                                                       ,OtpPurpose purpose
-                                                       ,int expireMinute)
+        public async Task<Result> SendConfirmOtpAsync(string toEmail
+                                                      ,OtpPurpose purpose
+                                                      ,int expireMinute)
         {
             int code = RandomNumberGenerator.GetInt32(100000, 999999);
 
-            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:rate-limit:{toEmail.ToLowerInvariant()}",
+            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:rate-limit:{toEmail.ToLower()}",
                                                 TimeSpan.FromMinutes(10)) > 3)
                 return Result.Failure(AuthError.TooManyRequests);
 
+            string otpKey = $"otp:{purpose.ToString().ToLower()}:{toEmail.ToLowerInvariant()}";
+
+            if (await _redisCashe.AnyAsync(otpKey))
+                await _redisCashe.DeleteAsync(otpKey);
+
             await _redisCashe.SetAsync($"otp:{purpose.ToString().ToLower()}:{toEmail.ToLowerInvariant()}",
-                                    code,TimeSpan.FromMinutes(expireMinute));
+                                    code, TimeSpan.FromMinutes(expireMinute));
 
             (string subject, string actionDescription) = purpose switch
             {
@@ -38,10 +43,10 @@ namespace CorePay.Infrastructure.Services
                 OtpPurpose.PasswordReset => ("Reset Your Password",
                                              "We received a request to reset your password." +
                                              " Please enter the following code to proceed:"),
-                OtpPurpose.HighAmountTransfer=>("Confirm Your Transaction",
+                OtpPurpose.HighAmountTransfer => ("Confirm Your Transaction",
                                                 "You are performing a high-value transaction on CorePay." +
                                                 " Please enter the following OTP to confirm:"),
-                _=>("Verification Code",
+                _ => ("Verification Code",
                     "Please use the following verification code to complete your action:")
             };
 
@@ -69,11 +74,11 @@ namespace CorePay.Infrastructure.Services
             return Result.Success();
         }
 
-        public async Task<bool> IsTooManyAttempsAsync(string email,OtpPurpose purpose)
+        public async Task<bool> IsTooManyAttempsAsync(string email, OtpPurpose purpose)
         {
 
-            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:attempts:{email.ToLowerInvariant()}"
-                                                    ,TimeSpan.FromMinutes(10)) == 4)
+            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:attempts:{email.ToLower()}"
+                                                    , TimeSpan.FromMinutes(10)) == 4)
                 return true;
 
             return false;

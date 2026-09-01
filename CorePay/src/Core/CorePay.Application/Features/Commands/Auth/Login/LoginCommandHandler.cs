@@ -22,16 +22,19 @@ namespace CorePay.Application.Features.Commands.Auth.Login
         private readonly IRefreshTokenRepository _tokenRepository;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly IRedisCasheService _casheService;
 
         public LoginCommandHandler(ITokenService tokenService,
                                    IRefreshTokenRepository tokenRepository,
                                    SignInManager<AppUser> signInManager,
-                                   IConfiguration configuration)
+                                   IConfiguration configuration,
+                                   IRedisCasheService casheService)
         {
             _tokenService = tokenService;
             _tokenRepository = tokenRepository;
             _signInManager = signInManager;
             _configuration = configuration;
+            _casheService = casheService;
         }
         public async Task<Result<LoginCommandResponce>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {

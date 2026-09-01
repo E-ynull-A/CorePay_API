@@ -8,8 +8,9 @@ namespace CorePay.Domain.Utilities.Enums
 {
     public enum OtpPurpose
     {
-        EmailConfirm = 1,
-        PasswordReset = 2,
-        HighAmountTransfer = 3
+        PasswordReset = 1,
+        HighAmountTransfer = 2,
+        EmailConfirm = 3,
+        Other = 4
     }
 }

@@ -194,6 +194,37 @@
         }
       }
     },
+    "/Logout": {
+      "delete": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogoutCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogoutCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogoutCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Refresh": {
       "post": {
         "tags": [
@@ -293,22 +324,37 @@
         }
       }
     },
-    "/Card/Post/{AccountId}": {
+    "/Card/Post": {
       "post": {
         "tags": [
           "Cards"
         ],
-        "parameters": [
-          {
-            "name": "AccountId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "AccountId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "PIN": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "AccountId": {
+                  "style": "form"
+                },
+                "PIN": {
+                  "style": "form"
+                }
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -481,6 +527,44 @@
           }
         }
       }
+    },
+    "/terminal/deposit": {
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CardNumber": {
+                    "type": "string"
+                  },
+                  "Amount": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              },
+              "encoding": {
+                "CardNumber": {
+                  "style": "form"
+                },
+                "Amount": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -494,6 +578,10 @@
         "type": "string"
       },
       "GetAllAccountQuery": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "LogoutCommand": {
         "type": "object",
         "additionalProperties": false
       },

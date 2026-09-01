@@ -2,6 +2,7 @@
 using CorePay.Application.Common;
 using CorePay.Application.Features.Commands.Transactions.ATM.Auth;
 using CorePay.Application.Features.Commands.Transactions.ATM.Withdraw;
+using CorePay.Application.Features.Commands.Transactions.Deposit;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,15 @@ namespace CorePay.API.Controllers
         {
             Result result = await _mediator.Send(command);
 
-            return result.ToActionResult(204);
+            return result.ToActionResult(201);
+        }
+
+        [HttpPost("/terminal/deposit")]
+        public async Task<IActionResult> Deposit([FromForm]DepositCommand command)
+        {
+            Result result = await _mediator.Send(command);
+
+            return result.ToActionResult(201);
         }
     }
 }
