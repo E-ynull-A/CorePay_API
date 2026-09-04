@@ -56,7 +56,7 @@ namespace CorePay.Application.Features.Commands.Auth.Register
                 throw new IdentityException(roleResult.Errors);
 
             Result emailResult = await _confirmService
-                                            .SendConfirmEmailAsync(request.Email,OtpPurpose.EmailConfirm,3);
+                                            .SendConfirmOtpAsync(request.Email,OtpPurpose.EmailConfirm,3);
 
             if (!emailResult.IsSuccess)
                 return emailResult;

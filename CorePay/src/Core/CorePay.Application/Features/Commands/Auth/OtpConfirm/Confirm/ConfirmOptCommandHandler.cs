@@ -36,6 +36,8 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Confirm
             {
                 CriticalOtpPurpose.PasswordReset => OtpPurpose.PasswordReset,
                 CriticalOtpPurpose.HighAmountTransfer => OtpPurpose.HighAmountTransfer,
+                CriticalOtpPurpose.CloseAccount => OtpPurpose.CloseAccount,
+                CriticalOtpPurpose.DeleteCard => OtpPurpose.DeleteCard,
                 _ => throw new ArgumentOutOfRangeException()
             };
 
@@ -65,7 +67,7 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Confirm
             if (otp == request.OtpCode)
             {
                 await _casheService.SetAsync($"otp-confirmed:{strPurpose}:{userId}"
-                                                  , "1", TimeSpan.FromMinutes(EXP_MINUTE));
+                                              ,"1", TimeSpan.FromMinutes(EXP_MINUTE));
 
                 await _casheService.DeleteAsync(otpKey);
                 await _casheService.DeleteAsync(attempKey);

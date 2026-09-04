@@ -11,6 +11,8 @@ namespace CorePay.Domain.Utilities.Enums
         PasswordReset = 1,
         HighAmountTransfer = 2,
         EmailConfirm = 3,
-        Other = 4
+        CloseAccount = 4,
+        DeleteCard = 5,
+        Other = 6
     }
 }

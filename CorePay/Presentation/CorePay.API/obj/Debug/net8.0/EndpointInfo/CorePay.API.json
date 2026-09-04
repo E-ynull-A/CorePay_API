@@ -324,6 +324,68 @@
         }
       }
     },
+    "/OtpEmail/Send": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendOptConfirmCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendOptConfirmCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendOptConfirmCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/OtpEmail/Confirm": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmOptCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmOptCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmOptCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Card/Post": {
       "post": {
         "tags": [
@@ -569,6 +631,28 @@
   },
   "components": {
     "schemas": {
+      "ConfirmOptCommand": {
+        "type": "object",
+        "properties": {
+          "otpCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "purpose": {
+            "$ref": "#/components/schemas/CriticalOtpPurpose"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CriticalOtpPurpose": {
+        "enum": [
+          "PasswordReset",
+          "HighAmountTransfer",
+          "CloseAccount",
+          "DeleteCard"
+        ],
+        "type": "string"
+      },
       "Currency": {
         "enum": [
           "AZN",
@@ -619,6 +703,15 @@
           "fin": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SendOptConfirmCommand": {
+        "type": "object",
+        "properties": {
+          "purpose": {
+            "$ref": "#/components/schemas/CriticalOtpPurpose"
           }
         },
         "additionalProperties": false

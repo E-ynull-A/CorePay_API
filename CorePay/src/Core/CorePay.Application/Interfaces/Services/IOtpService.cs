@@ -13,6 +13,6 @@ namespace CorePay.Application.Interfaces.Services
         Task<bool> IsTooManyAttempsAsync(string email,OtpPurpose purpose);
         Task<Result> SendConfirmOtpAsync(string toEmail
                                           ,OtpPurpose purpose
-                                          ,int expireMinute);
+                                          ,double expireMinute);
     }
 }

@@ -19,7 +19,7 @@ namespace CorePay.Infrastructure.Services
 
         public async Task<Result> SendConfirmOtpAsync(string toEmail
                                                       ,OtpPurpose purpose
-                                                      ,int expireMinute)
+                                                      ,double expireMinute)
         {
             int code = RandomNumberGenerator.GetInt32(100000, 999999);
 
@@ -60,7 +60,7 @@ namespace CorePay.Infrastructure.Services
 
                           👉  {code}  👈
 
-                          This verification code is valid for {expireMinute} minutes. Please do not share this code with anyone.
+                          This verification code is valid for {expireMinute - 0.5} minutes. Please do not share this code with anyone.
 
                           If you did not create a CorePay account, you can safely ignore this email.
 
@@ -78,7 +78,7 @@ namespace CorePay.Infrastructure.Services
         {
 
             if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:attempts:{email.ToLower()}"
-                                                    , TimeSpan.FromMinutes(10)) == 4)
+                                                    ,TimeSpan.FromMinutes(10)) >= 4)
                 return true;
 
             return false;

@@ -282,6 +282,38 @@
   },
   {
     "ContainingType": "CorePay.API.Controllers.AuthController",
+    "Method": "Confirm",
+    "RelativePath": "OtpEmail/Confirm",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "CorePay.Application.Features.Commands.Auth.OtpConfirm.Confirm.ConfirmOptCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.AuthController",
+    "Method": "Send",
+    "RelativePath": "OtpEmail/Send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "CorePay.Application.Features.Commands.Auth.OtpConfirm.Send.SendOptConfirmCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.AuthController",
     "Method": "Refresh",
     "RelativePath": "Refresh",
     "HttpMethod": "POST",

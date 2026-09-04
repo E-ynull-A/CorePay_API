@@ -18,7 +18,7 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Send
         private readonly IEmailService _emailService;
         private readonly IRedisCasheService _redisCashe;
         private readonly IOtpService _otpService;
-        private const int EXP_MINUTE_OTP = 3;
+        private const double EXP_MINUTE_OTP = 3.5;
         public SendOtpConfirmCommandHandler(ICurrentUserService currentUser,
                                             IEmailService emailService,
                                             IRedisCasheService redisCashe,
@@ -37,7 +37,9 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Send
             {
                 CriticalOtpPurpose.PasswordReset => OtpPurpose.PasswordReset,
                 CriticalOtpPurpose.HighAmountTransfer => OtpPurpose.HighAmountTransfer,
-                _ => OtpPurpose.Other
+                CriticalOtpPurpose.CloseAccount => OtpPurpose.CloseAccount,
+                CriticalOtpPurpose.DeleteCard => OtpPurpose.DeleteCard,               
+                _ => throw new ArgumentOutOfRangeException()
             };
 
            Result result = await _otpService

@@ -30,6 +30,9 @@ namespace CorePay.Domain.Utilities.Errors
                                                               "Too many requests! " +
                                                               "Please try a few minutes later.",
                                                               ErrorType.TooManyRequests);
+        public static readonly Error FailedOtpConfirmation = new("Auth.OtpConfirmation",
+                                                                "Otp Code not Found or has already Expired",
+                                                                ErrorType.Validation);
 
     }
 }
