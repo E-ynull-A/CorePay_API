@@ -23,5 +23,12 @@ namespace CorePay.Domain.Utilities.Errors
         public static Error TooManyAttempts { get; } = new Error("Transaction.TooManyAttempts",
                                                                  "Too many Attempts! Please, try again Later!",
                                                                  ErrorType.BusinessRule);
-                    }
+        public static Error SelfTransfer { get; } = new Error("Transaction.SelfTransfer",
+                                                              "You cannot Transfer between the same Accounts!",
+                                                              ErrorType.Conflict);
+
+        public static Error OtpRequired { get; } = new("Transaction.OtpRequired",
+                                                        "Otp Confirmation is Required because of High Amount of Transfer",
+                                                        ErrorType.BusinessRule);
+    }            
 }

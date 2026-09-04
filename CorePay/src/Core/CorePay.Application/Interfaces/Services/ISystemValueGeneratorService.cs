@@ -9,6 +9,7 @@ namespace CorePay.Application.Interfaces.Services
 {
     public interface ISystemValueGeneratorService
     {
+        bool CheckIBAN(string iban);
         Task<string> GenerateIbanAsync();
         Task<string> GenerateCardNumberAsync();
         string GenerateCvnCode();

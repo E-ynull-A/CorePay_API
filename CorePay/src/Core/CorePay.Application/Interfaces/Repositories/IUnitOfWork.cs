@@ -10,6 +10,7 @@ namespace CorePay.Application.Interfaces.Repositories
     public interface IUnitOfWork
     {
         IAccountRepository AccountRepository { get; }
+        ITransferRepository TransferRepository { get; }
         ICardRepository CardRepository { get; }
         ITransactionRepository TransactionRepository { get; }
 

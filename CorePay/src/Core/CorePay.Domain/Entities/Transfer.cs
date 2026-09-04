@@ -28,5 +28,16 @@ namespace CorePay.Domain.Entities
 
         public ICollection<Transaction> Transactions { get; protected set; } = new List<Transaction>();
 
+
+        public Transfer(Guid senderAccountId,
+                        Guid recieverAccountId,
+                        Guid? senderCardId = null,
+                        Guid? recieverCardId = null)
+        {
+            SenderAccountId = senderAccountId;
+            RecieverAccountId = recieverAccountId;
+            SenderCardId = senderCardId;
+            RecieverCardId = recieverCardId;
+        }
     }
 }

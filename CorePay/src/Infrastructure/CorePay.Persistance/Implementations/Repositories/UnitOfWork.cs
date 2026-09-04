@@ -16,17 +16,20 @@ namespace CorePay.Persistance.Implementations.Repositories
         public UnitOfWork(ITransactionRepository transactionRepository,
                           IAccountRepository accountRepository,
                           ICardRepository cardRepository,
+                          ITransferRepository transferRepository,
                           AppDbContext appDbContext)
         {
             TransactionRepository = transactionRepository;
             AccountRepository = accountRepository;
             CardRepository = cardRepository;
+            TransferRepository = transferRepository;
             _appDbContext = appDbContext;
         }
 
         public ITransactionRepository TransactionRepository { get; }
         public IAccountRepository AccountRepository { get; }
         public ICardRepository CardRepository { get; }
+        public ITransferRepository TransferRepository { get; }
 
         public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken token = default)
         {

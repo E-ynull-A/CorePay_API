@@ -43,6 +43,25 @@ namespace CorePay.Infrastructure.Services
             return string.Concat(_config["Bank:Country"],
                                 _getCheckDigit(ibanForCheckDigit),
                                 _config["Bank:Code"], accountCode);
+            //12242714 82864350635961085143 1035 69
+            //AZ 69 CORE 82864350635961085143
+        }
+
+        public bool CheckIBAN(string iban)
+        {
+            string checkIban = string.Concat(iban[4..], iban[0..2],"00");
+            string numberVersion = string.Empty;
+
+            foreach (var symbol in checkIban)
+            {
+                if (char.IsLetter(symbol))
+                    numberVersion += string.Concat(symbol - 'A' + 10)
+                                                            .ToString();
+                else
+                    numberVersion += string.Concat(symbol);
+            };
+
+            return _getCheckDigit(numberVersion).ToString() == iban[2..4];
         }
 
         private int _getCheckDigit(string letters)
