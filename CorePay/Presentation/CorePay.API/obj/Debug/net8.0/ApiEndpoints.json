@@ -2,7 +2,7 @@
   {
     "ContainingType": "CorePay.API.Controllers.AccountsController",
     "Method": "Close",
-    "RelativePath": "Account/Close/{Id}",
+    "RelativePath": "Account/Close",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -10,7 +10,12 @@
       {
         "Name": "Id",
         "Type": "System.Guid",
-        "IsRequired": true
+        "IsRequired": false
+      },
+      {
+        "Name": "ProcessId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -281,6 +286,37 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CorePay.API.Controllers.TransactionsController",
+    "Method": "Transfer",
+    "RelativePath": "mobileApp/transfer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "SenderAccountId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Amount",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "RecieverAccountIBAN",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SessionId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CorePay.API.Controllers.AuthController",
     "Method": "Confirm",
     "RelativePath": "OtpEmail/Confirm",
@@ -289,9 +325,19 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "command",
-        "Type": "CorePay.Application.Features.Commands.Auth.OtpConfirm.Confirm.ConfirmOptCommand",
-        "IsRequired": true
+        "Name": "OtpCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Purpose",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProcessId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -305,9 +351,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "command",
-        "Type": "CorePay.Application.Features.Commands.Auth.OtpConfirm.Send.SendOptConfirmCommand",
-        "IsRequired": true
+        "Name": "Purpose",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

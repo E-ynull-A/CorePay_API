@@ -6,6 +6,7 @@ using CorePay.Domain.Utilities.Errors.Common;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,11 +43,14 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Confirm
             };
 
             string strPurpose = purpose.ToString().ToLower();
+            string processId = request.ProcessId;
 
-            if (await _otpService.IsTooManyAttempsAsync(userEmail, purpose))
+            if (await _otpService.IsTooManyAttempsAsync(userEmail,purpose,processId))
                 return Result.Failure(AuthError.TooManyRequests);
 
-            string otpKey = $"otp:{strPurpose}:{userEmail.ToLower()}";
+
+
+            string otpKey = $"otp:{strPurpose}:{userEmail.ToLower()}:{processId}";
 
 
             string? otp = await _casheService.GetAsync<string>(otpKey);
@@ -60,13 +64,13 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Confirm
 
             Guid userId = _currentUser.GetUserId();
 
-            string attempKey = $"otp:{strPurpose}:attempts:{userEmail.ToLower()}";
-            string rateLimitKey = $"otp:{strPurpose}:rate-limit:{userEmail.ToLower()}";
+            string attempKey = $"otp:{strPurpose}:attempts:{userEmail.ToLower()}:processId:{processId}";
+            string rateLimitKey = $"otp:{strPurpose}:rate-limit:{userEmail.ToLower()}:processId:{processId}";
 
 
             if (otp == request.OtpCode)
             {
-                await _casheService.SetAsync($"otp-confirmed:{strPurpose}:{userId}"
+                await _casheService.SetAsync($"otp-confirmed:{strPurpose}:{userId}:{processId}"
                                               ,"1", TimeSpan.FromMinutes(EXP_MINUTE));
 
                 await _casheService.DeleteAsync(otpKey);

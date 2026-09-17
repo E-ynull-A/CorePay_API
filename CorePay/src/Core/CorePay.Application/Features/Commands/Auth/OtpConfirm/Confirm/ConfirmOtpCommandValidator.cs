@@ -19,6 +19,9 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Confirm
                 .NotEmpty()
                 .Must(oc => oc.All(l => Char.IsDigit(l)))
                     .WithMessage("Invalid Code Input!");
+
+            RuleFor(co => co.ProcessId)
+                .NotEmpty();
         }
     }
 }

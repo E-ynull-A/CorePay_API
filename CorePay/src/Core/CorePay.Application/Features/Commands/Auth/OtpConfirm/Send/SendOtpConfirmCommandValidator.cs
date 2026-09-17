@@ -16,7 +16,6 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Send
                 .NotEmpty()
                 .IsInEnum();
 
-
         }
     }
 }

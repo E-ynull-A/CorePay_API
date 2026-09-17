@@ -9,6 +9,7 @@ namespace CorePay.Domain.Utilities.Errors.Common
 {
     public sealed record Error(string ErrorCode,
                         string Desctription,
-                        ErrorType Type);
+                        ErrorType Type,
+                        object? Details = null);
     
 }

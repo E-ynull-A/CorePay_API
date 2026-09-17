@@ -58,9 +58,11 @@ namespace CorePay.Application.Features.Commands.Transactions.ATM.Withdraw
                 Transaction withdraw = new Transaction(request.Amount,
                                                        TransactionType.Withdraw,
                                                        account.Id,
-                                                       cardId); 
+                                                       cardId);
 
-                _unitOfWork.TransactionRepository.Add(withdraw);
+                withdraw.Validate();
+
+                _unitOfWork.TransactionRepository.Add(withdraw);                
                 await _unitOfWork.SaveChangeAsync();
 
                 await transactionDb.CommitAsync(cancellationToken);

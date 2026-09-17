@@ -72,14 +72,16 @@ namespace CorePay.API.Controllers
         }
 
         [HttpPost("/OtpEmail/Send")]
-        public async Task<IActionResult> Send([FromBody]SendOptConfirmCommand command)
+        public async Task<IActionResult> Send([FromForm]SendOptConfirmCommand command)
         {
-            Result result = await _mediator.Send(command);
+            Result<SendOtpConfirmCommandResponse> result = 
+                                        await _mediator.Send(command);
+
             return result.ToActionResult();
         }
 
         [HttpPost("/OtpEmail/Confirm")]
-        public async Task<IActionResult> Confirm([FromBody]ConfirmOptCommand command)
+        public async Task<IActionResult> Confirm([FromForm]ConfirmOptCommand command)
         {
             Result result = await _mediator.Send(command);
             return result.ToActionResult();

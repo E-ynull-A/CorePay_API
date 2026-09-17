@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Send
 {
-    public class SendOtpConfirmCommandHandler : IRequestHandler<SendOptConfirmCommand, Result>
+    public class SendOtpConfirmCommandHandler : IRequestHandler<SendOptConfirmCommand, Result<SendOtpConfirmCommandResponse>>
     {
         private readonly ICurrentUserService _currentUser;
         private readonly IEmailService _emailService;
@@ -29,7 +29,7 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Send
             _redisCashe = redisCashe;
             _otpService = otpService;
         }
-        public async Task<Result> Handle(SendOptConfirmCommand request, CancellationToken cancellationToken)
+        public async Task<Result<SendOtpConfirmCommandResponse>> Handle(SendOptConfirmCommand request, CancellationToken cancellationToken)
         {
             string email = _currentUser.GetUserEmail();
 
@@ -42,10 +42,14 @@ namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Send
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-           Result result = await _otpService
+            Result<string> result = await _otpService
                             .SendConfirmOtpAsync(email,purpose,EXP_MINUTE_OTP);
 
-           return result;
+            if (!result.IsSuccess)
+                return Result<SendOtpConfirmCommandResponse>.Failure(result.Error);
+
+           return Result<SendOtpConfirmCommandResponse>
+                .Success(new(result.Value));
         }
     }
 }

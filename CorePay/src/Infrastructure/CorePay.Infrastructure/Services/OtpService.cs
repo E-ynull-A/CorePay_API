@@ -1,4 +1,5 @@
 ﻿using CorePay.Application.Common;
+using CorePay.Application.Features.Commands.Transactions.MobileApp.common;
 using CorePay.Application.Interfaces.Services;
 using CorePay.Domain.Utilities.Enums;
 using CorePay.Domain.Utilities.Errors;
@@ -10,30 +11,36 @@ namespace CorePay.Infrastructure.Services
     {
         private readonly IEmailService _emailService;
         private readonly IRedisCasheService _redisCashe;
+        private readonly ICurrentUserService _currentUser;
 
-        public OtpService(IEmailService emailService, IRedisCasheService redisCashe)
+        public OtpService(IEmailService emailService,
+                          IRedisCasheService redisCashe,
+                          ICurrentUserService currentUser)
         {
             _emailService = emailService;
             _redisCashe = redisCashe;
+            _currentUser = currentUser;
         }
 
-        public async Task<Result> SendConfirmOtpAsync(string toEmail
+        public async Task<Result<string>> SendConfirmOtpAsync(string toEmail
                                                       ,OtpPurpose purpose
                                                       ,double expireMinute)
         {
             int code = RandomNumberGenerator.GetInt32(100000, 999999);
 
-            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:rate-limit:{toEmail.ToLower()}",
-                                                TimeSpan.FromMinutes(10)) > 3)
-                return Result.Failure(AuthError.TooManyRequests);
+            string processId = Guid.NewGuid().ToString();
 
-            string otpKey = $"otp:{purpose.ToString().ToLower()}:{toEmail.ToLowerInvariant()}";
+            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:rate-limit:{toEmail.ToLower()}:processId:{processId}",
+                                                TimeSpan.FromMinutes(10)) > 3)
+                return Result<string>.Failure(AuthError.TooManyRequests);
+
+            string otpKey = $"otp:{purpose.ToString().ToLower()}:{toEmail.ToLower()}:{processId}";
 
             if (await _redisCashe.AnyAsync(otpKey))
                 await _redisCashe.DeleteAsync(otpKey);
 
-            await _redisCashe.SetAsync($"otp:{purpose.ToString().ToLower()}:{toEmail.ToLowerInvariant()}",
-                                    code, TimeSpan.FromMinutes(expireMinute));
+            await _redisCashe.SetAsync(otpKey,code, 
+                                TimeSpan.FromMinutes(expireMinute));
 
             (string subject, string actionDescription) = purpose switch
             {
@@ -71,17 +78,20 @@ namespace CorePay.Infrastructure.Services
 
 
             await _emailService.SendEmailAsync(toEmail, subject, body);
-            return Result.Success();
+            return Result<string>.Success(processId);
         }
 
-        public async Task<bool> IsTooManyAttempsAsync(string email, OtpPurpose purpose)
+        public async Task<bool> IsTooManyAttempsAsync(string email,
+                                                      OtpPurpose purpose,
+                                                      string processId)
         {
-
-            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:attempts:{email.ToLower()}"
+            if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:attempts:{email.ToLower()}:processId:{processId}"
                                                     ,TimeSpan.FromMinutes(10)) >= 4)
                 return true;
 
             return false;
         }
+
+        
     }
 }

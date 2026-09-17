@@ -19,6 +19,8 @@ namespace CorePay.Application.Features.Commands.Transactions.ATM.Auth
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRedisCasheService _casheService;
 
+        
+
         public AtmAuthenticationCommandHandler(IUnitOfWork unitOfWork,
                                                IRedisCasheService casheService)
         {
@@ -27,6 +29,12 @@ namespace CorePay.Application.Features.Commands.Transactions.ATM.Auth
         }
         public async Task<Result<AtmAuthenticationCommandResponse>> Handle(AtmAuthenticationCommand request, CancellationToken cancellationToken)
         {
+
+            if (await _casheService.CountAsync($"atm:request-limit:{request.CardNumber}"
+                                                            ,TimeSpan.FromMinutes(15)) > 3)
+                return Result<AtmAuthenticationCommandResponse>
+                                .Failure(AuthError.TooManyRequests);
+
             Card? card = await _unitOfWork.CardRepository
                 .FirstOrDefaultAsync(c=>c.CardNumber == request.CardNumber,
                                     [nameof(Card.Account)]);

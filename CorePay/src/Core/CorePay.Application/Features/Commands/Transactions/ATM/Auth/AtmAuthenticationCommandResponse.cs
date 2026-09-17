@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Commands.Transactions.ATM.Auth
 {
-    public record AtmAuthenticationCommandResponse(string sessionId);
+    public record AtmAuthenticationCommandResponse(string SessionId);
   
 }

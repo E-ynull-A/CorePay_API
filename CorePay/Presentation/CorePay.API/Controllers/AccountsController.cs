@@ -60,8 +60,8 @@ namespace CorePay.API.Controllers
         }
 
         [Authorize]
-        [HttpPut("/Account/Close/{Id}")]
-        public async Task<IActionResult> Close([FromRoute] CloseAccountCommand query)
+        [HttpPut("/Account/Close")]
+        public async Task<IActionResult> Close([FromForm] CloseAccountCommand query)
         {
             Result result = await _mediator.Send(query);
 

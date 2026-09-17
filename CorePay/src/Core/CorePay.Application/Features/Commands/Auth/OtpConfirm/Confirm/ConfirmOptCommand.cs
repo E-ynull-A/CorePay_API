@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Confirm
 {
     public record ConfirmOptCommand(string OtpCode,
-                                    CriticalOtpPurpose Purpose):IRequest<Result>;
+                                    CriticalOtpPurpose Purpose,
+                                    string ProcessId):IRequest<Result>;
     
 }

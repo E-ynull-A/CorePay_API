@@ -35,10 +35,14 @@ namespace CorePay.Domain.Entities
             Type = type;
             AccountId = accountId;
             CardId = cardId;
-            TransferId = transferId;
-            Validate();           
+            TransferId = transferId;                      
         }
 
+
+
+        public void AsignTransfer(Transfer transfer)=>        
+            Transfer = transfer;
+        
         public void Validate()
         {
             if (TransactionType.Withdraw == Type && CardId is null)

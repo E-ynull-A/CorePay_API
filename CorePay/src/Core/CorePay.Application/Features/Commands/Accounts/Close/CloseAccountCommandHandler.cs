@@ -31,7 +31,7 @@ namespace CorePay.Application.Features.Commands.Accounts.Close
                 return Result.Failure(AccountError.NotFound);
 
             string otpPurpose = OtpPurpose.CloseAccount.ToString().ToLower();
-            string key = $"otp-confirmed:{otpPurpose}:{account.AppUserId}";
+            string key = $"otp-confirmed:{otpPurpose}:{account.AppUserId}:{request.ProcessId}";
 
             if (!await _casheService.AnyAsync(key))
                 return Result.Failure(AuthError.FailedOtpConfirmation);

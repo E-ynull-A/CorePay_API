@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Commands.Auth.OtpConfirm.Send
 {
-    public record SendOptConfirmCommand(CriticalOtpPurpose Purpose):IRequest<Result>;
+    public record SendOptConfirmCommand(CriticalOtpPurpose Purpose)
+                            :IRequest<Result<SendOtpConfirmCommandResponse>>;
    
 }

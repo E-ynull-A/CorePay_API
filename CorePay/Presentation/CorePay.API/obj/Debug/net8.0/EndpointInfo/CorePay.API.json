@@ -103,22 +103,37 @@
         }
       }
     },
-    "/Account/Close/{Id}": {
+    "/Account/Close": {
       "put": {
         "tags": [
           "Accounts"
         ],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "ProcessId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "ProcessId": {
+                  "style": "form"
+                }
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -331,19 +346,19 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/SendOptConfirmCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SendOptConfirmCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SendOptConfirmCommand"
+                "type": "object",
+                "properties": {
+                  "Purpose": {
+                    "$ref": "#/components/schemas/CriticalOtpPurpose"
+                  }
+                }
+              },
+              "encoding": {
+                "Purpose": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -362,19 +377,31 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/ConfirmOptCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ConfirmOptCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ConfirmOptCommand"
+                "type": "object",
+                "properties": {
+                  "OtpCode": {
+                    "type": "string"
+                  },
+                  "Purpose": {
+                    "$ref": "#/components/schemas/CriticalOtpPurpose"
+                  },
+                  "ProcessId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "OtpCode": {
+                  "style": "form"
+                },
+                "Purpose": {
+                  "style": "form"
+                },
+                "ProcessId": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -627,23 +654,61 @@
           }
         }
       }
+    },
+    "/mobileApp/transfer": {
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "SenderAccountId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "Amount": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "RecieverAccountIBAN": {
+                    "type": "string"
+                  },
+                  "SessionId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "SenderAccountId": {
+                  "style": "form"
+                },
+                "Amount": {
+                  "style": "form"
+                },
+                "RecieverAccountIBAN": {
+                  "style": "form"
+                },
+                "SessionId": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "ConfirmOptCommand": {
-        "type": "object",
-        "properties": {
-          "otpCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "purpose": {
-            "$ref": "#/components/schemas/CriticalOtpPurpose"
-          }
-        },
-        "additionalProperties": false
-      },
       "CriticalOtpPurpose": {
         "enum": [
           "PasswordReset",
@@ -703,15 +768,6 @@
           "fin": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SendOptConfirmCommand": {
-        "type": "object",
-        "properties": {
-          "purpose": {
-            "$ref": "#/components/schemas/CriticalOtpPurpose"
           }
         },
         "additionalProperties": false

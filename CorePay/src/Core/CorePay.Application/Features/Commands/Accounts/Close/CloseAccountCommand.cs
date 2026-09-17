@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Commands.Accounts.Close
 {
-    public record CloseAccountCommand(Guid Id):IRequest<Result>;
+    public record CloseAccountCommand(Guid Id,string ProcessId):IRequest<Result>;
  
 }

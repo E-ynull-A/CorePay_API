@@ -31,6 +31,7 @@ namespace CorePay.Domain.Entities
 
         public Transfer(Guid senderAccountId,
                         Guid recieverAccountId,
+                        decimal amount,
                         Guid? senderCardId = null,
                         Guid? recieverCardId = null)
         {
@@ -38,6 +39,7 @@ namespace CorePay.Domain.Entities
             RecieverAccountId = recieverAccountId;
             SenderCardId = senderCardId;
             RecieverCardId = recieverCardId;
+            Amount = amount;
         }
     }
 }

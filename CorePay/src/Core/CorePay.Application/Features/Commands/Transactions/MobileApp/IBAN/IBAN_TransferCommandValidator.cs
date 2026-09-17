@@ -1,7 +1,7 @@
 ﻿using CorePay.Application.Interfaces.Services;
 using FluentValidation;
 
-namespace CorePay.Application.Features.Commands.Transactions.MobileApp
+namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
 {
     public class IBAN_TransferCommandValidator:AbstractValidator<IBAN_TransferCommand>
     {

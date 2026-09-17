@@ -27,8 +27,12 @@ namespace CorePay.Domain.Utilities.Errors
                                                               "You cannot Transfer between the same Accounts!",
                                                               ErrorType.Conflict);
 
-        public static Error OtpRequired { get; } = new("Transaction.OtpRequired",
+        public static Error OtpRequired { get; } = new Error("Transaction.OtpRequired",
                                                         "Otp Confirmation is Required because of High Amount of Transfer",
                                                         ErrorType.BusinessRule);
+
+        public static Error InvalidOtpContext { get; } = new Error("Transaction.InvalidOtpContext",
+                                                                   "The Request Context was changed during the Otp Confirmation!",
+                                                                   ErrorType.Conflict);
     }            
 }

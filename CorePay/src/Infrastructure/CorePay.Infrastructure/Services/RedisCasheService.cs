@@ -41,6 +41,8 @@ namespace CorePay.Infrastructure.Services
             {
                 RedisValue rValue = await _dbRedis.StringGetAsync(key);
 
+                Console.WriteLine(rValue.ToString());
+
                 if (!rValue.HasValue)
                     return default;
 
