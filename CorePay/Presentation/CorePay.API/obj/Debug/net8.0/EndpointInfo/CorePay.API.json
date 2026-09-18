@@ -655,7 +655,7 @@
         }
       }
     },
-    "/mobileApp/transfer": {
+    "/mobileApp/transfer/IBAN": {
       "post": {
         "tags": [
           "Transactions"
@@ -690,6 +690,57 @@
                   "style": "form"
                 },
                 "RecieverAccountIBAN": {
+                  "style": "form"
+                },
+                "SessionId": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mobileApp/transfer/Card": {
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "SenderCardId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "ReceiverCardNumber": {
+                    "type": "string"
+                  },
+                  "Amount": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "SessionId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "SenderCardId": {
+                  "style": "form"
+                },
+                "ReceiverCardNumber": {
+                  "style": "form"
+                },
+                "Amount": {
                   "style": "form"
                 },
                 "SessionId": {

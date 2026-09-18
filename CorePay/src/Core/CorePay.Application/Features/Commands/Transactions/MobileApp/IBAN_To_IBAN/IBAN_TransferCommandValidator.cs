@@ -14,7 +14,13 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
             RuleFor(tc => tc.RecieverAccountIBAN)
                 .Must(ib => _generatorService.CheckIBAN(ib))
                 .WithMessage("Invalid IBAN Input!");
-               
+
+
+            RuleFor(t => t.Amount)
+                .NotNull()
+                .GreaterThan(0)
+                .WithMessage("The Amount of Money must be greater than zero!");
+
         }
     }
 }

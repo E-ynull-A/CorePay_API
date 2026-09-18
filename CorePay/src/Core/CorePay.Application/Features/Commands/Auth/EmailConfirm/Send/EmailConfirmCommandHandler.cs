@@ -16,6 +16,7 @@ namespace CorePay.Application.Features.Commands.Auth.EmailConfirm.Send
         private readonly UserManager<AppUser> _userManager;
         private readonly IOtpService _otpService;
 
+
         public EmailConfirmCommandHandler(IRedisCasheService redisCashe,
                                           UserManager<AppUser> userManager,
                                           IOtpService otpService)
@@ -26,19 +27,25 @@ namespace CorePay.Application.Features.Commands.Auth.EmailConfirm.Send
         }
         public async Task<Result> Handle(EmailConfirmCommand request, CancellationToken cancellationToken)
         {
-            //if (await _otpService.IsTooManyAttempsAsync(request.Email,OtpPurpose.EmailConfirm))
-            //    return Result.Failure(AuthError.TooManyRequests);
+            string processId = Guid.Empty.ToString();
 
-            if (await _redisCashe.GetAsync<string>($"otp:{OtpPurpose.EmailConfirm}:{request.Email.ToLowerInvariant()}") == request.Code)
+            if (await _otpService.IsTooManyAttempsAsync(request.Email,
+                                                        OtpPurpose.EmailConfirm,
+                                                        processId))
+                return Result.Failure(AuthError.TooManyRequests);
+
+            string purpose = OtpPurpose.EmailConfirm.ToString().ToLower();
+
+            if (await _redisCashe.GetAsync<string>($"otp:{purpose}:{request.Email.ToLower()}:{processId}") == request.Code)
             {
                 AppUser? user = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
                 if (user == null)
-                    return Result.Failure(AuthError.NotFound);
+                    return Result.Failure(AuthError.NotFound);        
 
                 user.EmailConfirmed = true;
                 await _userManager.UpdateAsync(user);
 
-                await _redisCashe.DeleteAsync(request.Email);
+                await _redisCashe.DeleteAsync($"otp:{purpose}:{request.Email.ToLower()}:{processId}");
                 return Result.Success();
             }
 

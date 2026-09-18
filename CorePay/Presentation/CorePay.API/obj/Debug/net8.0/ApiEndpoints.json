@@ -288,7 +288,38 @@
   {
     "ContainingType": "CorePay.API.Controllers.TransactionsController",
     "Method": "Transfer",
-    "RelativePath": "mobileApp/transfer",
+    "RelativePath": "mobileApp/transfer/Card",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "SenderCardId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "ReceiverCardNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Amount",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "SessionId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CorePay.API.Controllers.TransactionsController",
+    "Method": "Transfer",
+    "RelativePath": "mobileApp/transfer/IBAN",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

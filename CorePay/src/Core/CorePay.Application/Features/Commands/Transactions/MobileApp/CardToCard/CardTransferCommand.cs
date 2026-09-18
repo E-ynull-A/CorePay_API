@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorePay.Application.Features.Commands.Transactions.MobileApp.Card
+namespace CorePay.Application.Features.Commands.Transactions.MobileApp.CardToCard
 {
     public record CardTransferCommand(Guid SenderCardId,
                                       string ReceiverCardNumber,
-                                      decimal Amount):IRequest<Result>;
+                                      decimal Amount,
+                                      string? SessionId = null):IRequest<Result>;
     
 }

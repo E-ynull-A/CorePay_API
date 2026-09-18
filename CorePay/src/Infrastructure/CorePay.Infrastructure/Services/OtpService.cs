@@ -3,7 +3,9 @@ using CorePay.Application.Features.Commands.Transactions.MobileApp.common;
 using CorePay.Application.Interfaces.Services;
 using CorePay.Domain.Utilities.Enums;
 using CorePay.Domain.Utilities.Errors;
+using MediatR;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace CorePay.Infrastructure.Services
 {
@@ -23,12 +25,14 @@ namespace CorePay.Infrastructure.Services
         }
 
         public async Task<Result<string>> SendConfirmOtpAsync(string toEmail
-                                                      ,OtpPurpose purpose
-                                                      ,double expireMinute)
+                                                      , OtpPurpose purpose
+                                                      , double expireMinute)
         {
             int code = RandomNumberGenerator.GetInt32(100000, 999999);
 
-            string processId = Guid.NewGuid().ToString();
+            string processId = (purpose == OtpPurpose.EmailConfirm)
+                ? Guid.Empty.ToString()
+                : Guid.NewGuid().ToString();
 
             if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:rate-limit:{toEmail.ToLower()}:processId:{processId}",
                                                 TimeSpan.FromMinutes(10)) > 3)
@@ -39,7 +43,7 @@ namespace CorePay.Infrastructure.Services
             if (await _redisCashe.AnyAsync(otpKey))
                 await _redisCashe.DeleteAsync(otpKey);
 
-            await _redisCashe.SetAsync(otpKey,code, 
+            await _redisCashe.SetAsync(otpKey, code,
                                 TimeSpan.FromMinutes(expireMinute));
 
             (string subject, string actionDescription) = purpose switch
@@ -86,12 +90,12 @@ namespace CorePay.Infrastructure.Services
                                                       string processId)
         {
             if (await _redisCashe.CountAsync($"otp:{purpose.ToString().ToLower()}:attempts:{email.ToLower()}:processId:{processId}"
-                                                    ,TimeSpan.FromMinutes(10)) >= 4)
+                                                    , TimeSpan.FromMinutes(10)) >= 4)
                 return true;
 
             return false;
         }
 
-        
+       
     }
 }

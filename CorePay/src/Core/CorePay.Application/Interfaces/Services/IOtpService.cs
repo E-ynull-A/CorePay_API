@@ -1,4 +1,5 @@
 ﻿using CorePay.Application.Common;
+using CorePay.Application.Features.Commands.Transactions.MobileApp.common;
 using CorePay.Domain.Utilities.Enums;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,6 @@ namespace CorePay.Application.Interfaces.Services
         Task<Result<string>> SendConfirmOtpAsync(string toEmail
                                                 ,OtpPurpose purpose
                                                 ,double expireMinute);
-
     }
 
 }

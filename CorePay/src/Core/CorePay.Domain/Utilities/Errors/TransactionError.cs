@@ -34,5 +34,9 @@ namespace CorePay.Domain.Utilities.Errors
         public static Error InvalidOtpContext { get; } = new Error("Transaction.InvalidOtpContext",
                                                                    "The Request Context was changed during the Otp Confirmation!",
                                                                    ErrorType.Conflict);
+
+        public static Error DifferentCurrencyTransfer { get; } = new Error("Tranaction.DifferentCurrencyTransfer",
+                                                                            "The Transfer process works only the same Currency between Accounts!",
+                                                                            ErrorType.BusinessRule);
     }            
 }

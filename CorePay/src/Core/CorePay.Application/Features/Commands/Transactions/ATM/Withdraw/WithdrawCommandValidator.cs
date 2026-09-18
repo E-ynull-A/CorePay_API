@@ -18,6 +18,8 @@ namespace CorePay.Application.Features.Commands.Transactions.ATM.Withdraw
             RuleFor(w => w.SessionId)
                 .NotEmpty()
                 .MaximumLength(40);
+
+
         }
     }
 }

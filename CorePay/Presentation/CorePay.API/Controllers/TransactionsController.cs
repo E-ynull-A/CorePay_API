@@ -3,9 +3,12 @@ using CorePay.Application.Common;
 using CorePay.Application.Features.Commands.Transactions.ATM.Auth;
 using CorePay.Application.Features.Commands.Transactions.ATM.Withdraw;
 using CorePay.Application.Features.Commands.Transactions.Deposit;
+using CorePay.Application.Features.Commands.Transactions.MobileApp.CardToCard;
 using CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace CorePay.API.Controllers
 {
@@ -46,8 +49,19 @@ namespace CorePay.API.Controllers
             return result.ToActionResult(201);
         }
 
-        [HttpPost("/mobileApp/transfer")]
+        [Authorize]
+        [HttpPost("/mobileApp/transfer/IBAN")]
         public async Task<IActionResult> Transfer([FromForm]IBAN_TransferCommand command)
+        {
+            Result result = await _mediator.Send(command);
+
+            return result.ToActionResult();
+        }
+
+        [Authorize]
+        [HttpPost("/mobileApp/transfer/Card")]
+
+        public async Task<IActionResult> Transfer([FromForm]CardTransferCommand command)
         {
             Result result = await _mediator.Send(command);
 

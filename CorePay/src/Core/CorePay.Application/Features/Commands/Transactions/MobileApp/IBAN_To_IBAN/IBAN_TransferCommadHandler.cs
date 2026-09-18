@@ -16,16 +16,19 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
         private readonly ICurrentUserService _currentUser;
         private readonly IRedisCasheService _casheService;
         private readonly IOtpService _otpService;
+        private readonly ITransferService _transferService;
 
         public IBAN_TransferCommadHandler(IUnitOfWork unitOfWork,
                                           ICurrentUserService currentUser,
                                           IRedisCasheService casheService,
-                                          IOtpService otpService)
+                                          IOtpService otpService,
+                                          ITransferService transferService)
         {
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;
             _casheService = casheService;
             _otpService = otpService;
+            _transferService = transferService;
         }
         public async Task<Result> Handle(IBAN_TransferCommand request, CancellationToken cancellationToken)
         {
@@ -52,47 +55,30 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
             if (sender.Id == receiver.Id)
                 return Result.Failure(TransactionError.SelfTransfer);
 
+            if (sender.Currency != receiver.Currency)
+                return Result.Failure(TransactionError.DifferentCurrencyTransfer);
+
             if (receiver.Status != AccountStatus.Active)
                 return Result.Failure(TransactionError.InvalidStatus);
 
             if (request.Amount > 100)
             {
-                if (!await _casheService.AnyAsync($"otp-confirmed:{OtpPurpose.HighAmountTransfer.ToString().ToLower()}:{userId}:{request.SessionId}"))
-                {
-                    string? email = _currentUser.GetUserEmail();
+                PendingTransferContext transferContext =
+                                new PendingTransferContext(sender.Id,
+                                                           receiver.Id,
+                                                           request.Amount);
 
-                    if (email is null)
-                        return Result.Failure(AuthError.NotFound);
+                Result result = await _transferService
+                                        .HighAmountTransferAsync(userId, request.SessionId, transferContext);
 
-                    Result<string> result = await _otpService
-                                                        .SendConfirmOtpAsync(email,OtpPurpose.HighAmountTransfer,3);
+                if (!result.IsSuccess)
+                    return result;
 
-                    await _casheService.SetAsync($"pending-transfer:{userId.ToString()}:{result.Value}",
-                                                  new PendingTransferContext(sender.Id,
-                                                                             receiver.Id,
-                                                                             request.Amount)
-                                                  ,TimeSpan.FromMinutes(4));
+                Result checkResult = await _transferService
+                                                 .CheckTransferContextAsync(userId, request.SessionId, transferContext);
 
-                    return Result.Failure(TransactionError.OtpRequired with { Details = result.Value});
-                }
-                else
-                {
-                    PendingTransferContext? transferContext = await _casheService.GetAsync<PendingTransferContext>
-                                                ($"pending-transfer:{userId.ToString()}:{request.SessionId}");
-
-                    if (transferContext == default
-                      || transferContext.Amount != request.Amount
-                      || transferContext.SenderAccountId != sender.Id
-                      || transferContext.ReceiverAccountId != receiver.Id)
-                        return Result.Failure(TransactionError.InvalidOtpContext);
-
-                    await _casheService.DeleteAsync($"otp-confirmed:{OtpPurpose.HighAmountTransfer}:{userId}");
-                    await _casheService.DeleteAsync($"pending-amount:{userId}:{request.SessionId}");
-                }
-
-                //Qardaş send və confirm ayrı endpointlərdə
-                //gedəcək bura qatma sadəcə sessionİd-ni tut göndər
-                // O otp service-də yazdığın da rədd elə getsün xoroşo?!
+                if(!checkResult.IsSuccess)
+                    return checkResult;
             }
 
             sender.DecreaseBalance(request.Amount);
@@ -123,13 +109,13 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
                 senderTransaction.AsignTransfer(transfer);
                 receiverTransaction.AsignTransfer(transfer);
 
+                senderTransaction.Validate();
+                receiverTransaction.Validate();
+
                 _unitOfWork.TransactionRepository.Add(senderTransaction);
                 _unitOfWork.TransactionRepository.Add(receiverTransaction);
 
                 _unitOfWork.TransferRepository.Add(transfer);
-
-                senderTransaction.Validate();
-                receiverTransaction.Validate();
 
                 await _unitOfWork.SaveChangeAsync();
                 await dbTransaction.CommitAsync(cancellationToken);
@@ -140,10 +126,10 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
             {
                 await dbTransaction.RollbackAsync(cancellationToken);
 
-                throw new TransactionException("Transfer process was Failed!",ex);
+                throw new TransactionException("Transfer process was Failed!", ex);
             }
 
-            
+
         }
     }
 }

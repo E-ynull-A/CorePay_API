@@ -21,7 +21,9 @@ namespace CorePay.Application.Features.Commands.Auth.EmailConfirm.Confirm
         public async Task<Result> Handle(ConfirmEmailResendCommand request, CancellationToken cancellationToken)
         {
             Result emailResult = await _otpService
-                                            .SendConfirmOtpAsync(request.Email,OtpPurpose.EmailConfirm,3);
+                                            .SendConfirmOtpAsync(request.Email,
+                                                                 OtpPurpose.EmailConfirm,
+                                                                 3);
 
             if (!emailResult.IsSuccess)
                 return emailResult;
