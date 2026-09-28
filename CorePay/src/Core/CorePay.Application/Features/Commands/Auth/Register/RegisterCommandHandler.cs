@@ -1,19 +1,12 @@
-﻿using AutoMapper;
-using CorePay.Application.Common;
+﻿using CorePay.Application.Common;
 using CorePay.Application.Interfaces.Services;
 using CorePay.Domain.Entities;
 using CorePay.Domain.Exceptions;
 using CorePay.Domain.Utilities.Enums;
 using CorePay.Domain.Utilities.Errors;
-using CorePay.Domain.Utilities.Errors.Common;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CorePay.Application.Features.Commands.Auth.Register
 {

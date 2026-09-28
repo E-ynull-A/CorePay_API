@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "MyAPI",
-    "version": "v1"
+    "title": "CorePay API",
+    "version": "v3"
   },
   "paths": {
     "/Account/GetAll": {

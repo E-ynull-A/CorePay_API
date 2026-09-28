@@ -9,9 +9,7 @@ using CorePay.Application.Features.Commands.Auth.OtpConfirm.Send;
 using CorePay.Application.Features.Commands.Auth.Refresh;
 using CorePay.Application.Features.Commands.Auth.Register;
 using MediatR;
-using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace CorePay.API.Controllers
 {
