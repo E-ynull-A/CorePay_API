@@ -28,6 +28,8 @@ namespace CorePay.Domain.Entities
         public ICollection<Account> Accounts { get; } = new List<Account>();
         public ICollection<RefreshToken> RefreshTokens { get; } = new List<RefreshToken>();
 
+        public ICollection<GroupMember> GroupMemberships { get; protected set; } = new List<GroupMember>();
+
         private AppUser() { }
                            
         public AppUser(string name,

@@ -40,7 +40,7 @@ namespace CorePay.Application.Features.Commands.Accounts.Post
 
 
             Account account = new Account(await _generatorService.GenerateIbanAsync()
-                                         ,Currency.AZN,currentUserId);
+                                         ,Currency.AZN,AccountType.Personal,currentUserId);
 
             _accountRepository.Add(account);
             await _accountRepository.SaveChangesAsync();
