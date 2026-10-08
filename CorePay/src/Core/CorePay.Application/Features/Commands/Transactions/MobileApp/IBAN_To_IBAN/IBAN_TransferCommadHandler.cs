@@ -91,7 +91,7 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
 
             try
             {
-                Transaction senderTransaction = new Transaction(-request.Amount,
+                Transaction senderTransaction = new Transaction(request.Amount,
                                                                 TransactionType.Transfer,
                                                                 sender.Id);
 

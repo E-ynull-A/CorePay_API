@@ -37,5 +37,11 @@ namespace CorePay.Persistance.Data_Access_Layer
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Transfer> Transfers { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+
+        public DbSet<GroupAccount> GroupAccounts { get; set; }
+        public DbSet<GroupMember> GroupMembers { get; set; }
+        public DbSet<GroupProposal> GroupProposals { get; set; }
+        public DbSet<GroupVote> GroupVotes { get; set; }
+        public DbSet<GroupInvitation> GroupInvitations { get; set; }
     }
 }

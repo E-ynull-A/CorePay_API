@@ -10,6 +10,7 @@ namespace CorePay.Domain.Utilities.Enums
     {
         Active = 1,
         Left = 2,
-        Removed = 3
+        Removed = 3,
+        Banned = 4
     }
 }

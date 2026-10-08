@@ -22,5 +22,13 @@ namespace CorePay.Domain.Utilities.Extentions
 
             return result;
         }
+
+        public static string MaskIban(this string iban) =>
+           $"{iban[..4]} {iban[4..8]} ** **** {iban[^4..]}";
+
+
+        public static string MaskCardNumber(this string cardNumber) =>
+            $"{cardNumber[..4]} {cardNumber[4..6]} ** {cardNumber[^4..]}";
+      
     }
 }

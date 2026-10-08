@@ -5,6 +5,9 @@ using CorePay.Application.Features.Commands.Transactions.ATM.Withdraw;
 using CorePay.Application.Features.Commands.Transactions.Deposit;
 using CorePay.Application.Features.Commands.Transactions.MobileApp.CardToCard;
 using CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN;
+using CorePay.Application.Features.Queries.Accounts.GetById;
+using CorePay.Application.Features.Queries.Transactions.GetAll;
+using CorePay.Application.Features.Queries.Transactions.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +26,25 @@ namespace CorePay.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("/atm/authenticate")]
+        [HttpGet("/history")]
+        public async Task<IActionResult> Get([FromQuery]GetAllTransactionQuery query)
+        {
+          Result<ICollection<GetAllTransactionQueryResponse>>
+                                result = await _mediator.Send(query);
 
+          return result.ToActionResult();
+        }
+
+        [HttpGet("/history/detailed/{Id}")]
+        public async Task<IActionResult> Get([FromRoute]GetByIdTransactionQuery query)
+        {
+            Result<GetByIdTransactionQueryResponse> result = 
+                                            await _mediator.Send(query);
+
+            return result.ToActionResult();
+        }
+
+        [HttpPost("/atm/authenticate")]
         public async Task<IActionResult> Authenticate([FromForm] AtmAuthenticationCommand command)
         {
             Result<AtmAuthenticationCommandResponse> result =

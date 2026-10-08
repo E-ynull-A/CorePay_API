@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace CorePay.Domain.Utilities.Enums
 {
-    public enum TransactionChannel
+    public enum TransferType
     {
-        MobileApp = 1,
-        ATM = 2,
-        Terminal = 3
+        CardToCard = 1,
+        ToIBAN = 2
     }
 }

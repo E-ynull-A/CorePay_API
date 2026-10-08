@@ -28,7 +28,7 @@ namespace CorePay.Persistance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AppUserId")
+                    b.Property<Guid?>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Balance")
@@ -53,6 +53,9 @@ namespace CorePay.Persistance.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
@@ -217,6 +220,223 @@ namespace CorePay.Persistance.Migrations
                         .IsUnique();
 
                     b.ToTable("Cards");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupAccount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
+
+                    b.Property<DateTimeOffset>("ExpireAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId")
+                        .IsUnique();
+
+                    b.ToTable("GroupAccounts");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupInvitation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("ExpireAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("GroupAccounId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GroupAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedUserId");
+
+                    b.HasIndex("GroupAccountId");
+
+                    b.ToTable("GroupInvitations");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupMember", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GroupAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("GroupAccountId");
+
+                    b.ToTable("GroupMembers");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupProposal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("Amount")
+                        .IsRequired()
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedByMemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GroupAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedByMemberId");
+
+                    b.HasIndex("GroupAccountId");
+
+                    b.ToTable("GroupProposals");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupVote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GroupMemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GroupProposalId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupMemberId");
+
+                    b.HasIndex("GroupProposalId");
+
+                    b.ToTable("GroupVotes");
                 });
 
             modelBuilder.Entity("CorePay.Domain.Entities.RefreshToken", b =>
@@ -499,8 +719,7 @@ namespace CorePay.Persistance.Migrations
                     b.HasOne("CorePay.Domain.Entities.AppUser", "AppUser")
                         .WithMany("Accounts")
                         .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("AppUser");
                 });
@@ -514,6 +733,93 @@ namespace CorePay.Persistance.Migrations
                         .IsRequired();
 
                     b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupAccount", b =>
+                {
+                    b.HasOne("CorePay.Domain.Entities.Account", "Account")
+                        .WithOne()
+                        .HasForeignKey("CorePay.Domain.Entities.GroupAccount", "AccountId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupInvitation", b =>
+                {
+                    b.HasOne("CorePay.Domain.Entities.AppUser", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CorePay.Domain.Entities.GroupAccount", "GroupAccount")
+                        .WithMany()
+                        .HasForeignKey("GroupAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedUser");
+
+                    b.Navigation("GroupAccount");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupMember", b =>
+                {
+                    b.HasOne("CorePay.Domain.Entities.AppUser", "AppUser")
+                        .WithMany("GroupMemberships")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CorePay.Domain.Entities.GroupAccount", "GroupAccount")
+                        .WithMany("GroupMembers")
+                        .HasForeignKey("GroupAccountId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("GroupAccount");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupProposal", b =>
+                {
+                    b.HasOne("CorePay.Domain.Entities.GroupMember", "CreatedByMember")
+                        .WithMany()
+                        .HasForeignKey("CreatedByMemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CorePay.Domain.Entities.GroupAccount", "GroupAccount")
+                        .WithMany("Proposals")
+                        .HasForeignKey("GroupAccountId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CreatedByMember");
+
+                    b.Navigation("GroupAccount");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupVote", b =>
+                {
+                    b.HasOne("CorePay.Domain.Entities.GroupMember", "GroupMember")
+                        .WithMany("GroupVotes")
+                        .HasForeignKey("GroupMemberId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CorePay.Domain.Entities.GroupProposal", "GroupProposal")
+                        .WithMany("GroupVotes")
+                        .HasForeignKey("GroupProposalId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("GroupMember");
+
+                    b.Navigation("GroupProposal");
                 });
 
             modelBuilder.Entity("CorePay.Domain.Entities.RefreshToken", b =>
@@ -645,12 +951,31 @@ namespace CorePay.Persistance.Migrations
                 {
                     b.Navigation("Accounts");
 
+                    b.Navigation("GroupMemberships");
+
                     b.Navigation("RefreshTokens");
                 });
 
             modelBuilder.Entity("CorePay.Domain.Entities.Card", b =>
                 {
                     b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupAccount", b =>
+                {
+                    b.Navigation("GroupMembers");
+
+                    b.Navigation("Proposals");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupMember", b =>
+                {
+                    b.Navigation("GroupVotes");
+                });
+
+            modelBuilder.Entity("CorePay.Domain.Entities.GroupProposal", b =>
+                {
+                    b.Navigation("GroupVotes");
                 });
 
             modelBuilder.Entity("CorePay.Domain.Entities.Transfer", b =>
