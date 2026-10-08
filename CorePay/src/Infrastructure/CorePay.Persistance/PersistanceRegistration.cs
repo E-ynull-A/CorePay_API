@@ -23,6 +23,10 @@ namespace CorePay.Persistance
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<ITransferRepository, TransferRepository>();
+            services.AddScoped<IGroupAccountRepository, GroupAccountRepository>();
+            services.AddScoped<IGroupInvitationRepository, GroupInvitationRepository>();
+            services.AddScoped<IGroupProposalRepository, GroupProposalRepository>();
+            services.AddScoped<IGroupVoteRepository, GroupVoteRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

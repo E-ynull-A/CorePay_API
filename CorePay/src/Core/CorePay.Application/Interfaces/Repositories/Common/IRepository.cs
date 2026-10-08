@@ -10,6 +10,8 @@ namespace CorePay.Application.Interfaces.Repositories.Common
 {
     public interface IRepository<T> where T : BaseEntity
     {
+        Task<Q?> GetPropertyAsync<Q>(Expression<Func<T, bool>> predicate,
+                                    Expression<Func<T, Q>> selector);
         IQueryable<T> GetAll(Expression<Func<T, bool>>? func = null,
                                     string[]? includes = null,
                                     int page = 0,

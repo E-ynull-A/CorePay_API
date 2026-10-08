@@ -19,10 +19,22 @@ namespace CorePay.Domain.Entities
 
 
         public DateTimeOffset ExpireAt { get;protected set; }
-        public GroupAccountStatus Status { get;protected set; }
+        public GroupAccountStatus Status { get;protected set; } = GroupAccountStatus.Active;
 
         public ICollection<GroupMember> GroupMembers { get; protected set; } = new List<GroupMember>();
 
         public ICollection<GroupProposal> Proposals { get; protected set; } = new List<GroupProposal>();
+
+        public GroupAccount() { }
+        
+        public GroupAccount(string title, Account account, DateTimeOffset expireAt)
+        {
+            Title = title;
+            Account = account;
+            ExpireAt = expireAt;
+        }
+
+
+        
     }
 }

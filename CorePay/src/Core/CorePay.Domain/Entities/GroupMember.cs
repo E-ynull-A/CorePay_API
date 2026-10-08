@@ -19,7 +19,19 @@ namespace CorePay.Domain.Entities
 
         public ICollection<GroupVote> GroupVotes { get; protected set; } = new List<GroupVote>();
 
-        public GroupMemberStatus Status { get;protected set; }
+        public GroupMemberStatus Status { get;protected set; } = GroupMemberStatus.Active;
+
+        public GroupMember(Guid appUserId, GroupAccount groupAccount)
+        {
+            AppUserId = appUserId;
+            GroupAccount = groupAccount;
+        }
+
+        public GroupMember(Guid appUserId, Guid groupAccountId)
+        {
+            AppUserId = appUserId;
+            GroupAccountId = groupAccountId;
+        }
 
     }
 }

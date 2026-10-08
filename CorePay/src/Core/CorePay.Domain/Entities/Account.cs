@@ -48,5 +48,7 @@ namespace CorePay.Domain.Entities
             Status = AccountStatus.UserBlocked;
         public void Close()=>
             Status = AccountStatus.Closed;
-    }
+
+        //GroupAccountda neje olsun bu method-lar ^^^
+    }                                          // |||
 }

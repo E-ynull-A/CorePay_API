@@ -25,7 +25,7 @@ namespace CorePay.Application.Features.Commands.Transactions.Deposit
         {
             Card? card = await _unitOfWork.CardRepository
                                     .FirstOrDefaultAsync(c => c.CardNumber == request.CardNumber,
-                                                         [nameof(Account)]);
+                                                         [nameof(Card.Account)]);
 
             if (card == null)
                 return Result.Failure(CardError.NotFound);
