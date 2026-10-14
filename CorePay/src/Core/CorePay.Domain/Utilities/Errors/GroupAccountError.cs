@@ -19,11 +19,17 @@ namespace CorePay.Domain.Utilities.Errors
                                                             ErrorType.BusinessRule);
 
         public static Error InactiveStatus { get; } = new Error("GroupAccount.InactiveStatus",
-                                                           "The GroupAccount is not Account!",
+                                                           "The GroupAccount is not Active!",
+                                                           ErrorType.BusinessRule);
+
+        public static Error InactiveMember { get; } = new Error("GroupAccount.InactiveMember",
+                                                           "The Group Member is not Active!",
                                                            ErrorType.BusinessRule);
 
         public static Error SelfInvite { get; } = new Error("GroupAccount.SelfInvite",
                                                             "The User is already Member of the Group Account!",
                                                             ErrorType.Conflict);
+
+
     }
 }

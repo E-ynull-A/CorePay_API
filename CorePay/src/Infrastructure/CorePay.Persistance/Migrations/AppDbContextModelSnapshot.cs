@@ -281,6 +281,12 @@ namespace CorePay.Persistance.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+<<<<<<< HEAD
+=======
+                    b.Property<Guid>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+>>>>>>> b1ec9d6f4c8c746aa6d805f3e567a8f820ec9921
                     b.Property<DateTimeOffset>("ExpireAt")
                         .HasColumnType("datetimeoffset");
 
@@ -290,9 +296,12 @@ namespace CorePay.Persistance.Migrations
                     b.Property<Guid>("GroupAccountId")
                         .HasColumnType("uniqueidentifier");
 
+<<<<<<< HEAD
                     b.Property<Guid>("InvitedUserId")
                         .HasColumnType("uniqueidentifier");
 
+=======
+>>>>>>> b1ec9d6f4c8c746aa6d805f3e567a8f820ec9921
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -307,9 +316,15 @@ namespace CorePay.Persistance.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<< HEAD
                     b.HasIndex("GroupAccountId");
 
                     b.HasIndex("InvitedUserId");
+=======
+                    b.HasIndex("CreatedUserId");
+
+                    b.HasIndex("GroupAccountId");
+>>>>>>> b1ec9d6f4c8c746aa6d805f3e567a8f820ec9921
 
                     b.ToTable("GroupInvitations");
                 });
@@ -748,12 +763,22 @@ namespace CorePay.Persistance.Migrations
 
             modelBuilder.Entity("CorePay.Domain.Entities.GroupInvitation", b =>
                 {
+<<<<<<< HEAD
+=======
+                    b.HasOne("CorePay.Domain.Entities.AppUser", "CreatedUser")
+                        .WithMany()
+                        .HasForeignKey("CreatedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+>>>>>>> b1ec9d6f4c8c746aa6d805f3e567a8f820ec9921
                     b.HasOne("CorePay.Domain.Entities.GroupAccount", "GroupAccount")
                         .WithMany()
                         .HasForeignKey("GroupAccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+<<<<<<< HEAD
                     b.HasOne("CorePay.Domain.Entities.AppUser", "InvitedUser")
                         .WithMany()
                         .HasForeignKey("InvitedUserId")
@@ -763,6 +788,11 @@ namespace CorePay.Persistance.Migrations
                     b.Navigation("GroupAccount");
 
                     b.Navigation("InvitedUser");
+=======
+                    b.Navigation("CreatedUser");
+
+                    b.Navigation("GroupAccount");
+>>>>>>> b1ec9d6f4c8c746aa6d805f3e567a8f820ec9921
                 });
 
             modelBuilder.Entity("CorePay.Domain.Entities.GroupMember", b =>

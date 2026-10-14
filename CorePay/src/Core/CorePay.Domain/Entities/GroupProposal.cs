@@ -17,12 +17,31 @@ namespace CorePay.Domain.Entities
         public Guid CreatedByMemberId { get;protected set; }
 
         public ProposalType Type { get;protected set; }
-        public ProposalStatus Status { get; protected set; }
+        public ProposalStatus Status { get; protected set; } = ProposalStatus.Pending;
 
         public decimal? Amount { get;protected set; }     
         public DateTimeOffset ExpireAt { get; } = DateTimeOffset.UtcNow.AddHours(24);
 
         public ICollection<GroupVote> GroupVotes { get; protected set; } = new List<GroupVote>();
+
+
+        public GroupProposal(Guid groupAccountId, Guid createdByMemberId, ProposalType type, decimal? amount = null)
+        {
+            GroupAccountId = groupAccountId;
+            CreatedByMemberId = createdByMemberId;
+            Type = type;
+            Amount = amount;
+            Validate();
+        }
+
+        void Validate()
+        {
+            if ((Type == ProposalType.Withdraw && Amount is null)
+               || Type != ProposalType.Withdraw && Amount is not null)
+                throw new InvalidOperationException("The Input data (Amount) doesn't match the Proposal Type!");
+        }
+           
+        
 
     }
 }

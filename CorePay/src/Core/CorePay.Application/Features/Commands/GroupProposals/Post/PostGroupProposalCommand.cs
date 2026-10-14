@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorePay.Application.Features.Commands.GroupProposal.Post
+namespace CorePay.Application.Features.Commands.GroupProposals.Post
 {
     public record PostGroupProposalCommand(Guid GroupMemberId,
                                            ProposalType Type,
