@@ -17,5 +17,13 @@ namespace CorePay.Domain.Utilities.Errors
         public static Error ReachLimit { get; } = new Error("GroupAccount.ReachLimit",
                                                             "Reach the Limit Count of GroupAccount!",
                                                             ErrorType.BusinessRule);
+
+        public static Error InactiveStatus { get; } = new Error("GroupAccount.InactiveStatus",
+                                                           "The GroupAccount is not Account!",
+                                                           ErrorType.BusinessRule);
+
+        public static Error SelfInvite { get; } = new Error("GroupAccount.SelfInvite",
+                                                            "The User is already Member of the Group Account!",
+                                                            ErrorType.Conflict);
     }
 }

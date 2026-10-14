@@ -10,8 +10,9 @@ namespace CorePay.Domain.Utilities.Errors
 {
     public sealed class CardError
     {
-        public static Error NotFound { get; } =
-            new Error("Card.NotFound", "Card not found!", ErrorType.NotFound);
+        public static Error NotFound { get; } = new Error("Card.NotFound",
+                                                          "Card not found!",
+                                                          ErrorType.NotFound);
 
         public static Error ReachedCardLimit { get; } = new Error("Card.ReachedLimit",
                                                      "You reach the card limit!",
