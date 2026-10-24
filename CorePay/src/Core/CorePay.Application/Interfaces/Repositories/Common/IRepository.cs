@@ -24,6 +24,8 @@ namespace CorePay.Application.Interfaces.Repositories.Common
         Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> func,
                                           string[]? includes = null,
                                           bool isFiltered = true);
+        Task<Q?> GetPropertyAsync<Q>(Expression<Func<T, bool>> predicate,
+                                     Expression<Func<T, Q>> selector);
         void Update(T updatedItem);
         void Add(T item);
         Task SaveChangesAsync();

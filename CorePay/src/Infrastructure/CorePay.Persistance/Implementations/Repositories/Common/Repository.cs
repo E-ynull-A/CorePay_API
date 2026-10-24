@@ -88,6 +88,16 @@ namespace CorePay.Persistance.Implementations.Repositories.Common
             return await query.FirstOrDefaultAsync(q => q.Id == id);
         }
 
+        public async Task<Q?> GetPropertyAsync<Q>(Expression<Func<T, bool>> predicate,
+                                               Expression<Func<T, Q>> selector)
+        {
+            return await _dbSet
+                .AsNoTracking()
+                .Where(predicate)
+                .Select(selector)
+                .FirstOrDefaultAsync();
+        }
+
         public void Update(T updatedItem) =>
             _dbSet.Update(updatedItem);
 

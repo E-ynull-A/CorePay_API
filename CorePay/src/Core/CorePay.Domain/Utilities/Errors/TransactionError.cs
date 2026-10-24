@@ -10,6 +10,9 @@ namespace CorePay.Domain.Utilities.Errors
 {
     public sealed class TransactionError
     {
+        public static Error NotFound { get; } = new Error("Transaction.NotFound",
+                                                          "Transaction not Found!",
+                                                          ErrorType.NotFound);
         public static Error NoEnoughBalance { get; } = new Error("Transaction.NotEnoughBalance",
                                                                  "There no enough balance for the Transaction in your Account!",
                                                                  ErrorType.BusinessRule);
