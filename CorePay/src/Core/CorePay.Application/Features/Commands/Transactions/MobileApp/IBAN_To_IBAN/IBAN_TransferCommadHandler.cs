@@ -6,7 +6,9 @@ using CorePay.Domain.Entities;
 using CorePay.Domain.Exceptions;
 using CorePay.Domain.Utilities.Enums;
 using CorePay.Domain.Utilities.Errors;
+using CorePay.Domain.Utilities.Extentions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
 {
@@ -61,6 +63,26 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
             if (receiver.Status != AccountStatus.Active)
                 return Result.Failure(TransactionError.InvalidStatus);
 
+
+            IdempotencyRequest? idempotencyRqst = await _unitOfWork
+                                                          .IdempotencyRequestRepository
+                                                                      .FirstOrDefaultAsync(ir => ir.UserId == userId
+                                                                                              && ir.IdempotencyKey == request.IdempotencyKey);
+
+            string newHash = TransferRequestHasher.Create(sender.Id,
+                                                          receiver.IBAN,
+                                                          request.Amount);
+
+            if (idempotencyRqst is not null)
+            {               
+                if (idempotencyRqst.RequestHash != newHash)
+                    return Result.Failure(TransactionError.IdempotencyKeyReused);
+
+                return Result.Success();
+            }
+
+
+
             if (request.Amount > 100)
             {
                 PendingTransferContext transferContext =
@@ -77,7 +99,7 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
                 Result checkResult = await _transferService
                                                  .CheckTransferContextAsync(userId, request.SessionId, transferContext);
 
-                if(!checkResult.IsSuccess)
+                if (!checkResult.IsSuccess)
                     return checkResult;
             }
 
@@ -112,12 +134,18 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
                 senderTransaction.Validate();
                 receiverTransaction.Validate();
 
+                IdempotencyRequest idempotencyRequest = new IdempotencyRequest(userId,
+                                                                               request.IdempotencyKey,
+                                                                               newHash);
+
                 _unitOfWork.TransactionRepository.Add(senderTransaction);
                 _unitOfWork.TransactionRepository.Add(receiverTransaction);
 
                 _unitOfWork.TransferRepository.Add(transfer);
+                
+                _unitOfWork.IdempotencyRequestRepository.Add(idempotencyRequest);
 
-                await _unitOfWork.SaveChangeAsync();
+                await _unitOfWork.SaveChangeAsync(cancellationToken);
                 await dbTransaction.CommitAsync(cancellationToken);
 
                 return Result.Success();
@@ -125,6 +153,9 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN
             catch (Exception ex)
             {
                 await dbTransaction.RollbackAsync(cancellationToken);
+
+                if (ex is DbUpdateConcurrencyException)
+                    throw new ConcurrencyException("Account was modified by another operation", ex);
 
                 throw new TransactionException("Transfer process was Failed!", ex);
             }

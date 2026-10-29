@@ -32,6 +32,10 @@ namespace CorePay.Persistance.Data_Access_Layer.Configurations
                    .WithMany()
                    .HasForeignKey(t => t.RecieverCardId)
                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(t => t.Amount)
+                .IsRequired()
+                .HasPrecision(18, 2);
         }
     }
 }

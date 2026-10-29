@@ -13,8 +13,10 @@ namespace CorePay.Application.Interfaces.Repositories
         ITransferRepository TransferRepository { get; }
         ICardRepository CardRepository { get; }
         ITransactionRepository TransactionRepository { get; }
+        IIdempotencyRequestRepository IdempotencyRequestRepository { get; }
 
 
+        IExecutionStrategy CreateExecutionStrategy();
         Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken token = default);
         Task<int> SaveChangeAsync(CancellationToken cancellationToken = default);
     }

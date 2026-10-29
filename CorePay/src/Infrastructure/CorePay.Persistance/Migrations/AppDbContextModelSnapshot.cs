@@ -52,6 +52,12 @@ namespace CorePay.Persistance.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -219,6 +225,55 @@ namespace CorePay.Persistance.Migrations
                     b.ToTable("Cards");
                 });
 
+            modelBuilder.Entity("CorePay.Domain.Entities.IdempotencyRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("IdempotencyKey")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RequestHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<Guid?>("TransferId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TransferId")
+                        .IsUnique()
+                        .HasFilter("[TransferId] IS NOT NULL");
+
+                    b.HasIndex("UserId", "IdempotencyKey")
+                        .IsUnique();
+
+                    b.ToTable("IdempotencyRequest");
+                });
+
             modelBuilder.Entity("CorePay.Domain.Entities.RefreshToken", b =>
                 {
                     b.Property<Guid>("Id")
@@ -321,12 +376,16 @@ namespace CorePay.Persistance.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("IdempotencyRequestId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
@@ -516,6 +575,22 @@ namespace CorePay.Persistance.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("CorePay.Domain.Entities.IdempotencyRequest", b =>
+                {
+                    b.HasOne("CorePay.Domain.Entities.Transfer", "Transfer")
+                        .WithOne("IdempotencyRequest")
+                        .HasForeignKey("CorePay.Domain.Entities.IdempotencyRequest", "TransferId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("CorePay.Domain.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Transfer");
+                });
+
             modelBuilder.Entity("CorePay.Domain.Entities.RefreshToken", b =>
                 {
                     b.HasOne("CorePay.Domain.Entities.AppUser", "AppUser")
@@ -655,6 +730,8 @@ namespace CorePay.Persistance.Migrations
 
             modelBuilder.Entity("CorePay.Domain.Entities.Transfer", b =>
                 {
+                    b.Navigation("IdempotencyRequest");
+
                     b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618

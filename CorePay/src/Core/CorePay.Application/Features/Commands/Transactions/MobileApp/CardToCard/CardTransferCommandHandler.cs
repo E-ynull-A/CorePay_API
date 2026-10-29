@@ -7,6 +7,7 @@ using CorePay.Domain.Exceptions;
 using CorePay.Domain.Utilities.Enums;
 using CorePay.Domain.Utilities.Errors;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 
@@ -14,19 +15,16 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.CardToCar
 {
     public class CardTransferCommandHandler : IRequestHandler<CardTransferCommand, Result>
     {
-        private readonly ICardRepository _cardRepository;
         private readonly IOtpService _otpService;
         private readonly ITransferService _transferService;
         private readonly ICurrentUserService _currentUser;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CardTransferCommandHandler(ICardRepository cardRepository,
-                                          IOtpService otpService,
+        public CardTransferCommandHandler(IOtpService otpService,
                                           ITransferService transferService,
                                           ICurrentUserService currentUser,
                                           IUnitOfWork unitOfWork)
         {
-            _cardRepository = cardRepository;
             _otpService = otpService;
             _transferService = transferService;
             _currentUser = currentUser;
@@ -36,7 +34,7 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.CardToCar
         {
             Guid userId = _currentUser.GetUserId();
 
-            Card? sender = await _cardRepository
+            Card? sender = await _unitOfWork.CardRepository
                                 .FirstOrDefaultAsync(c => c.Id == request.SenderCardId
                                                        && c.Account.AppUserId == userId,
                                                                 [nameof(Card.Account)]);
@@ -44,7 +42,7 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.CardToCar
             if (sender is null)
                 return Result.Failure(CardError.NotFound);
 
-            Card? receiver = await _cardRepository
+            Card? receiver = await _unitOfWork.CardRepository
                                 .FirstOrDefaultAsync(c => c.CardNumber == request.ReceiverCardNumber,
                                                      [nameof(Card.Account)]);
 
@@ -101,48 +99,60 @@ namespace CorePay.Application.Features.Commands.Transactions.MobileApp.CardToCar
             IDbContextTransaction transactionDb = await _unitOfWork
                                         .BeginTransactionAsync(cancellationToken);
 
-            try
+            var strategy = _unitOfWork.CreateExecutionStrategy();
+
+            await strategy.ExecuteAsync(async () =>
             {
-                Transaction send = new Transaction(request.Amount,
-                                                   TransactionType.Transfer,
-                                                   sender.AccountId,
-                                                   sender.Id);
+                try
+                {
+                    Transaction send = new Transaction(request.Amount,
+                                                       TransactionType.Transfer,
+                                                       sender.AccountId,
+                                                       sender.Id);
 
-                Transaction receive = new Transaction(request.Amount,
-                                                      TransactionType.Transfer,
-                                                      receiver.Account.Id,
-                                                      receiver.Id);
+                    Transaction receive = new Transaction(request.Amount,
+                                                          TransactionType.Transfer,
+                                                          receiver.Account.Id,
+                                                          receiver.Id);
 
-                Transfer cardTransfer = new Transfer(sender.AccountId, receiver.AccountId,
-                                                     request.Amount,
-                                                     sender.Id, receiver.Id);
+                    Transfer cardTransfer = new Transfer(sender.AccountId, receiver.AccountId,
+                                                         request.Amount,
+                                                         sender.Id, receiver.Id);
 
-                cardTransfer.Transactions.Add(send);
-                cardTransfer.Transactions.Add(receive);
+                    cardTransfer.Transactions.Add(send);
+                    cardTransfer.Transactions.Add(receive);
 
-                send.AsignTransfer(cardTransfer);
-                receive.AsignTransfer(cardTransfer);
+                    send.AsignTransfer(cardTransfer);
+                    receive.AsignTransfer(cardTransfer);
 
-                send.Validate();
-                receive.Validate();
+                    send.Validate();
+                    receive.Validate();
 
-                _unitOfWork.TransferRepository.Add(cardTransfer);
+                    _unitOfWork.TransferRepository.Add(cardTransfer);
 
-                _unitOfWork.TransactionRepository.Add(send);
-                _unitOfWork.TransactionRepository.Add(receive);
+                    _unitOfWork.TransactionRepository.Add(send);
+                    _unitOfWork.TransactionRepository.Add(receive);
 
-               
 
-                await _unitOfWork.SaveChangeAsync();
-                await transactionDb.CommitAsync(cancellationToken);
 
-                return Result.Success();
-            }
-            catch (Exception ex)
-            {
-                await transactionDb.RollbackAsync(cancellationToken);
-                throw new TransactionException("Transfer process was Failed!", ex);
-            }   
+                    await _unitOfWork.SaveChangeAsync();
+                    await transactionDb.CommitAsync(cancellationToken);
+
+                    return Result.Success();
+                }
+                catch (Exception ex)
+                {
+                    await transactionDb.RollbackAsync(cancellationToken);
+
+                    if (ex is DbUpdateConcurrencyException)
+                        throw new ConcurrencyException("Account was modified by another operation", ex);
+
+                    throw new TransactionException("Transfer process was Failed!", ex);
+                }
+            });
+
+
+
         }
     }
 }

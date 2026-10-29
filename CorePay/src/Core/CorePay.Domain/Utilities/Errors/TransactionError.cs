@@ -41,5 +41,10 @@ namespace CorePay.Domain.Utilities.Errors
         public static Error DifferentCurrencyTransfer { get; } = new Error("Tranaction.DifferentCurrencyTransfer",
                                                                             "The Transfer process works only the same Currency between Accounts!",
                                                                             ErrorType.BusinessRule);
+
+        public static readonly Error IdempotencyKeyReused = new("Transfer.IdempotencyKeyReused",
+                                                                "The idempotency key has already been used with different request data.",
+                                                                ErrorType.Conflict
+    );
     }            
 }

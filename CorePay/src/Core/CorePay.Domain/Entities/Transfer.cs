@@ -27,7 +27,8 @@ namespace CorePay.Domain.Entities
         public Card? RecieverCard { get; protected set; }
 
         public ICollection<Transaction> Transactions { get; protected set; } = new List<Transaction>();
-
+        public IdempotencyRequest? IdempotencyRequest { get; private set; }
+        public Guid? IdempotencyRequestId { get; private set; }
 
         public Transfer(Guid senderAccountId,
                         Guid recieverAccountId,

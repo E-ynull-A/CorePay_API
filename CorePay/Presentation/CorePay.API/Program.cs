@@ -60,13 +60,16 @@ namespace CorePay.API
             });
 
             builder.Services.RegistrateApplication();
-           
+
             builder.Services.RegistratePersistance();
 
 
 
-            builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer
-                        (builder.Configuration.GetConnectionString("default")));
+            builder.Services.AddDbContextFactory<AppDbContext>(opt => opt.UseSqlServer
+                        (builder.Configuration.GetConnectionString("default")
+                        ,sql=>sql.EnableRetryOnFailure(maxRetryCount:3,
+                                                       maxRetryDelay: TimeSpan.FromSeconds(2),
+                                                       errorNumbersToAdd: new[] {1205})));
 
 
 

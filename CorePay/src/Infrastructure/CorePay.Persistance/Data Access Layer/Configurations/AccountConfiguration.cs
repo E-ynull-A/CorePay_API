@@ -16,6 +16,10 @@ namespace CorePay.Persistance.Data_Access_Layer.Configurations
                  .HasForeignKey(a => a.AppUserId)
                  .OnDelete(DeleteBehavior.NoAction);
 
+            builder.
+                Property(a => a.RowVersion)
+                .IsRowVersion();
+
             builder
                 .Property(a => a.Balance)
                 .HasPrecision(18,2)

@@ -660,41 +660,30 @@
         "tags": [
           "Transactions"
         ],
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "SenderAccountId": {
-                    "type": "string",
-                    "format": "uuid"
-                  },
-                  "Amount": {
-                    "type": "number",
-                    "format": "double"
-                  },
-                  "RecieverAccountIBAN": {
-                    "type": "string"
-                  },
-                  "SessionId": {
-                    "type": "string"
-                  }
-                }
-              },
-              "encoding": {
-                "SenderAccountId": {
-                  "style": "form"
-                },
-                "Amount": {
-                  "style": "form"
-                },
-                "RecieverAccountIBAN": {
-                  "style": "form"
-                },
-                "SessionId": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/IBAN_TransferCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBAN_TransferCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBAN_TransferCommand"
               }
             }
           }
@@ -779,6 +768,28 @@
       },
       "GetAllAccountQuery": {
         "type": "object",
+        "additionalProperties": false
+      },
+      "IBAN_TransferCommand": {
+        "type": "object",
+        "properties": {
+          "senderAccountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "recieverAccountIBAN": {
+            "type": "string",
+            "nullable": true
+          },
+          "sessionId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
         "additionalProperties": false
       },
       "LogoutCommand": {

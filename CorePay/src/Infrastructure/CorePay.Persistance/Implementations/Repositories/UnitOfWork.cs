@@ -17,12 +17,14 @@ namespace CorePay.Persistance.Implementations.Repositories
                           IAccountRepository accountRepository,
                           ICardRepository cardRepository,
                           ITransferRepository transferRepository,
+                          IIdempotencyRequestRepository idempotencyRequestRepository,
                           AppDbContext appDbContext)
         {
             TransactionRepository = transactionRepository;
             AccountRepository = accountRepository;
             CardRepository = cardRepository;
             TransferRepository = transferRepository;
+            IdempotencyRequestRepository = idempotencyRequestRepository;
             _appDbContext = appDbContext;
         }
 
@@ -30,6 +32,7 @@ namespace CorePay.Persistance.Implementations.Repositories
         public IAccountRepository AccountRepository { get; }
         public ICardRepository CardRepository { get; }
         public ITransferRepository TransferRepository { get; }
+        public IIdempotencyRequestRepository IdempotencyRequestRepository { get; }
 
         public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken token = default)
         {
@@ -40,5 +43,8 @@ namespace CorePay.Persistance.Implementations.Repositories
         {
             return await _appDbContext.SaveChangesAsync(cancellationToken);
         }
+
+        public IExecutionStrategy CreateExecutionStrategy()=>
+                 _appDbContext.Database.CreateExecutionStrategy();
     }
 }

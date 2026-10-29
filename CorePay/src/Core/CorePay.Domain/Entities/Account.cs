@@ -9,6 +9,7 @@ namespace CorePay.Domain.Entities
         public string IBAN { get; protected set; }
         public Currency Currency { get; protected set; }
         public AccountStatus Status { get; protected set; } = AccountStatus.Active;
+        public byte[] RowVersion { get; private set; } = null!;
 
 
         //Relations

@@ -51,8 +51,18 @@ namespace CorePay.API.Controllers
 
         [Authorize]
         [HttpPost("/mobileApp/transfer/IBAN")]
-        public async Task<IActionResult> Transfer([FromForm]IBAN_TransferCommand command)
+        public async Task<IActionResult> Transfer([FromBody]IBAN_TransferCommand command,
+                                                  [FromHeader(Name = "Idempotency-Key")] string? idempotencyKey)
         {
+
+            if (string.IsNullOrWhiteSpace(idempotencyKey))
+                return BadRequest("Idempotency-Key is required.");
+
+            command = command with
+            {
+                IdempotencyKey = idempotencyKey.Trim()
+            };
+
             Result result = await _mediator.Send(command);
 
             return result.ToActionResult();

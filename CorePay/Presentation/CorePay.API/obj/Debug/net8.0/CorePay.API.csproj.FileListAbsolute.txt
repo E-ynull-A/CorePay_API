@@ -179,3 +179,6 @@ C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\StackExchange.Redis.dll
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\System.IO.Hashing.dll
 C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\MailKit.dll
+C:\Users\Eynotto\Desktop\Code Work\CorePay_API\CorePay\Presentation\CorePay.API\bin\Debug\net8.0\MimeKit.dll

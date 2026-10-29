@@ -325,22 +325,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "SenderAccountId",
-        "Type": "System.Guid",
-        "IsRequired": false
+        "Name": "command",
+        "Type": "CorePay.Application.Features.Commands.Transactions.MobileApp.IBAN.IBAN_TransferCommand",
+        "IsRequired": true
       },
       {
-        "Name": "Amount",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "RecieverAccountIBAN",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "SessionId",
+        "Name": "Idempotency-Key",
         "Type": "System.String",
         "IsRequired": false
       }
